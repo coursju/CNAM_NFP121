@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=void\ setUp()
+comment1.target=void\ testAdd()
+comment2.target=void\ testRemove()
+comment3.target=void\ testElement()
+comment4.target=void\ testCapacity()
+comment5.target=void\ testClear()
+numComments=6

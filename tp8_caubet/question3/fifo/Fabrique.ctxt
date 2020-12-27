@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=Fabrique
+comment1.params=capacite
+comment1.target=FileI\ creerFile(int)
+comment2.params=capacite
+comment2.target=FileI\ creerFileAvecPriorite(int)
+comment3.params=capacite\ comparator
+comment3.target=FileI\ creerFileAvecPriorite(int,\ java.util.Comparator)
+numComments=4

@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=Tests
+comment0.text=\r\n\ classe\ de\ test\ des\ classes\ treesetfactory\ et\ hashsetfactory\r\n
+comment1.params=f
+comment1.target=void\ test1(Factory)
+comment1.text=\r\n\ test1\r\n\ @param\ factory<set<Integer>>\r\n
+comment2.params=
+comment2.target=void\ testCreation()
+comment2.text=\r\n\ test\ creation\r\n
+comment3.params=
+comment3.target=void\ test_TreeSetFactory()
+comment3.text=\r\n\ test\ treesetfactory\r\n
+comment4.params=
+comment4.target=void\ test_HashSetFactory()
+comment4.text=\r\n\ test\ hashsetfactory\r\n
+numComments=5

@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.target=FileException()
+comment1.params=message
+comment1.target=FileException(String)
+numComments=2

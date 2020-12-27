@@ -1,0 +1,21 @@
+#BlueJ class context
+comment0.target=TestFabriqueFileAvecPriorite
+comment1.params=i1\ i2
+comment1.target=int\ compare(java.lang.Integer,\ java.lang.Integer)
+comment2.params=
+comment2.target=void\ setUp()
+comment3.params=
+comment3.target=void\ testEnfiler()
+comment4.params=
+comment4.target=void\ testDefiler()
+comment5.params=
+comment5.target=void\ testpremier()
+comment6.params=
+comment6.target=void\ testCapacite()
+comment7.params=
+comment7.target=void\ testVider()
+comment8.params=
+comment8.target=void\ testEquals()
+comment9.params=
+comment9.target=void\ testEqualsBis()
+numComments=10

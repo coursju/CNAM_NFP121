@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.target=ConfigGeneratorGUI
+comment0.text=\ Interface\ graphique\ d'aide\ \u00E0\ la\ g\u00E9n\u00E9ration\ du\ fichier\ de\ configuration.\r\n\ Le\ texte\ de\ configuration\ est\ g\u00E9n\u00E9r\u00E9\ dans\ la\ fen\u00EAtre\ principale,\ il\ suffit\r\n\ ensuite\ de\ la\ compl\u00E9ter\ avec\ les\ valeurs\ des\ attributs\ laiss\u00E9s\ vacants.\ Ces\ valeurs\r\n\ peuvent\ \u00EAtre\ des\ noms\ de\ bean\ de\ ce\ m\u00EAme\ fichier\ ou\ \r\n\ des\ valeurs\ pour\ les\ types\ tableaux\ ou\ bien\ des\ types\ primitifs\ (int/Integer,...).\r\n\ \r\n\ @author\ jean-michel\ Douin\r\n\ @version\ Mars\ et\ Juin\ 2019\r\n\ @see\ config_editor.ConfigGenerator\r\n
+comment1.params=configGenerator
+comment1.target=void\ setConfigConfigurator(IConfigGenerator)
+comment2.params=number
+comment2.target=void\ setNumberBean(int)
+comment3.params=classBean
+comment3.target=void\ setClassBean(java.lang.String)
+comment4.params=
+comment4.target=ConfigGeneratorGUI()
+comment5.params=
+comment5.target=Formatter\ getFormatter()
+comment6.params=args
+comment6.target=void\ main(java.lang.String[])
+comment7.params=
+comment7.target=void\ run()
+numComments=8

@@ -1,0 +1,1120 @@
+<html>
+<head>
+    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+    <title>NFP121 - TP4</title>
+    <style type="text/css">
+        body {
+            background: #E5DED6;
+            background-color: #fff;
+            color: #333333;
+            font-size: 14px;
+            font-family: Verdana, Arial;
+        }
+
+        table {
+            font-size: 20px;
+            border-color: #808080;
+            border-style: solid;
+            border-width: 1px;
+        }
+
+        h2 {
+            color: #C1002A;
+            font-family: Verdana, Arial;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        h3 {
+            color: #C1002A;
+            font-family: Verdana, Arial;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        hr {
+            margin: 15px 0 15px 0;
+        }
+
+		applet {
+			margin: 10px 0px 25px 250px;
+			border-width: 1px;
+			border-style: solid;
+			border-color: #777777;
+		}
+    </style>
+
+</head>
+<body>
+    <h2 style="text-align: center">NFP 121 - TP4</h2>
+    <h2 style="text-align: center">Pattern Observer - Evenement - Modele MVC</h2>
+    <br />
+    <hr>
+    <br />
+    <table>
+        <tr>
+            <td>Nom:
+            </td>
+            <td>CAUBET
+            </td>
+        </tr>
+        <tr>
+            <td>Prenom:
+            </td>
+            <td>Julien
+            </td>
+        </tr>
+        <tr>
+            <td>Matricule:
+            </td>
+            <td>FOD_motdepasse1
+            </td>
+        </tr>
+    </table>
+
+	<br />
+    <hr />
+    <h3>Question 1</h3>
+    <p>Test des differents observeur / observé</p>
+    <br />
+
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question1;
+
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> PatternObservateur <span style='font-weight:bold;color:#7B0052;'>extends</span> junit.framework.TestCase <span style='font-weight:bold;color:#D3171B'>{</span>
+
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> testNotify() <span style='font-weight:bold;color:#D3171B'>{</span>
+    ConcreteSubject list;
+    ConcreteObserver observer;
+
+    list = <span style='font-weight:bold;color:#7B0052;'>new</span> ConcreteSubject();           <span style='color:#3F7F5F'>// création d'un "observé" constitué d'une liste
+</span>        observer = <span style='font-weight:bold;color:#7B0052;'>new</span> ConcreteObserver();      <span style='color:#3F7F5F'>// création d'un observateur
+</span>        list.addObserver(observer);             <span style='color:#3F7F5F'>// ajouter cet observateur à la liste
+</span>        list.insert(<span style='color:#2A00FF'>"il fait beau, ce matin"</span>);  <span style='color:#3F7F5F'>// modification de cette liste, l'observateur doit
+</span>                                                <span style='color:#3F7F5F'>// (dervrait) être notifié
+</span>
+    <span style='color:#3F7F5F'>// "vérification" :
+</span>        assertFalse(observer.senders().empty());                            <span style='color:#3F7F5F'>// elle ne doit pas être vide,
+</span>        assertEquals(list, observer.senders().pop());                       <span style='color:#3F7F5F'>// est-ce le bon émetteur ?
+</span>        assertEquals(<span style='color:#2A00FF'>"il fait beau, ce matin"</span>, observer.arguments().pop()); <span style='color:#3F7F5F'>// le paramètre reçu est-il correct ?
+</span>    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+<span style='color:#3F7F5F'>// une liste, 2 observateurs
+</span>    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> test1() <span style='font-weight:bold;color:#D3171B'>{</span>
+    question1.ConcreteSubject l1 = <span style='font-weight:bold;color:#7B0052;'>new</span> question1.ConcreteSubject();
+    question1.ConcreteObserver o1 = <span style='font-weight:bold;color:#7B0052;'>new</span> question1.ConcreteObserver();
+    question1.ConcreteObserver o2 = <span style='font-weight:bold;color:#7B0052;'>new</span> question1.ConcreteObserver();
+    l1.addObserver(o1);
+    l1.addObserver(o2);
+    l1.insert(<span style='color:#2A00FF'>"test"</span>);
+    l1.insert(<span style='color:#2A00FF'>" 1 "</span>);
+    <span style='color:#3F7F5F'>// vérifier que les deux observateurs ont bien été notifiés avec les
+</span>        <span style='color:#3F7F5F'>// bons paramètres
+</span>
+    assertFalse(o1.senders().empty() || o2.senders().empty());
+    assertTrue(o1.senders().size() == 2);
+    assertTrue(o2.senders().size() == 2);
+    assertTrue(o1.arguments().elementAt(0) ==<span style='color:#2A00FF'>"test"</span> && o1.arguments().elementAt(1) == <span style='color:#2A00FF'>" 1 "</span>);
+    assertTrue(o2.arguments().elementAt(0) ==<span style='color:#2A00FF'>"test"</span> && o2.arguments().elementAt(1) == <span style='color:#2A00FF'>" 1 "</span>);
+    assertTrue(l1.countObservers() == 2);
+    l1.deleteObservers();
+    assertTrue(l1.countObservers() == 0);
+    o1.resetAll();
+    o2.resetAll();
+
+    <span style='color:#3F7F5F'>// ne pas modifier ces lignes, dernières assertions vraies de cette
+</span>        <span style='color:#3F7F5F'>// méthode
+</span>        assertTrue(o1.senders().empty() && o1.arguments().empty());
+    assertTrue(o2.senders().empty() && o2.arguments().empty());
+<span style='font-weight:bold;color:#D3171B'>}</span>
+
+<span style='color:#3F7F5F'>// deux listes, 1 observateur
+</span>    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> test2() <span style='font-weight:bold;color:#D3171B'>{</span>
+    question1.ConcreteSubject l1 = <span style='font-weight:bold;color:#7B0052;'>new</span> question1.ConcreteSubject();
+    question1.ConcreteSubject l2 = <span style='font-weight:bold;color:#7B0052;'>new</span> question1.ConcreteSubject();
+
+    question1.ConcreteObserver o = <span style='font-weight:bold;color:#7B0052;'>new</span> question1.ConcreteObserver();
+    l1.addObserver(o);
+    l2.addObserver(o);
+    l1.insert(<span style='color:#2A00FF'>"testA"</span>);
+    l1.insert(<span style='color:#2A00FF'>" A "</span>);
+    l2.insert(<span style='color:#2A00FF'>"testB"</span>);
+    l2.insert(<span style='color:#2A00FF'>" B "</span>);
+
+    <span style='color:#3F7F5F'>// à compléter à partir de la ligne 56
+</span>        <span style='color:#3F7F5F'>// vérifier que l'observateur a bien été notifié par les deux listes
+</span>
+    assertFalse(o.senders().empty() );
+    assertTrue(o.senders().size() == 4);
+    assertTrue(o.arguments().elementAt(0) ==<span style='color:#2A00FF'>"testA"</span> && o.arguments().elementAt(1) == <span style='color:#2A00FF'>" A "</span>);
+    assertTrue(o.arguments().elementAt(2) ==<span style='color:#2A00FF'>"testB"</span> && o.arguments().elementAt(3) == <span style='color:#2A00FF'>" B "</span>);
+
+    assertTrue(l1.countObservers() == 1);
+    assertTrue(l2.countObservers() == 1);
+
+    l1.deleteObservers();
+    l2.deleteObservers();
+
+    assertTrue(l1.countObservers() == 0 && l2.countObservers() == 0);
+    o.resetAll();
+
+
+    <span style='color:#3F7F5F'>// ne pas modifier cette ligne, dernière assertion vraie de cette
+</span>        <span style='color:#3F7F5F'>// méthode
+</span>        assertTrue(o.senders().empty() && o.arguments().empty());
+<span style='font-weight:bold;color:#D3171B'>}</span>
+
+<span style='color:#3F7F5F'>// deux listes, 2 observateurs
+</span>    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> test3() <span style='font-weight:bold;color:#D3171B'>{</span>
+    question1.ConcreteSubject l1 = <span style='font-weight:bold;color:#7B0052;'>new</span> question1.ConcreteSubject();
+    question1.ConcreteSubject l2 = <span style='font-weight:bold;color:#7B0052;'>new</span> question1.ConcreteSubject();
+    question1.ConcreteObserver o1 = <span style='font-weight:bold;color:#7B0052;'>new</span> question1.ConcreteObserver();
+    question1.ConcreteObserver o2 = <span style='font-weight:bold;color:#7B0052;'>new</span> question1.ConcreteObserver();
+    l1.addObserver(o1);
+    l1.addObserver(o2);
+    l2.addObserver(o1);
+    l2.addObserver(o2);
+
+    <span style='color:#3F7F5F'>// à compléter à partir de la ligne 81
+</span>        <span style='color:#3F7F5F'>// vérifier le bon fonctionnement de countObservers(), de deleteObserver
+</span>        <span style='color:#3F7F5F'>// et deleteObservers()
+</span>
+    assertTrue(l1.countObservers() == 2);
+    assertTrue(l2.countObservers() == 2);
+
+    l1.deleteObserver(o2);
+    l2.deleteObserver(o2);
+
+    assertTrue(l1.countObservers() == 1);
+    assertTrue(l2.countObservers() == 1);
+
+    l1.deleteObservers();
+    l2.deleteObservers();
+
+    <span style='color:#3F7F5F'>// ne pas modifier ces lignes, dernières assertions vraies de cette
+</span>        <span style='color:#3F7F5F'>// méthode
+</span>        assertTrue(o1.senders().empty());
+    assertTrue(o2.senders().empty());
+    assertTrue(l1.countObservers() == 0);
+    assertTrue(l2.countObservers() == 0);
+<span style='font-weight:bold;color:#D3171B'>}</span>
+
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+
+    <br />
+    <hr />
+    <h3>Question 2.1</h3>
+    <p>Les classes IHMQuestion2_1 et JButtonObserver complétées.</p>
+    <br />
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question2;
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.*;
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.event.*;
+<span style='font-weight:bold;color:#7B0052;'>import</span> javax.swing.*;
+
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> IHMQuestion2_1 <span style='font-weight:bold;color:#7B0052;'>extends</span> JFrame <span style='font-weight:bold;color:#D3171B'>{</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>private</span> JButton boutonA = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"A"</span>);
+    <span style='font-weight:bold;color:#7B0052;'>private</span> JButton boutonB = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"B"</span>);
+    <span style='font-weight:bold;color:#7B0052;'>private</span> JButton boutonC = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"C"</span>);
+
+    <span style='font-weight:bold;color:#7B0052;'>private</span> TextArea contenu = <span style='font-weight:bold;color:#7B0052;'>new</span> TextArea(30, 80);
+
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> IHMQuestion2_1() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>super</span>(<span style='color:#2A00FF'>"IHM Question2_1"</span>);
+        JPanel enHaut = <span style='font-weight:bold;color:#7B0052;'>new</span> JPanel();
+        enHaut.add(boutonA);
+        enHaut.add(boutonB);
+        enHaut.add(boutonC);
+        setLayout(<span style='font-weight:bold;color:#7B0052;'>new</span> BorderLayout(5, 5));
+        add(<span style='color:#2A00FF'>"North"</span>, enHaut);
+        add(<span style='color:#2A00FF'>"Center"</span>, contenu); <span style='color:#3F7F5F'>// contenu sera transmis aux observateurs, voir
+</span>                                <span style='color:#3F7F5F'>// la description des constructeurs
+</span>        enHaut.setBackground(Color.blue);
+        setLocation(100,100);
+        pack();show();
+
+        <span style='color:#3F7F5F'>//creation des observateurs
+</span>        JButtonObserver jbo1 = <span style='font-weight:bold;color:#7B0052;'>new</span> JButtonObserver(<span style='color:#2A00FF'>"jbo1"</span>,this.getContenu());
+        JButtonObserver jbo2 = <span style='font-weight:bold;color:#7B0052;'>new</span> JButtonObserver(<span style='color:#2A00FF'>"jbo2"</span>,this.getContenu());
+        JButtonObserver jbo3 = <span style='font-weight:bold;color:#7B0052;'>new</span> JButtonObserver(<span style='color:#2A00FF'>"jbo3"</span>,this.getContenu());
+
+        <span style='color:#3F7F5F'>//attachement des observateurs
+</span>        this.addObserver2A(jbo1);
+        this.addObserver2A(jbo2);
+        this.addObserver2A(jbo3);
+
+        this.addObserver2B(jbo1);
+        this.addObserver2B(jbo2);
+
+        this.addObserver2C(jbo1);
+
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>static</span> <span style='font-weight:bold;color:#7B0052;'>void</span> main(String[] args)<span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>new</span> IHMQuestion2_1();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='color:#3F5FBF'>/**
+     * ajoute un observateur a boutonA
+     */</span>
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> addObserver2A(JButtonObserver jbo)<span style='font-weight:bold;color:#D3171B'>{</span>
+        boutonA.addActionListener(jbo);
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='color:#3F5FBF'>/**
+     * ajoute un observateur a boutonB
+     */</span>
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> addObserver2B(JButtonObserver jbo)<span style='font-weight:bold;color:#D3171B'>{</span>
+        boutonB.addActionListener(jbo);
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='color:#3F5FBF'>/**
+     * ajoute un observateur a boutonC
+     */</span>
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> addObserver2C(JButtonObserver jbo)<span style='font-weight:bold;color:#D3171B'>{</span>
+        boutonC.addActionListener(jbo);
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='color:#3F5FBF'>/**
+     * renvoi contenu
+     */</span>
+    <span style='font-weight:bold;color:#7B0052;'>public</span> TextArea getContenu()<span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> contenu;
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+
+    <br />
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question2;
+
+    <span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.event.ActionEvent;
+    <span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.event.ActionListener;
+    <span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.TextArea;
+
+    <span style='color:#3F5FBF'>/**
+     * Décrivez votre classe JButtonObserver ici.
+     *
+     * @author (votre nom)
+     * @version (un numéro de version ou une date)
+     */</span>
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> JButtonObserver <span style='font-weight:bold;color:#7B0052;'>implements</span> ActionListener<span style='font-weight:bold;color:#D3171B'>{</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>private</span> String nom;
+        <span style='font-weight:bold;color:#7B0052;'>private</span> TextArea contenu;
+
+        <span style='color:#3F5FBF'>/**
+         * Constructeur d'objets de classe JButtonObserver
+         *
+         * @param nom
+         *            le nom du bouton, jbo1, jbo2, jbo3, jmo1, jmo2, jmo3
+         * @param contenu
+         *            la zone de texte de l'applette
+         */</span>
+        <span style='font-weight:bold;color:#7B0052;'>public</span> JButtonObserver(String nom, TextArea contenu) <span style='font-weight:bold;color:#D3171B'>{</span>
+            this.nom = nom;
+            this.contenu = contenu;
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='color:#3F5FBF'>/**
+         * affichage d'un message dans la zone de texte ce message est de la forme
+         * observateur this.nom : clic du bouton nom_du_bouton exemple : observateur
+         * jbo1 : clic du bouton A, voir la méthode getActionCommand()
+         *
+         * @param à
+         *            compléter
+         */</span>
+        <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> actionPerformed(ActionEvent e) <span style='font-weight:bold;color:#D3171B'>{</span>
+
+                String message = <span style='color:#2A00FF'>"observateur "</span>+this.nom+ <span style='color:#2A00FF'>": clic du bouton "</span>+e.getActionCommand() + <span style='color:#2A00FF'>"\n"</span>;
+
+                contenu.append(message);
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#D3171B'>}</span></pre>
+
+    <br />
+     <img src="IHMQuestion2_1.png" alt="IHMQuestion2_1" height="543" width="581">
+     <br/>
+    <hr />
+    <h3>Question 2.2</h3>
+    <p>Les classes IHMQuestion2_2 et JMouseObserver complétées</p>
+    <br />
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question2;
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.*;
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.event.*;
+<span style='font-weight:bold;color:#7B0052;'>import</span> javax.swing.*;
+
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> IHMQuestion2_2 <span style='font-weight:bold;color:#7B0052;'>extends</span> JFrame <span style='font-weight:bold;color:#D3171B'>{</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>private</span> JButton boutonA = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"A"</span>);
+    <span style='font-weight:bold;color:#7B0052;'>private</span> JButton boutonB = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"B"</span>);
+    <span style='font-weight:bold;color:#7B0052;'>private</span> JButton boutonC = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"C"</span>);
+
+    <span style='font-weight:bold;color:#7B0052;'>private</span> TextArea contenu = <span style='font-weight:bold;color:#7B0052;'>new</span> TextArea(30, 80);
+
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> IHMQuestion2_2() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>super</span>(<span style='color:#2A00FF'>"IHM Question2_2"</span>);
+        JPanel enHaut = <span style='font-weight:bold;color:#7B0052;'>new</span> JPanel();
+        enHaut.add(boutonA);
+        enHaut.add(boutonB);
+        enHaut.add(boutonC);
+        setLayout(<span style='font-weight:bold;color:#7B0052;'>new</span> BorderLayout(5, 5));
+        add(<span style='color:#2A00FF'>"North"</span>, enHaut);
+        add(<span style='color:#2A00FF'>"Center"</span>, contenu); <span style='color:#3F7F5F'>// contenu sera transmis aux observateurs, voir
+</span>                                <span style='color:#3F7F5F'>// la description des constructeurs
+</span>        setLocation(150,150);pack();show();
+        enHaut.setBackground(Color.magenta);
+
+        <span style='color:#3F7F5F'>//creation des JButtonObserver
+</span>        JButtonObserver jbo1 = <span style='font-weight:bold;color:#7B0052;'>new</span> JButtonObserver(<span style='color:#2A00FF'>"jbo1"</span>,this.getContenu());
+        JButtonObserver jbo2 = <span style='font-weight:bold;color:#7B0052;'>new</span> JButtonObserver(<span style='color:#2A00FF'>"jbo2"</span>,this.getContenu());
+        JButtonObserver jbo3 = <span style='font-weight:bold;color:#7B0052;'>new</span> JButtonObserver(<span style='color:#2A00FF'>"jbo3"</span>,this.getContenu());
+
+        <span style='color:#3F7F5F'>//attachement des observateurs
+</span>        this.addObserver2A(jbo1);
+        this.addObserver2A(jbo2);
+        this.addObserver2A(jbo3);
+
+        this.addObserver2B(jbo1);
+        this.addObserver2B(jbo2);
+
+        this.addObserver2C(jbo1);
+
+        <span style='color:#3F7F5F'>//creation des JMouseObserver
+</span>        JMouseObserver jmo1 = <span style='font-weight:bold;color:#7B0052;'>new</span> JMouseObserver(<span style='color:#2A00FF'>"jmo1"</span>,this.getContenu());
+        JMouseObserver jmo2 = <span style='font-weight:bold;color:#7B0052;'>new</span> JMouseObserver(<span style='color:#2A00FF'>"jmo2"</span>,this.getContenu());
+        JMouseObserver jmo3 = <span style='font-weight:bold;color:#7B0052;'>new</span> JMouseObserver(<span style='color:#2A00FF'>"jmo3"</span>,this.getContenu());
+
+        <span style='color:#3F7F5F'>//attachement des observateurs
+</span>        this.addMouseObserver2A(jmo1);
+        this.addMouseObserver2B(jmo2);
+        this.addMouseObserver2C(jmo3);
+
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+     <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>static</span> <span style='font-weight:bold;color:#7B0052;'>void</span> main(String[] args)<span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>new</span> IHMQuestion2_1();
+        <span style='font-weight:bold;color:#7B0052;'>new</span> IHMQuestion2_2();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='color:#3F5FBF'>/**
+     * ajoute un observateur a boutonA
+     */</span>
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> addObserver2A(JButtonObserver jbo)<span style='font-weight:bold;color:#D3171B'>{</span>
+        boutonA.addActionListener(jbo);
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='color:#3F5FBF'>/**
+     * ajoute un observateur a boutonB
+     */</span>
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> addObserver2B(JButtonObserver jbo)<span style='font-weight:bold;color:#D3171B'>{</span>
+        boutonB.addActionListener(jbo);
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='color:#3F5FBF'>/**
+     * ajoute un observateur a boutonC
+     */</span>
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> addObserver2C(JButtonObserver jbo)<span style='font-weight:bold;color:#D3171B'>{</span>
+        boutonC.addActionListener(jbo);
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='color:#3F5FBF'>/**
+     * renvoi contenu
+     */</span>
+    <span style='font-weight:bold;color:#7B0052;'>public</span> TextArea getContenu()<span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> contenu;
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='color:#3F5FBF'>/**
+     * ajoute un mouseListener a boutonA
+     */</span>
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> addMouseObserver2A(JMouseObserver jmo)<span style='font-weight:bold;color:#D3171B'>{</span>
+        boutonA.addMouseListener(jmo);
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='color:#3F5FBF'>/**
+     * ajoute un mouseListener a boutonB
+     */</span>
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> addMouseObserver2B(JMouseObserver jmo)<span style='font-weight:bold;color:#D3171B'>{</span>
+        boutonB.addMouseListener(jmo);
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='color:#3F5FBF'>/**
+     * ajoute un mouseListener a boutonC
+     */</span>
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> addMouseObserver2C(JMouseObserver jmo)<span style='font-weight:bold;color:#D3171B'>{</span>
+        boutonC.addMouseListener(jmo);
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+    <br />
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question2;
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.event.ActionEvent;
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.event.ActionListener;
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.TextArea;
+
+<span style='color:#3F5FBF'>/**
+ * Décrivez votre classe JButtonObserver ici.
+ *
+ * @author (votre nom)
+ * @version (un numéro de version ou une date)
+ */</span>
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> JButtonObserver <span style='font-weight:bold;color:#7B0052;'>implements</span> ActionListener<span style='font-weight:bold;color:#D3171B'>{</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>private</span> String nom;
+    <span style='font-weight:bold;color:#7B0052;'>private</span> TextArea contenu;
+
+    <span style='color:#3F5FBF'>/**
+     * Constructeur d'objets de classe JButtonObserver
+     *
+     * @param nom
+     *            le nom du bouton, jbo1, jbo2, jbo3, jmo1, jmo2, jmo3
+     * @param contenu
+     *            la zone de texte de l'applette
+     */</span>
+    <span style='font-weight:bold;color:#7B0052;'>public</span> JButtonObserver(String nom, TextArea contenu) <span style='font-weight:bold;color:#D3171B'>{</span>
+        this.nom = nom;
+        this.contenu = contenu;
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='color:#3F5FBF'>/**
+     * affichage d'un message dans la zone de texte ce message est de la forme
+     * observateur this.nom : clic du bouton nom_du_bouton exemple : observateur
+     * jbo1 : clic du bouton A, voir la méthode getActionCommand()
+     *
+     * @param à
+     *            compléter
+     */</span>
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> actionPerformed(ActionEvent e) <span style='font-weight:bold;color:#D3171B'>{</span>
+
+            String message = <span style='color:#2A00FF'>"observateur "</span>+this.nom+ <span style='color:#2A00FF'>": clic du bouton "</span>+e.getActionCommand() + <span style='color:#2A00FF'>"\n"</span>;
+
+            contenu.append(message);
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+    <br />
+     <img src="IHMQuestion2_2.png" alt="IHMQuestion2_2" height="543" width="581">
+    <hr />
+    <h3>Question 3.1</h3>
+    <p>Le code des classes de l' exercice</p>
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question3;
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> question3.tp3.*;
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.*;
+<span style='font-weight:bold;color:#7B0052;'>import</span> javax.swing.*;
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.util.Observer;
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.util.Observable;
+
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> IHMCalculette <span style='font-weight:bold;color:#7B0052;'>extends</span> JFrame <span style='font-weight:bold;color:#D3171B'>{</span>
+    <span style='font-weight:bold;color:#7B0052;'>public</span> IHMCalculette() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>super</span>(<span style='color:#2A00FF'>"IHM Calculette"</span>);
+        PileModele&lt;Integer&gt; modele = <span style='font-weight:bold;color:#7B0052;'>new</span> PileModele&lt;Integer&gt;(<span style='font-weight:bold;color:#7B0052;'>new</span> Pile2&lt;Integer&gt;(5));
+        Controleur controle = <span style='font-weight:bold;color:#7B0052;'>new</span> Controleur(modele);
+        Vue vue = <span style='font-weight:bold;color:#7B0052;'>new</span> Vue(modele);
+        <span style='color:#3F7F5F'>//Vue2 vue2 = new Vue2(modele);
+</span>
+        setLayout(<span style='font-weight:bold;color:#7B0052;'>new</span> GridLayout(2, 1));
+        add(vue);
+        <span style='color:#3F7F5F'>//add(vue2);
+</span>        add(controle);
+        pack();
+        setLocation(200,200);
+        setVisible(<span style='font-weight:bold;color:#7B0052;'>true</span>);
+
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>static</span> <span style='font-weight:bold;color:#7B0052;'>void</span> main(String[] args)<span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>new</span> IHMCalculette();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+
+    <br />
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question3;
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> question3.tp3.PileI;
+<span style='font-weight:bold;color:#7B0052;'>import</span> question3.tp3.PileVideException;
+<span style='font-weight:bold;color:#7B0052;'>import</span> question3.tp3.PilePleineException;
+
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> PileModele&lt;T&gt; <span style='font-weight:bold;color:#7B0052;'>extends</span>  java.util.Observable <span style='font-weight:bold;color:#7B0052;'>implements</span> PileI&lt;T&gt; <span style='font-weight:bold;color:#D3171B'>{</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>private</span> PileI&lt;T&gt; pile;
+
+    <span style='color:#3F7F5F'>/* à compléter */</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> PileModele(PileI&lt;T&gt; pile) <span style='font-weight:bold;color:#D3171B'>{</span>
+        this.pile = pile;
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> empiler(T o) <span style='font-weight:bold;color:#7B0052;'>throws</span> PilePleineException <span style='font-weight:bold;color:#D3171B'>{</span>
+
+         pile.empiler(o);
+         setChanged();
+         notifyObservers(o);
+
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> T depiler() <span style='font-weight:bold;color:#7B0052;'>throws</span> PileVideException <span style='font-weight:bold;color:#D3171B'>{</span>
+         T t;
+         t = pile.depiler();
+         setChanged();
+         notifyObservers();
+         <span style='font-weight:bold;color:#7B0052;'>return</span> t;
+            <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> T sommet() <span style='font-weight:bold;color:#7B0052;'>throws</span> PileVideException <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> pile.sommet();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>int</span> taille() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> pile.taille();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>int</span> capacite() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> pile.capacite();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>boolean</span> estVide() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> pile.estVide();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>boolean</span> estPleine() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> pile.estPleine();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> String toString() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> pile.toString();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+<span style='font-weight:bold;color:#D3171B'>}</span>
+
+<span style='color:#3F5FBF'>/**
+ * notez qu'un message d'alerte subsiste à la compilation (unsafe ...) dû à
+ * l'emploi de notifyObservers, incontournable et sans conséquence ici
+ */</span></pre>
+    <br />
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question3;
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.*;
+<span style='font-weight:bold;color:#7B0052;'>import</span> javax.swing.*;
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.event.*;
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.util.Observable;
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.util.Observer;
+
+<span style='color:#3F5FBF'>/**
+ * Décrivez votre classe Controleur ici.
+ *
+ * @author (votre nom)
+ * @version (un numéro de version ou une date)
+ */</span>
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> Vue <span style='font-weight:bold;color:#7B0052;'>extends</span> JPanel <span style='font-weight:bold;color:#7B0052;'>implements</span> Observer<span style='font-weight:bold;color:#D3171B'>{</span><span style='color:#3F7F5F'>// à compléter
+</span>
+    <span style='font-weight:bold;color:#7B0052;'>private</span> JLabel etatPile;
+    <span style='font-weight:bold;color:#7B0052;'>private</span> PileModele&lt;Integer&gt; pile;
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> Vue(PileModele&lt;Integer&gt; pile) <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>super</span>();
+        this.pile = pile;
+        this.etatPile = <span style='font-weight:bold;color:#7B0052;'>new</span> JLabel(<span style='color:#2A00FF'>"entrez des nombres entiers"</span>);
+        setLayout(<span style='font-weight:bold;color:#7B0052;'>new</span> FlowLayout(FlowLayout.LEFT));
+        add(etatPile);
+        setBackground(Color.green);
+        <span style='color:#3F7F5F'>// inscription auprès du modèle comme observateur
+</span>        pile.addObserver(<span style='font-weight:bold;color:#7B0052;'>this</span>);
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> update(Observable obs, Object arg) <span style='font-weight:bold;color:#D3171B'>{</span>
+        etatPile.setText(pile.toString()); <span style='color:#3F7F5F'>// ou obs.toString()
+</span>    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+    <br />
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question3;
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> question3.tp3.PileI;
+<span style='font-weight:bold;color:#7B0052;'>import</span> question3.tp3.PilePleineException;
+<span style='font-weight:bold;color:#7B0052;'>import</span> question3.tp3.PileVideException;
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.*;
+<span style='font-weight:bold;color:#7B0052;'>import</span> javax.swing.*;
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.event.*;
+
+<span style='color:#3F5FBF'>/**
+ * Décrivez votre classe Controleur ici.
+ *
+ * @author (votre nom)
+ * @version (un numéro de version ou une date)
+ */</span>
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> Controleur <span style='font-weight:bold;color:#7B0052;'>extends</span> JPanel <span style='font-weight:bold;color:#7B0052;'>implements</span> ActionListener <span style='font-weight:bold;color:#D3171B'>{</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>private</span> JButton push, add, sub, mul, div, clear;
+    <span style='font-weight:bold;color:#7B0052;'>private</span> PileModele&lt;Integer&gt; pile;
+    <span style='font-weight:bold;color:#7B0052;'>private</span> JTextField donnee;
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> Controleur(PileModele&lt;Integer&gt; pile)  <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>super</span>();
+        this.pile = pile;
+        this.donnee = <span style='font-weight:bold;color:#7B0052;'>new</span> JTextField(8);
+
+        this.push = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"push"</span>);
+        this.add = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"+"</span>);
+        this.sub = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"-"</span>);
+        this.mul = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"*"</span>);
+        this.div = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"/"</span>);
+        this.clear = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"[]"</span>);
+
+        setLayout(<span style='font-weight:bold;color:#7B0052;'>new</span> GridLayout(2, 1));
+        add(donnee);
+        donnee.addActionListener(<span style='font-weight:bold;color:#7B0052;'>this</span>);
+        JPanel boutons = <span style='font-weight:bold;color:#7B0052;'>new</span> JPanel();
+        boutons.setLayout(<span style='font-weight:bold;color:#7B0052;'>new</span> FlowLayout());
+        boutons.add(push);  push.addActionListener(<span style='font-weight:bold;color:#7B0052;'>this</span>);
+        boutons.add(add);   add.addActionListener(<span style='font-weight:bold;color:#7B0052;'>this</span>);
+        boutons.add(sub);   sub.addActionListener(<span style='font-weight:bold;color:#7B0052;'>this</span>);
+        boutons.add(mul);   mul.addActionListener(<span style='font-weight:bold;color:#7B0052;'>this</span>);
+        boutons.add(div);   div.addActionListener(<span style='font-weight:bold;color:#7B0052;'>this</span>);
+        boutons.add(clear); clear.addActionListener(<span style='font-weight:bold;color:#7B0052;'>this</span>);
+        add(boutons);
+        boutons.setBackground(Color.red);
+        actualiserInterface();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> actualiserInterface() <span style='font-weight:bold;color:#D3171B'>{</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>if</span>(pile.taille() == 0)<span style='font-weight:bold;color:#D3171B'>{</span>
+        push.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);
+        add.setEnabled(<span style='font-weight:bold;color:#7B0052;'>false</span>);
+        sub.setEnabled(<span style='font-weight:bold;color:#7B0052;'>false</span>);
+        mul.setEnabled(<span style='font-weight:bold;color:#7B0052;'>false</span>);
+        div.setEnabled(<span style='font-weight:bold;color:#7B0052;'>false</span>);
+        clear.setEnabled(<span style='font-weight:bold;color:#7B0052;'>false</span>);
+
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>if</span>(pile.taille() == 1)<span style='font-weight:bold;color:#D3171B'>{</span>
+        push.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);
+        add.setEnabled(<span style='font-weight:bold;color:#7B0052;'>false</span>);
+        sub.setEnabled(<span style='font-weight:bold;color:#7B0052;'>false</span>);
+        mul.setEnabled(<span style='font-weight:bold;color:#7B0052;'>false</span>);
+        div.setEnabled(<span style='font-weight:bold;color:#7B0052;'>false</span>);
+        clear.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);
+
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>if</span>((pile.taille() &gt; 1) && (pile.taille() != pile.capacite()))<span style='font-weight:bold;color:#D3171B'>{</span>
+        push.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);
+        add.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);
+        sub.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);
+        mul.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);
+        div.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);
+        clear.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);
+
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>if</span>(pile.taille() == pile.capacite())<span style='font-weight:bold;color:#D3171B'>{</span>
+        push.setEnabled(<span style='font-weight:bold;color:#7B0052;'>false</span>);
+        add.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);
+        sub.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);
+        mul.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);
+        div.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);
+        clear.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);
+
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>private</span> Integer operande() <span style='font-weight:bold;color:#7B0052;'>throws</span> NumberFormatException <span style='font-weight:bold;color:#D3171B'>{</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>return</span> Integer.parseInt(donnee.getText());
+
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='color:#3F7F5F'>// à compléter
+</span>    <span style='color:#3F7F5F'>// en cas d'exception comme division par zéro,
+</span>    <span style='color:#3F7F5F'>// mauvais format de nombre suite à l'appel de la méthode operande
+</span>    <span style='color:#3F7F5F'>// la pile reste en l'état (intacte)
+</span>    @Override
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> actionPerformed(ActionEvent ae)<span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>if</span> (ae.getActionCommand().equals(<span style='color:#2A00FF'>"push"</span>)) <span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>try</span><span style='font-weight:bold;color:#D3171B'>{</span>
+            this.pile.empiler(operande());
+            actualiserInterface();
+        <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#7B0052;'>catch</span>(Exception exc)<span style='font-weight:bold;color:#D3171B'>{</span><span style='color:#3F7F5F'>/*System.out.println("yo");*/</span><span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>if</span> (ae.getActionCommand().equals(<span style='color:#2A00FF'>"+"</span>)) <span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>try</span><span style='font-weight:bold;color:#D3171B'>{</span>
+                <span style='font-weight:bold;color:#7B0052;'>if</span>(pile.taille()&gt;1)<span style='font-weight:bold;color:#D3171B'>{</span>
+                    Integer a = pile.depiler();
+                    Integer b = pile.depiler();
+                    this.pile.empiler(a+b);
+                    actualiserInterface();
+                <span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#7B0052;'>catch</span>(Exception exc)<span style='font-weight:bold;color:#D3171B'>{</span><span style='color:#3F7F5F'>/*System.out.println("yo");*/</span><span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>if</span> (ae.getActionCommand().equals(<span style='color:#2A00FF'>"-"</span>)) <span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>try</span><span style='font-weight:bold;color:#D3171B'>{</span>
+                <span style='font-weight:bold;color:#7B0052;'>if</span>(pile.taille()&gt;1)<span style='font-weight:bold;color:#D3171B'>{</span>
+                    Integer a = pile.depiler();
+                    Integer b = pile.depiler();
+                    this.pile.empiler(b-a);
+                    actualiserInterface();
+                <span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#7B0052;'>catch</span>(Exception exc)<span style='font-weight:bold;color:#D3171B'>{</span><span style='color:#3F7F5F'>/*System.out.println("yo");*/</span><span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>if</span> (ae.getActionCommand().equals(<span style='color:#2A00FF'>"*"</span>)) <span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>try</span><span style='font-weight:bold;color:#D3171B'>{</span>
+                <span style='font-weight:bold;color:#7B0052;'>if</span>(pile.taille()&gt;1)<span style='font-weight:bold;color:#D3171B'>{</span>
+                    Integer a = pile.depiler();
+                    Integer b = pile.depiler();
+                    this.pile.empiler(a*b);
+                    actualiserInterface();
+                <span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#7B0052;'>catch</span>(Exception exc)<span style='font-weight:bold;color:#D3171B'>{</span><span style='color:#3F7F5F'>/*System.out.println("yo");*/</span><span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>if</span> (ae.getActionCommand().equals(<span style='color:#2A00FF'>"/"</span>)) <span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>try</span><span style='font-weight:bold;color:#D3171B'>{</span>
+                <span style='font-weight:bold;color:#7B0052;'>if</span>((pile.taille()&gt;1) && (pile.sommet() != 0))<span style='font-weight:bold;color:#D3171B'>{</span>
+                    Integer a = pile.depiler();
+                    Integer b = pile.depiler();
+                    this.pile.empiler(b / a);
+                    actualiserInterface();
+                <span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#7B0052;'>catch</span>(Exception exc)<span style='font-weight:bold;color:#D3171B'>{</span><span style='color:#3F7F5F'>/*System.out.println("yo");*/</span><span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>if</span> (ae.getActionCommand().equals(<span style='color:#2A00FF'>"[]"</span>)) <span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>try</span><span style='font-weight:bold;color:#D3171B'>{</span>
+                <span style='font-weight:bold;color:#7B0052;'>while</span>(pile.taille() &gt; 0)<span style='font-weight:bold;color:#D3171B'>{</span>
+                    pile.depiler();
+                    actualiserInterface();
+                <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#7B0052;'>catch</span>(Exception exc)<span style='font-weight:bold;color:#D3171B'>{</span><span style='color:#3F7F5F'>/*System.out.println("yo");*/</span><span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+    <br />
+
+    <hr />
+    <h3>Question 3.2</h3>
+    <p>Les éléments graphiques de type JButton et JTextField n' ont rien à faire dans le controleur, ils doivent être placé dans la Vue.Le "main" devrait être dans le controleur et initialiser la vue. la classe IHMCalculette, n' a pas raison d' être.</p>
+    <p>Voici dans l' ordre "Modele, Vue, Controleur" 3 classes proposant une solution collant plus avec le patron MVC:</p>
+    <br />
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question3;
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> question3.tp3.PileI;
+<span style='font-weight:bold;color:#7B0052;'>import</span> question3.tp3.PileVideException;
+<span style='font-weight:bold;color:#7B0052;'>import</span> question3.tp3.PilePleineException;
+
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> PileModele&lt;T&gt; <span style='font-weight:bold;color:#7B0052;'>extends</span>  java.util.Observable <span style='font-weight:bold;color:#7B0052;'>implements</span> PileI&lt;T&gt; <span style='font-weight:bold;color:#D3171B'>{</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>private</span> PileI&lt;T&gt; pile;
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> PileModele(PileI&lt;T&gt; pile) <span style='font-weight:bold;color:#D3171B'>{</span>
+        this.pile = pile;
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> empiler(T o) <span style='font-weight:bold;color:#7B0052;'>throws</span> PilePleineException <span style='font-weight:bold;color:#D3171B'>{</span>
+
+         pile.empiler(o);
+         setChanged();
+         notifyObservers(o);
+
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> T depiler() <span style='font-weight:bold;color:#7B0052;'>throws</span> PileVideException <span style='font-weight:bold;color:#D3171B'>{</span>
+         T t;
+         t = pile.depiler();
+         setChanged();
+         notifyObservers();
+         <span style='font-weight:bold;color:#7B0052;'>return</span> t;
+            <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> T sommet() <span style='font-weight:bold;color:#7B0052;'>throws</span> PileVideException <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> pile.sommet();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>int</span> taille() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> pile.taille();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>int</span> capacite() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> pile.capacite();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>boolean</span> estVide() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> pile.estVide();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>boolean</span> estPleine() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> pile.estPleine();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> String toString() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> pile.toString();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+
+    <br />
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question3;
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.*;
+<span style='font-weight:bold;color:#7B0052;'>import</span> javax.swing.*;
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.event.*;
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.util.Observable;
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.util.Observer;
+
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> Vue <span style='font-weight:bold;color:#7B0052;'>extends</span> JFrame <span style='font-weight:bold;color:#7B0052;'>implements</span> Observer<span style='font-weight:bold;color:#D3171B'>{</span>
+    <span style='color:#3F7F5F'>//proprietes
+</span>    <span style='font-weight:bold;color:#7B0052;'>private</span> JLabel etatPile;
+    <span style='font-weight:bold;color:#7B0052;'>private</span> PileModele&lt;Integer&gt; pile;
+    <span style='font-weight:bold;color:#7B0052;'>private</span> JPanel fen;
+    <span style='font-weight:bold;color:#7B0052;'>private</span> JPanel fen2;
+    <span style='font-weight:bold;color:#7B0052;'>private</span> JButton push, add, sub, mul, div, clear;
+    <span style='font-weight:bold;color:#7B0052;'>private</span> JTextField donnee;
+    <span style='font-weight:bold;color:#7B0052;'>private</span> Controleur controleur;
+
+    <span style='color:#3F7F5F'>//constructeur
+</span>    <span style='font-weight:bold;color:#7B0052;'>public</span> Vue(PileModele&lt;Integer&gt; pile, Controleur controleur, String nom) <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>super</span>(nom);
+        this.controleur = controleur;
+        this.pile = pile;
+        this.etatPile = <span style='font-weight:bold;color:#7B0052;'>new</span> JLabel(<span style='color:#2A00FF'>"entrez des nombres entiers"</span>);
+        fen = <span style='font-weight:bold;color:#7B0052;'>new</span> JPanel();
+        this.add(fen);
+        fen.setLayout(<span style='font-weight:bold;color:#7B0052;'>new</span> FlowLayout(FlowLayout.LEFT));
+        fen.add(etatPile);
+        fen.setBackground(Color.green);
+        <span style='color:#3F7F5F'>// inscription auprès du modèle comme observateur
+</span>        pile.addObserver(<span style='font-weight:bold;color:#7B0052;'>this</span>);
+
+        this.donnee = <span style='font-weight:bold;color:#7B0052;'>new</span> JTextField(8);
+
+        this.push = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"push"</span>);
+        this.add = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"+"</span>);
+        this.sub = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"-"</span>);
+        this.mul = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"*"</span>);
+        this.div = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"/"</span>);
+        this.clear = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"[]"</span>);
+
+        setLayout(<span style='font-weight:bold;color:#7B0052;'>new</span> GridLayout(2, 1));
+        add(donnee);
+        donnee.addActionListener(this.controleur);
+        JPanel boutons = <span style='font-weight:bold;color:#7B0052;'>new</span> JPanel();
+        boutons.setLayout(<span style='font-weight:bold;color:#7B0052;'>new</span> FlowLayout());
+        boutons.add(push);  push.addActionListener(this.controleur);
+        boutons.add(add);   add.addActionListener(this.controleur);
+        boutons.add(sub);   sub.addActionListener(this.controleur);
+        boutons.add(mul);   mul.addActionListener(this.controleur);
+        boutons.add(div);   div.addActionListener(this.controleur);
+        boutons.add(clear); clear.addActionListener(this.controleur);
+        add(boutons);
+        boutons.setBackground(Color.red);
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> update(Observable obs, Object arg) <span style='font-weight:bold;color:#D3171B'>{</span>
+        etatPile.setText(pile.toString()); <span style='color:#3F7F5F'>// ou obs.toString()
+</span>    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> JTextField getDonnee()<span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> this.donnee;
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> actualiserInterface() <span style='font-weight:bold;color:#D3171B'>{</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>if</span>(pile.taille() == 0)<span style='font-weight:bold;color:#D3171B'>{</span>
+        push.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);
+        add.setEnabled(<span style='font-weight:bold;color:#7B0052;'>false</span>);
+        sub.setEnabled(<span style='font-weight:bold;color:#7B0052;'>false</span>);
+        mul.setEnabled(<span style='font-weight:bold;color:#7B0052;'>false</span>);
+        div.setEnabled(<span style='font-weight:bold;color:#7B0052;'>false</span>);
+        clear.setEnabled(<span style='font-weight:bold;color:#7B0052;'>false</span>);
+
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>if</span>(pile.taille() == 1)<span style='font-weight:bold;color:#D3171B'>{</span>
+        push.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);
+        add.setEnabled(<span style='font-weight:bold;color:#7B0052;'>false</span>);
+        sub.setEnabled(<span style='font-weight:bold;color:#7B0052;'>false</span>);
+        mul.setEnabled(<span style='font-weight:bold;color:#7B0052;'>false</span>);
+        div.setEnabled(<span style='font-weight:bold;color:#7B0052;'>false</span>);
+        clear.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);
+
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>if</span>((pile.taille() &gt; 1) && (pile.taille() != pile.capacite()))<span style='font-weight:bold;color:#D3171B'>{</span>
+        push.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);
+        add.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);
+        sub.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);
+        mul.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);
+        div.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);
+        clear.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);
+
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>if</span>(pile.taille() == pile.capacite())<span style='font-weight:bold;color:#D3171B'>{</span>
+        push.setEnabled(<span style='font-weight:bold;color:#7B0052;'>false</span>);
+        add.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);
+        sub.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);
+        mul.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);
+        div.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);
+        clear.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);
+
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+
+    <br />
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question3;
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> question3.tp3.*;
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.*;
+<span style='font-weight:bold;color:#7B0052;'>import</span> javax.swing.*;
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.event.*;
+
+
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> Controleur <span style='font-weight:bold;color:#7B0052;'>implements</span> ActionListener <span style='font-weight:bold;color:#D3171B'>{</span>
+    <span style='color:#3F7F5F'>//propriete
+</span>    <span style='font-weight:bold;color:#7B0052;'>private</span> PileModele&lt;Integer&gt; pile;
+    <span style='font-weight:bold;color:#7B0052;'>private</span> Vue vue;
+
+    <span style='color:#3F7F5F'>//constructeur
+</span>    <span style='font-weight:bold;color:#7B0052;'>public</span> Controleur()  <span style='font-weight:bold;color:#D3171B'>{</span>
+        PileModele&lt;Integer&gt; modele = <span style='font-weight:bold;color:#7B0052;'>new</span> PileModele&lt;Integer&gt;(<span style='font-weight:bold;color:#7B0052;'>new</span> Pile2&lt;Integer&gt;(5));
+        this.pile = modele;
+        this.vue = <span style='font-weight:bold;color:#7B0052;'>new</span> Vue(modele,this,<span style='color:#2A00FF'>"IHM Calculette"</span>);
+        this.vue.setLayout(<span style='font-weight:bold;color:#7B0052;'>new</span> GridLayout(2, 1));
+        this.vue.pack();
+        this.vue.setLocation(200,200);
+        this.vue.setVisible(<span style='font-weight:bold;color:#7B0052;'>true</span>);
+        vue.actualiserInterface();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>private</span> Integer operande() <span style='font-weight:bold;color:#7B0052;'>throws</span> NumberFormatException <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> Integer.parseInt(vue.getDonnee().getText());
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    @Override
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> actionPerformed(ActionEvent ae)<span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>if</span> (ae.getActionCommand().equals(<span style='color:#2A00FF'>"push"</span>)) <span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>try</span><span style='font-weight:bold;color:#D3171B'>{</span>
+            this.pile.empiler(operande());
+            vue.actualiserInterface();
+        <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#7B0052;'>catch</span>(Exception exc)<span style='font-weight:bold;color:#D3171B'>{</span><span style='color:#3F7F5F'>/*System.out.println("yo");*/</span><span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>if</span> (ae.getActionCommand().equals(<span style='color:#2A00FF'>"+"</span>)) <span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>try</span><span style='font-weight:bold;color:#D3171B'>{</span>
+                <span style='font-weight:bold;color:#7B0052;'>if</span>(pile.taille()&gt;1)<span style='font-weight:bold;color:#D3171B'>{</span>
+                    Integer a = pile.depiler();
+                    Integer b = pile.depiler();
+                    this.pile.empiler(a+b);
+                    vue.actualiserInterface();
+                <span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#7B0052;'>catch</span>(Exception exc)<span style='font-weight:bold;color:#D3171B'>{</span><span style='color:#3F7F5F'>/*System.out.println("yo");*/</span><span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>if</span> (ae.getActionCommand().equals(<span style='color:#2A00FF'>"-"</span>)) <span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>try</span><span style='font-weight:bold;color:#D3171B'>{</span>
+                <span style='font-weight:bold;color:#7B0052;'>if</span>(pile.taille()&gt;1)<span style='font-weight:bold;color:#D3171B'>{</span>
+                    Integer a = pile.depiler();
+                    Integer b = pile.depiler();
+                    this.pile.empiler(b-a);
+                    vue.actualiserInterface();
+                <span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#7B0052;'>catch</span>(Exception exc)<span style='font-weight:bold;color:#D3171B'>{</span><span style='color:#3F7F5F'>/*System.out.println("yo");*/</span><span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>if</span> (ae.getActionCommand().equals(<span style='color:#2A00FF'>"*"</span>)) <span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>try</span><span style='font-weight:bold;color:#D3171B'>{</span>
+                <span style='font-weight:bold;color:#7B0052;'>if</span>(pile.taille()&gt;1)<span style='font-weight:bold;color:#D3171B'>{</span>
+                    Integer a = pile.depiler();
+                    Integer b = pile.depiler();
+                    this.pile.empiler(a*b);
+                    vue.actualiserInterface();
+                <span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#7B0052;'>catch</span>(Exception exc)<span style='font-weight:bold;color:#D3171B'>{</span><span style='color:#3F7F5F'>/*System.out.println("yo");*/</span><span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>if</span> (ae.getActionCommand().equals(<span style='color:#2A00FF'>"/"</span>)) <span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>try</span><span style='font-weight:bold;color:#D3171B'>{</span>
+                <span style='font-weight:bold;color:#7B0052;'>if</span>((pile.taille()&gt;1) && (pile.sommet() != 0))<span style='font-weight:bold;color:#D3171B'>{</span>
+                    Integer a = pile.depiler();
+                    Integer b = pile.depiler();
+                    this.pile.empiler(b / a);
+                    vue.actualiserInterface();
+                <span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#7B0052;'>catch</span>(Exception exc)<span style='font-weight:bold;color:#D3171B'>{</span><span style='color:#3F7F5F'>/*System.out.println("yo");*/</span><span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>if</span> (ae.getActionCommand().equals(<span style='color:#2A00FF'>"[]"</span>)) <span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>try</span><span style='font-weight:bold;color:#D3171B'>{</span>
+                <span style='font-weight:bold;color:#7B0052;'>while</span>(pile.taille() &gt; 0)<span style='font-weight:bold;color:#D3171B'>{</span>
+                    pile.depiler();
+                    vue.actualiserInterface();
+                <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#7B0052;'>catch</span>(Exception exc)<span style='font-weight:bold;color:#D3171B'>{</span><span style='color:#3F7F5F'>/*System.out.println("yo");*/</span><span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>static</span> <span style='font-weight:bold;color:#7B0052;'>void</span> main(String[] args)<span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>new</span> Controleur();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+
+    <br />
+    <hr />
+    <h3>Question 3.3</h3>
+    <p>Les captures d' écran</p>
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question3;
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> question3.tp3.*;
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.*;
+<span style='font-weight:bold;color:#7B0052;'>import</span> javax.swing.*;
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.util.Observer;
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.util.Observable;
+
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> IHMCalculette <span style='font-weight:bold;color:#7B0052;'>extends</span> JFrame <span style='font-weight:bold;color:#D3171B'>{</span>
+    <span style='font-weight:bold;color:#7B0052;'>public</span> IHMCalculette() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>super</span>(<span style='color:#2A00FF'>"IHM Calculette"</span>);
+        PileModele&lt;Integer&gt; modele = <span style='font-weight:bold;color:#7B0052;'>new</span> PileModele&lt;Integer&gt;(<span style='font-weight:bold;color:#7B0052;'>new</span> Pile2&lt;Integer&gt;(5));
+        Controleur controle = <span style='font-weight:bold;color:#7B0052;'>new</span> Controleur(modele);
+        Vue vue = <span style='font-weight:bold;color:#7B0052;'>new</span> Vue(modele);
+        Vue2 vue2 = <span style='font-weight:bold;color:#7B0052;'>new</span> Vue2(modele);
+
+        setLayout(<span style='font-weight:bold;color:#7B0052;'>new</span> GridLayout(2, 1));
+        add(vue);
+        add(vue2);
+        add(controle);
+        pack();
+        setLocation(200,200);
+        setVisible(<span style='font-weight:bold;color:#7B0052;'>true</span>);
+
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>static</span> <span style='font-weight:bold;color:#7B0052;'>void</span> main(String[] args)<span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>new</span> IHMCalculette();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+     <img src="IHMQuestion3_3_1.png" alt="IHMQuestion3_3_1" height="171" width="587">
+     <img src="IHMQuestion3_3_2.png" alt="IHMQuestion3_3_2" height="171" width="587">
+
+    <br />
+    <hr />
+        <h3>Conclusion, biliographie et remarques :</h3>
+        <!--<i style="font-size:12px;">... Une seule page html, limitez le nombre de clics, (plus de 200 rapports � corriger chaque semaine)</i>-->
+        <p>TP très enrichissant, pour ma part pour m' aider à bien visualiser l' interet des observés, observeurs, je visualise un fader de console numérique( c' est normal, je viens de l' audio).</p>
+      </br>
+    </br>
+</body>
+</html>

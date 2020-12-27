@@ -1,0 +1,981 @@
+<html>
+<head>
+    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+    <title>NFP121 - TP1</title>
+    <style type="text/css">
+        body {
+            background: #E5DED6;
+            background-color: #fff;
+            color: #333333;
+            font-size: 14px;
+            font-family: Verdana, Arial;
+        }
+
+        table {
+            font-size: 20px;
+            border-color: #808080;
+            border-style: solid;
+            border-width: 1px;
+        }
+
+        h2 {
+            color: #C1002A;
+            font-family: Verdana, Arial;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        h3 {
+            color: #C1002A;
+            font-family: Verdana, Arial;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        hr {
+            margin: 15px 0 15px 0;
+        }
+		
+		applet {
+			margin: 10px 0px 25px 250px;
+			border-width: 1px;
+			border-style: solid;
+			border-color: #777777;
+		}
+		
+    </style>
+
+</head>
+<body>
+    <h2 style="text-align: center">NFP 121 - TP3</h2>
+    <h2 style="text-align: center">Les piles</h2>
+    <br />
+    <hr>
+    <br />
+    <table>
+        <tr>
+            <td>Nom
+            </td>
+            <td> : caubet
+            </td>
+        </tr>
+        <tr>
+            <td>Prénom
+            </td>
+            <td> : julien
+            </td>
+        </tr>
+        <tr>
+            <td>Matricule
+            </td>
+            <td> : FOD_motdepasse1
+            </td>
+        </tr>
+    </table>
+		
+	<br />
+    <hr />
+    <h3>Question 1.1</h3>
+    <p>voici le code modifié des classes "Pile" et "IHMPile"</p>
+<pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question1;
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> question1.PilePleineException;
+<span style='font-weight:bold;color:#7B0052;'>import</span> question1.PileVideException;
+
+<span style='color:#3F5FBF'>/**
+ * A remplacer par votre classe Pile .
+ * 
+ * @author (votre nom)
+ * @version (un numéro de version ou une date)
+ */</span>
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> Pile <span style='font-weight:bold;color:#D3171B'>{</span>
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>final</span> <span style='font-weight:bold;color:#7B0052;'>static</span> <span style='font-weight:bold;color:#7B0052;'>int</span> TAILLE_PAR_DEFAUT = 5;
+
+    <span style='font-weight:bold;color:#7B0052;'>private</span> Object[] zone;
+    <span style='font-weight:bold;color:#7B0052;'>private</span> <span style='font-weight:bold;color:#7B0052;'>int</span> ptr;
+
+    <span style='color:#3F5FBF'>/**
+     * à compléter
+     * 
+     */</span>
+    <span style='font-weight:bold;color:#7B0052;'>public</span> Pile(<span style='font-weight:bold;color:#7B0052;'>int</span> taille) <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>if</span> (taille &lt; 0)
+            taille = TAILLE_PAR_DEFAUT;
+        this.zone = <span style='font-weight:bold;color:#7B0052;'>new</span> Object[taille];
+        this.ptr = 0;
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> Pile() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>this</span>(TAILLE_PAR_DEFAUT);
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> empiler(Object i) <span style='font-weight:bold;color:#7B0052;'>throws</span> PilePleineException 
+    <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>if</span> (estPleine())
+            <span style='font-weight:bold;color:#7B0052;'>throw</span> <span style='font-weight:bold;color:#7B0052;'>new</span> PilePleineException();
+        this.zone[this.ptr] = i;
+        this.ptr++;
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> Object depiler() <span style='font-weight:bold;color:#7B0052;'>throws</span> PileVideException 
+    <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>if</span> (estVide())
+            <span style='font-weight:bold;color:#7B0052;'>throw</span> <span style='font-weight:bold;color:#7B0052;'>new</span> PileVideException();
+        this.ptr--;
+        <span style='font-weight:bold;color:#7B0052;'>return</span> zone[ptr];
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>boolean</span> estVide() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> ptr == 0;
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>boolean</span> estPleine() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> ptr == zone.length;
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> String toString() <span style='font-weight:bold;color:#D3171B'>{</span>
+        StringBuffer sb = <span style='font-weight:bold;color:#7B0052;'>new</span> StringBuffer(<span style='color:#2A00FF'>"["</span>);
+        <span style='font-weight:bold;color:#7B0052;'>for</span> (<span style='font-weight:bold;color:#7B0052;'>int</span> i = ptr - 1; i &gt;= 0; i--) <span style='font-weight:bold;color:#D3171B'>{</span>
+            sb.append(zone[i]);
+            <span style='font-weight:bold;color:#7B0052;'>if</span> (i &gt; 0)
+                sb.append(<span style='color:#2A00FF'>", "</span>);
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+        sb.append(<span style='color:#2A00FF'>"]"</span>);
+        <span style='font-weight:bold;color:#7B0052;'>return</span> sb.toString();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+
+<pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question1;
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.*;
+<span style='font-weight:bold;color:#7B0052;'>import</span> javax.swing.*;
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.event.*;
+
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> IHMPile <span style='font-weight:bold;color:#7B0052;'>extends</span> JFrame <span style='font-weight:bold;color:#7B0052;'>implements</span> ActionListener<span style='font-weight:bold;color:#D3171B'>{</span>
+    <span style='font-weight:bold;color:#7B0052;'>private</span> JTextField donnee = <span style='font-weight:bold;color:#7B0052;'>new</span> JTextField(6);
+    <span style='font-weight:bold;color:#7B0052;'>private</span> JTextField sommet = <span style='font-weight:bold;color:#7B0052;'>new</span> JTextField(6);
+    <span style='font-weight:bold;color:#7B0052;'>private</span> JLabel     contenu = <span style='font-weight:bold;color:#7B0052;'>new</span> JLabel(<span style='color:#2A00FF'>"[]"</span>);
+
+    <span style='font-weight:bold;color:#7B0052;'>private</span> Pile p;
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> IHMPile()<span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>super</span>(<span style='color:#2A00FF'>"IHM Pile"</span>);
+        JButton    boutonEmpiler = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"empiler"</span>);
+        JButton    boutonDepiler = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"depiler"</span>);
+
+        JPanel enHaut = <span style='font-weight:bold;color:#7B0052;'>new</span> JPanel();
+        enHaut.add(donnee);
+        enHaut.add(boutonEmpiler);
+        enHaut.add(boutonDepiler);
+        enHaut.add(sommet);
+        setLayout(<span style='font-weight:bold;color:#7B0052;'>new</span> BorderLayout(5,5));
+        add(<span style='color:#2A00FF'>"North"</span>,enHaut);
+        add(<span style='color:#2A00FF'>"Center"</span>,contenu);
+        enHaut.setBackground(Color.red);
+        setLocation(100,100);
+        pack();setVisible(<span style='font-weight:bold;color:#7B0052;'>true</span>);
+        boutonEmpiler.addActionListener(<span style='font-weight:bold;color:#7B0052;'>this</span>);
+        boutonDepiler.addActionListener(<span style='font-weight:bold;color:#7B0052;'>this</span>);
+
+        p = <span style='font-weight:bold;color:#7B0052;'>new</span> Pile(5);
+
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> actionPerformed(ActionEvent ae)<span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>if</span>(ae.getActionCommand().equals(<span style='color:#2A00FF'>"empiler"</span>))<span style='font-weight:bold;color:#D3171B'>{</span>
+
+            sommet.setText(donnee.getText());
+            <span style='font-weight:bold;color:#7B0052;'>try</span><span style='font-weight:bold;color:#D3171B'>{</span>
+                p.empiler(donnee.getText());
+                contenu.setText(p.toString());
+
+            <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#7B0052;'>catch</span>(Exception e)<span style='font-weight:bold;color:#D3171B'>{</span>
+                this.contenu.setText(p.toString()+<span style='color:#2A00FF'>" est pleine! "</span>);
+            <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#7B0052;'>else</span><span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>try</span><span style='font-weight:bold;color:#D3171B'>{</span>    
+                p.depiler();
+                contenu.setText(p.toString());
+
+            <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#7B0052;'>catch</span>(Exception e)<span style='font-weight:bold;color:#D3171B'>{</span>
+                this.contenu.setText(p.toString()+<span style='color:#2A00FF'>" est vide! "</span>);
+            <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> contenuException(String mess)<span style='font-weight:bold;color:#D3171B'>{</span>
+        this.contenu.setText(p.toString()+<span style='color:#2A00FF'>" "</span>+mess);
+
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>static</span> <span style='font-weight:bold;color:#7B0052;'>void</span> main(String[] args)<span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>new</span> IHMPile();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+
+<p></p>
+    <br />
+    <hr />
+    <h3>Question 1.2</h3>
+    <p>On peut constater l' exception pour avoir essayé de caster un Polygone dans un String</p>
+    	<img src="Annotation 2019-10-22 151605.png" width="705" height="115">
+    <br />
+    <hr />
+    <h3>Question 2.1</h3>
+    <p>Voici le code modifié de la classe Pile implémentant PileI</p>
+
+	<pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question2;
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> question1.PilePleineException;
+<span style='font-weight:bold;color:#7B0052;'>import</span> question1.PileVideException;
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.util.*; 
+
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> Pile <span style='font-weight:bold;color:#7B0052;'>implements</span> PileI <span style='font-weight:bold;color:#D3171B'>{</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>private</span> Object[] zone;
+    <span style='font-weight:bold;color:#7B0052;'>private</span> <span style='font-weight:bold;color:#7B0052;'>int</span> ptr;
+    <span style='font-weight:bold;color:#7B0052;'>private</span> <span style='font-weight:bold;color:#7B0052;'>int</span> size;
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> Pile(<span style='font-weight:bold;color:#7B0052;'>int</span> taille) <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>if</span> (taille &lt;= 0)<span style='font-weight:bold;color:#D3171B'>{</span>
+            taille = CAPACITE_PAR_DEFAUT;
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+        size = taille;
+        this.zone = <span style='font-weight:bold;color:#7B0052;'>new</span> Object[taille];
+        this.ptr = 0;
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> Pile() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>this</span>(0);
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> empiler(Object o) <span style='font-weight:bold;color:#7B0052;'>throws</span> PilePleineException <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>if</span> (estPleine())
+            <span style='font-weight:bold;color:#7B0052;'>throw</span> <span style='font-weight:bold;color:#7B0052;'>new</span> PilePleineException();
+        this.zone[this.ptr] = o;
+        this.ptr++;    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> Object depiler() <span style='font-weight:bold;color:#7B0052;'>throws</span> PileVideException <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>if</span> (estVide())
+            <span style='font-weight:bold;color:#7B0052;'>throw</span> <span style='font-weight:bold;color:#7B0052;'>new</span> PileVideException();
+        this.ptr--;
+        <span style='font-weight:bold;color:#7B0052;'>return</span> zone[ptr];
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> Object sommet() <span style='font-weight:bold;color:#7B0052;'>throws</span> PileVideException <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>if</span> (estVide())
+            <span style='font-weight:bold;color:#7B0052;'>throw</span> <span style='font-weight:bold;color:#7B0052;'>new</span> PileVideException();        
+        <span style='font-weight:bold;color:#7B0052;'>return</span> zone[ptr-1];
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>int</span> capacite() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> size;
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>int</span> taille() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> ptr;
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>boolean</span> estVide() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> ptr == 0;
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>boolean</span> estPleine() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> ptr == zone.length;
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>boolean</span> equals(Object o) <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>if</span>( o <span style='font-weight:bold;color:#7B0052;'>instanceof</span> Pile)<span style='font-weight:bold;color:#D3171B'>{</span>
+            Pile p = (Pile)o;
+            <span style='font-weight:bold;color:#7B0052;'>if</span>( this.taille() == p.taille() && this.capacite() == p.capacite() )<span style='font-weight:bold;color:#D3171B'>{</span>
+                <span style='font-weight:bold;color:#7B0052;'>for</span>( <span style='font-weight:bold;color:#7B0052;'>int</span> i = 0; i&lt; this.taille(); i++)<span style='font-weight:bold;color:#D3171B'>{</span>
+                    <span style='font-weight:bold;color:#7B0052;'>if</span>( this.zone[i] != p.zone[i] )<span style='font-weight:bold;color:#D3171B'>{</span> <span style='font-weight:bold;color:#7B0052;'>return</span> <span style='font-weight:bold;color:#7B0052;'>false</span>;<span style='font-weight:bold;color:#D3171B'>}</span>
+                <span style='font-weight:bold;color:#D3171B'>}</span>
+            <span style='font-weight:bold;color:#D3171B'>}</span> <span style='font-weight:bold;color:#7B0052;'>else</span><span style='font-weight:bold;color:#D3171B'>{</span><span style='font-weight:bold;color:#7B0052;'>return</span> <span style='font-weight:bold;color:#7B0052;'>false</span>;<span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#7B0052;'>else</span><span style='font-weight:bold;color:#D3171B'>{</span><span style='font-weight:bold;color:#7B0052;'>return</span> <span style='font-weight:bold;color:#7B0052;'>false</span>;<span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> <span style='font-weight:bold;color:#7B0052;'>true</span>;
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>int</span> hashCode() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> toString().hashCode();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> String toString() <span style='font-weight:bold;color:#D3171B'>{</span>
+        StringBuffer sb = <span style='font-weight:bold;color:#7B0052;'>new</span> StringBuffer(<span style='color:#2A00FF'>"["</span>);
+        <span style='font-weight:bold;color:#7B0052;'>for</span> (<span style='font-weight:bold;color:#7B0052;'>int</span> i = ptr - 1; i &gt;= 0; i--) <span style='font-weight:bold;color:#D3171B'>{</span>
+            sb.append(zone[i]);
+            <span style='font-weight:bold;color:#7B0052;'>if</span> (i &gt; 0)
+                sb.append(<span style='color:#2A00FF'>", "</span>);
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+        sb.append(<span style='color:#2A00FF'>"]"</span>);
+        <span style='font-weight:bold;color:#7B0052;'>return</span> sb.toString();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+
+    <br />
+    <hr />
+    <h3>Question 2.2</h3>
+	<p>Voici le code des Classes Pile2 , Pile3 et Pile4 , le code de la classe Pile est fourni dans l' exercice précédent</p>
+	<p>Pour Pile4, vu qu' il est clairement écrit que la classe Maillon est une proposition, et que l' on peut l' ignorer, j' ai préferé utiliser une LinkedList </p>
+    <br>
+	<p>Pile2</p>
+
+<pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question2;
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> question1.PilePleineException;
+<span style='font-weight:bold;color:#7B0052;'>import</span> question1.PileVideException;
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.util.Stack;
+
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> Pile2 <span style='font-weight:bold;color:#7B0052;'>implements</span> PileI <span style='font-weight:bold;color:#D3171B'>{</span>
+    <span style='font-weight:bold;color:#7B0052;'>private</span> Stack&lt;Object&gt; stk;
+    <span style='font-weight:bold;color:#7B0052;'>private</span> <span style='font-weight:bold;color:#7B0052;'>int</span> capacite;
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> Pile2(<span style='font-weight:bold;color:#7B0052;'>int</span> taille) <span style='font-weight:bold;color:#D3171B'>{</span>
+        this.capacite = taille;
+        <span style='font-weight:bold;color:#7B0052;'>if</span> (taille &lt;= 0)<span style='font-weight:bold;color:#D3171B'>{</span>
+            capacite = CAPACITE_PAR_DEFAUT;
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+        this.stk = <span style='font-weight:bold;color:#7B0052;'>new</span> Stack&lt;Object&gt;();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> Pile2() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>this</span>(0);
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> empiler(Object o) <span style='font-weight:bold;color:#7B0052;'>throws</span> PilePleineException <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>if</span> (estPleine())
+            <span style='font-weight:bold;color:#7B0052;'>throw</span> <span style='font-weight:bold;color:#7B0052;'>new</span> PilePleineException();   
+        stk.push(o);
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> Object depiler() <span style='font-weight:bold;color:#7B0052;'>throws</span> PileVideException <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>if</span> (estVide())
+            <span style='font-weight:bold;color:#7B0052;'>throw</span> <span style='font-weight:bold;color:#7B0052;'>new</span> PileVideException();
+        <span style='font-weight:bold;color:#7B0052;'>return</span>  stk.pop();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> Object sommet() <span style='font-weight:bold;color:#7B0052;'>throws</span> PileVideException <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> stk.peek();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>boolean</span> estVide() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> stk.empty();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>boolean</span> estPleine() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> stk.size()==capacite;
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> String toString() <span style='font-weight:bold;color:#D3171B'>{</span>
+        String s = <span style='color:#2A00FF'>"["</span>;
+        <span style='font-weight:bold;color:#7B0052;'>for</span> (<span style='font-weight:bold;color:#7B0052;'>int</span> i = this.stk.size() - 1; i &gt;= 0; i--) <span style='font-weight:bold;color:#D3171B'>{</span>
+            s+= this.stk.get(i).toString();
+            <span style='font-weight:bold;color:#7B0052;'>if</span>(i &gt;0)<span style='font-weight:bold;color:#D3171B'>{</span>
+                s+= <span style='color:#2A00FF'>", "</span>;
+            <span style='font-weight:bold;color:#D3171B'>}</span>       
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> s + <span style='color:#2A00FF'>"]"</span>; 
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>boolean</span> equals(Object o) <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>if</span>( o <span style='font-weight:bold;color:#7B0052;'>instanceof</span> Pile2)<span style='font-weight:bold;color:#D3171B'>{</span>
+            Pile2 p = (Pile2)o;
+            <span style='font-weight:bold;color:#7B0052;'>if</span>( this.taille() == p.taille() && this.capacite() == p.capacite() )<span style='font-weight:bold;color:#D3171B'>{</span>
+                <span style='font-weight:bold;color:#7B0052;'>for</span>( <span style='font-weight:bold;color:#7B0052;'>int</span> i = 0; i&lt; this.taille(); i++)<span style='font-weight:bold;color:#D3171B'>{</span>
+                    <span style='font-weight:bold;color:#7B0052;'>if</span>( this.stk.get(i) != p.stk.get(i) )<span style='font-weight:bold;color:#D3171B'>{</span> <span style='font-weight:bold;color:#7B0052;'>return</span> <span style='font-weight:bold;color:#7B0052;'>false</span>;<span style='font-weight:bold;color:#D3171B'>}</span>
+                <span style='font-weight:bold;color:#D3171B'>}</span>
+            <span style='font-weight:bold;color:#D3171B'>}</span> <span style='font-weight:bold;color:#7B0052;'>else</span><span style='font-weight:bold;color:#D3171B'>{</span><span style='font-weight:bold;color:#7B0052;'>return</span> <span style='font-weight:bold;color:#7B0052;'>false</span>;<span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#7B0052;'>else</span><span style='font-weight:bold;color:#D3171B'>{</span><span style='font-weight:bold;color:#7B0052;'>return</span> <span style='font-weight:bold;color:#7B0052;'>false</span>;<span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> <span style='font-weight:bold;color:#7B0052;'>true</span>;
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>int</span> hashCode() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> toString().hashCode();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>int</span> taille() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> stk.size();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>int</span> capacite() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> capacite;
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+
+	<p>Pile3</p>
+
+<pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question2;
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> question1.PilePleineException;
+<span style='font-weight:bold;color:#7B0052;'>import</span> question1.PileVideException;
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.util.Vector;
+
+<span style='color:#3F5FBF'>/**
+ * Décrivez votre classe PileVector ici.
+ * 
+ * @author (votre nom)
+ * @version (un numéro de version ou une date)
+ */</span>
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> Pile3 <span style='font-weight:bold;color:#7B0052;'>implements</span> PileI <span style='font-weight:bold;color:#D3171B'>{</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>private</span> Vector&lt;Object&gt; v;
+    <span style='font-weight:bold;color:#7B0052;'>private</span> <span style='font-weight:bold;color:#7B0052;'>int</span> size; 
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> Pile3() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>this</span>(0);
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> Pile3(<span style='font-weight:bold;color:#7B0052;'>int</span> taille) <span style='font-weight:bold;color:#D3171B'>{</span>
+        size = taille;       
+        <span style='font-weight:bold;color:#7B0052;'>if</span>(taille &lt;= 0)<span style='font-weight:bold;color:#D3171B'>{</span> 
+            size = CAPACITE_PAR_DEFAUT;
+        <span style='font-weight:bold;color:#D3171B'>}</span>        
+    v = <span style='font-weight:bold;color:#7B0052;'>new</span> Vector&lt;Object&gt;(size);
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> empiler(Object o) <span style='font-weight:bold;color:#7B0052;'>throws</span> PilePleineException <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>if</span> (estPleine())
+            <span style='font-weight:bold;color:#7B0052;'>throw</span> <span style='font-weight:bold;color:#7B0052;'>new</span> PilePleineException();           
+        v.add(o);    
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> Object depiler() <span style='font-weight:bold;color:#7B0052;'>throws</span> PileVideException <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>if</span> (estVide())
+            <span style='font-weight:bold;color:#7B0052;'>throw</span> <span style='font-weight:bold;color:#7B0052;'>new</span> PileVideException();            
+        Object t = v.elementAt(v.size()-1);
+        v.remove(v.elementAt(v.size()-1));
+       <span style='font-weight:bold;color:#7B0052;'>return</span> t;
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> Object sommet() <span style='font-weight:bold;color:#7B0052;'>throws</span> PileVideException <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>if</span> (estVide())
+            <span style='font-weight:bold;color:#7B0052;'>throw</span> <span style='font-weight:bold;color:#7B0052;'>new</span> PileVideException();           
+        <span style='font-weight:bold;color:#7B0052;'>return</span> v.elementAt(v.size()-1);
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>int</span> taille() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> v.size();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>int</span> capacite() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> size;
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>boolean</span> estVide() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> v.size()==0;
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>boolean</span> estPleine() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> v.size()==size;
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> String toString() <span style='font-weight:bold;color:#D3171B'>{</span>
+        String s = <span style='color:#2A00FF'>"["</span>;
+        <span style='font-weight:bold;color:#7B0052;'>for</span> (<span style='font-weight:bold;color:#7B0052;'>int</span> i = this.v.size() - 1; i &gt;= 0; i--) <span style='font-weight:bold;color:#D3171B'>{</span>
+            s+= this.v.get(i).toString();
+            <span style='font-weight:bold;color:#7B0052;'>if</span>(i &gt;0)<span style='font-weight:bold;color:#D3171B'>{</span>
+                s+= <span style='color:#2A00FF'>", "</span>;
+            <span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> s + <span style='color:#2A00FF'>"]"</span>; 
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>boolean</span> equals(Object o) <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>if</span>( o <span style='font-weight:bold;color:#7B0052;'>instanceof</span> Pile3)<span style='font-weight:bold;color:#D3171B'>{</span>
+            Pile3 p = (Pile3)o;
+            <span style='font-weight:bold;color:#7B0052;'>if</span>( this.taille() == p.taille() && this.capacite() == p.capacite() )<span style='font-weight:bold;color:#D3171B'>{</span>
+                <span style='font-weight:bold;color:#7B0052;'>for</span>( <span style='font-weight:bold;color:#7B0052;'>int</span> i = 0; i&lt; this.taille(); i++)<span style='font-weight:bold;color:#D3171B'>{</span>
+                    <span style='font-weight:bold;color:#7B0052;'>if</span>( this.v.get(i) != p.v.get(i) )<span style='font-weight:bold;color:#D3171B'>{</span> <span style='font-weight:bold;color:#7B0052;'>return</span> <span style='font-weight:bold;color:#7B0052;'>false</span>;<span style='font-weight:bold;color:#D3171B'>}</span>
+                <span style='font-weight:bold;color:#D3171B'>}</span>
+            <span style='font-weight:bold;color:#D3171B'>}</span> <span style='font-weight:bold;color:#7B0052;'>else</span><span style='font-weight:bold;color:#D3171B'>{</span><span style='font-weight:bold;color:#7B0052;'>return</span> <span style='font-weight:bold;color:#7B0052;'>false</span>;<span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#7B0052;'>else</span><span style='font-weight:bold;color:#D3171B'>{</span><span style='font-weight:bold;color:#7B0052;'>return</span> <span style='font-weight:bold;color:#7B0052;'>false</span>;<span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> <span style='font-weight:bold;color:#7B0052;'>true</span>;   
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>int</span> hashCode() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> toString().hashCode();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+
+	<p>Pile4</p>
+
+<pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question2;
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> question1.PilePleineException;
+<span style='font-weight:bold;color:#7B0052;'>import</span> question1.PileVideException;
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.util.LinkedList;
+
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> Pile4 <span style='font-weight:bold;color:#7B0052;'>implements</span> PileI <span style='font-weight:bold;color:#D3171B'>{</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>private</span> LinkedList&lt;Object&gt; link;
+    <span style='font-weight:bold;color:#7B0052;'>private</span> <span style='font-weight:bold;color:#7B0052;'>int</span> size; 
+
+    <span style='color:#3F5FBF'>/**
+     * Création d'une pile.
+     * 
+     * @param taille
+     *            la taille de la pile, la taille doit être &gt; 0
+     */</span>
+    <span style='font-weight:bold;color:#7B0052;'>public</span> Pile4(<span style='font-weight:bold;color:#7B0052;'>int</span> taille) <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>if</span> (taille &lt;= 0)
+            taille = CAPACITE_PAR_DEFAUT;
+        this.size = taille;
+        link = <span style='font-weight:bold;color:#7B0052;'>new</span> LinkedList&lt;Object&gt;();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> Pile4() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>this</span>(PileI.CAPACITE_PAR_DEFAUT);
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='color:#3F5FBF'>/**
+     * empiler à la pile un élément en paramètre.
+     * @Param o
+     *      objet à empiler dans la pile
+     * @throw PilePleineException
+     *      -si pile est pleine, ne peut pas empiler
+     */</span>
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> empiler(Object o) <span style='font-weight:bold;color:#7B0052;'>throws</span> PilePleineException <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>if</span> (estPleine())
+            <span style='font-weight:bold;color:#7B0052;'>throw</span> <span style='font-weight:bold;color:#7B0052;'>new</span> PilePleineException();       
+        link.add(o);
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='color:#3F5FBF'>/**
+     * depiler supprime de la pile le dernier objet entré, 
+     * retourne cet objet.
+     * @return Object 
+     * @throw PileVideException
+     *      -si pile n'a aucun élémnet
+     */</span>
+    <span style='font-weight:bold;color:#7B0052;'>public</span> Object depiler() <span style='font-weight:bold;color:#7B0052;'>throws</span> PileVideException <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>if</span> (estVide())
+            <span style='font-weight:bold;color:#7B0052;'>throw</span> <span style='font-weight:bold;color:#7B0052;'>new</span> PileVideException();       
+        <span style='font-weight:bold;color:#7B0052;'>return</span> link.removeLast();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> Object sommet() <span style='font-weight:bold;color:#7B0052;'>throws</span> PileVideException <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>if</span> (estVide())
+            <span style='font-weight:bold;color:#7B0052;'>throw</span> <span style='font-weight:bold;color:#7B0052;'>new</span> PileVideException();
+        <span style='font-weight:bold;color:#7B0052;'>return</span> link.peekLast() ;
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='color:#3F5FBF'>/**
+     * Effectue un test de l'état de la pile.
+     * 
+     * @return vrai si la pile est vide, faux autrement
+     */</span>
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>boolean</span> estVide() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> link.size() == 0; 
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='color:#3F5FBF'>/**
+     * Effectue un test de l'état de la pile.
+     * 
+     * @return vrai si la pile est pleine, faux autrement
+     */</span>
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>boolean</span> estPleine() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> link.size() == size; 
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='color:#3F5FBF'>/**
+     * Retourne une représentation en String d'une pile, contenant la
+     * représentation en String de chaque élément.
+     * 
+     * @return une représentation en String d'une pile
+     * Utilise la méthode hasNext() de Maillon
+     */</span>
+    <span style='font-weight:bold;color:#7B0052;'>public</span> String toString() <span style='font-weight:bold;color:#D3171B'>{</span>
+        String s = <span style='color:#2A00FF'>"["</span>;
+        <span style='font-weight:bold;color:#7B0052;'>for</span> (<span style='font-weight:bold;color:#7B0052;'>int</span> i = this.link.size() - 1; i &gt;= 0; i--) <span style='font-weight:bold;color:#D3171B'>{</span>
+            s+= this.link.get(i).toString();
+            <span style='font-weight:bold;color:#7B0052;'>if</span>(i &gt;0)<span style='font-weight:bold;color:#D3171B'>{</span>
+                s+= <span style='color:#2A00FF'>", "</span>;
+            <span style='font-weight:bold;color:#D3171B'>}</span>       
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> s + <span style='color:#2A00FF'>"]"</span>; 
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+   
+	<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>boolean</span> equals(Object o) <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>if</span>( o <span style='font-weight:bold;color:#7B0052;'>instanceof</span> Pile4)<span style='font-weight:bold;color:#D3171B'>{</span>
+            Pile4 p = (Pile4)o;
+            <span style='font-weight:bold;color:#7B0052;'>if</span>( this.taille() == p.taille() && this.capacite() == p.capacite() )<span style='font-weight:bold;color:#D3171B'>{</span>
+                <span style='font-weight:bold;color:#7B0052;'>for</span>( <span style='font-weight:bold;color:#7B0052;'>int</span> i = 0; i&lt; this.taille(); i++)<span style='font-weight:bold;color:#D3171B'>{</span>
+                    <span style='font-weight:bold;color:#7B0052;'>if</span>( this.link.get(i) != p.link.get(i) )<span style='font-weight:bold;color:#D3171B'>{</span> <span style='font-weight:bold;color:#7B0052;'>return</span> <span style='font-weight:bold;color:#7B0052;'>false</span>;<span style='font-weight:bold;color:#D3171B'>}</span>
+                <span style='font-weight:bold;color:#D3171B'>}</span>
+            <span style='font-weight:bold;color:#D3171B'>}</span> <span style='font-weight:bold;color:#7B0052;'>else</span><span style='font-weight:bold;color:#D3171B'>{</span><span style='font-weight:bold;color:#7B0052;'>return</span> <span style='font-weight:bold;color:#7B0052;'>false</span>;<span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#7B0052;'>else</span><span style='font-weight:bold;color:#D3171B'>{</span><span style='font-weight:bold;color:#7B0052;'>return</span> <span style='font-weight:bold;color:#7B0052;'>false</span>;<span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> <span style='font-weight:bold;color:#7B0052;'>true</span>;
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>int</span> capacite() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> this.size;
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>int</span> hashCode() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> toString().hashCode();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>int</span> taille() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> link.size();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+
+	
+
+
+    <br />
+    <hr />
+    <h3>Question 2.3</h3>
+    
+	<p>Voici le code de la classe de test de la classe Pile2, je mets que une classe de test, vu que les autres sont identiques, seuls les objects creés pour le test varient</p>
+
+<pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question2;
+
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> Pile2Test <span style='font-weight:bold;color:#7B0052;'>extends</span> junit.framework.TestCase <span style='font-weight:bold;color:#D3171B'>{</span>
+    <span style='font-weight:bold;color:#7B0052;'>private</span> PileI p1;
+    <span style='font-weight:bold;color:#7B0052;'>private</span> PileI p2;
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> setUp() <span style='font-weight:bold;color:#D3171B'>{</span>
+        p1 = <span style='font-weight:bold;color:#7B0052;'>new</span> question2.Pile2();
+        p2 = <span style='font-weight:bold;color:#7B0052;'>new</span> question2.Pile2();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> test_Pile_capacite() <span style='font-weight:bold;color:#D3171B'>{</span>
+        assertEquals(PileI.CAPACITE_PAR_DEFAUT, p1.capacite());
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> test_Pile_estPleine() <span style='font-weight:bold;color:#7B0052;'>throws</span> Exception <span style='font-weight:bold;color:#D3171B'>{</span>
+        PileI p = <span style='font-weight:bold;color:#7B0052;'>new</span> question2.Pile2(3);
+        p.empiler(3);
+        assertEquals(1, p.taille());
+        p.empiler(2);
+        assertEquals(2, p.taille());
+        p.empiler(1);
+        assertEquals(3, p.taille());
+
+        assertEquals(true, p.estPleine());
+        assertEquals(p.taille(), p.capacite());
+        <span style='font-weight:bold;color:#7B0052;'>try</span> <span style='font-weight:bold;color:#D3171B'>{</span>
+            p.empiler(0);
+            fail();
+        <span style='font-weight:bold;color:#D3171B'>}</span> <span style='font-weight:bold;color:#7B0052;'>catch</span> (Exception e) <span style='font-weight:bold;color:#D3171B'>{</span>
+            assertTrue(e <span style='font-weight:bold;color:#7B0052;'>instanceof</span> question1.PilePleineException);
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> test_Pile_sommet() <span style='font-weight:bold;color:#7B0052;'>throws</span> Exception <span style='font-weight:bold;color:#D3171B'>{</span>
+        PileI p = <span style='font-weight:bold;color:#7B0052;'>new</span> question2.Pile2(3);
+        assertEquals(true, p.estVide());
+
+        p.empiler(<span style='font-weight:bold;color:#7B0052;'>new</span> Integer(3));
+        assertEquals(<span style='color:#2A00FF'>" sommet ?? "</span>, <span style='font-weight:bold;color:#7B0052;'>new</span> Integer(3), p.sommet());
+        assertEquals(1, p.taille());
+        assertEquals(<span style='color:#2A00FF'>" depiler ?? "</span>, <span style='font-weight:bold;color:#7B0052;'>new</span> Integer(3), p.depiler());
+        assertEquals(0, p.taille());
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> test_Pile_estVide() <span style='font-weight:bold;color:#7B0052;'>throws</span> Exception <span style='font-weight:bold;color:#D3171B'>{</span>
+        PileI p = <span style='font-weight:bold;color:#7B0052;'>new</span> question2.Pile2(3);
+        assertEquals(true, p.estVide());
+        <span style='font-weight:bold;color:#7B0052;'>try</span> <span style='font-weight:bold;color:#D3171B'>{</span>
+            Object r = p.depiler();
+            fail();
+        <span style='font-weight:bold;color:#D3171B'>}</span> <span style='font-weight:bold;color:#7B0052;'>catch</span> (Exception e) <span style='font-weight:bold;color:#D3171B'>{</span>
+            assertTrue(e <span style='font-weight:bold;color:#7B0052;'>instanceof</span> question1.PileVideException);
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> test_Pile_toString() <span style='font-weight:bold;color:#7B0052;'>throws</span> Exception <span style='font-weight:bold;color:#D3171B'>{</span>
+        PileI pile1 = <span style='font-weight:bold;color:#7B0052;'>new</span> question2.Pile2(3);
+        assertEquals(<span style='color:#2A00FF'>"toString incorrect ? "</span>, <span style='color:#2A00FF'>"[]"</span>, pile1.toString());
+        pile1.empiler(4);
+        assertEquals(<span style='color:#2A00FF'>"toString incorrect ? "</span>, <span style='color:#2A00FF'>"[4]"</span>, pile1.toString());
+        pile1.empiler(5);
+        assertEquals(<span style='color:#2A00FF'>"toString incorrect ? "</span>, <span style='color:#2A00FF'>"[5, 4]"</span>, pile1.toString());
+        pile1.empiler(3);
+        assertEquals(<span style='color:#2A00FF'>"toString incorrect ? "</span>, <span style='color:#2A00FF'>"[3, 5, 4]"</span>, pile1.toString());
+
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> test_Pile_TailleNegative() <span style='font-weight:bold;color:#D3171B'>{</span>
+        PileI p = <span style='font-weight:bold;color:#7B0052;'>new</span> question2.Pile2(-3);
+        assertEquals(p.CAPACITE_PAR_DEFAUT, p.capacite());
+
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> test_Pile_equals() <span style='font-weight:bold;color:#7B0052;'>throws</span> Exception <span style='font-weight:bold;color:#D3171B'>{</span>
+
+        p1.empiler(3);
+        p1.empiler(2);
+        p1.empiler(1);
+
+        p2.empiler(3);
+        p2.empiler(2);
+        p2.empiler(1);
+
+        assertTrue(<span style='color:#2A00FF'>"égalité de deux piles ? "</span>, p1.equals(p2));
+        assertTrue(<span style='color:#2A00FF'>"égalité de deux piles ? "</span>, p2.equals(p1));
+        assertTrue(<span style='color:#2A00FF'>"égalité de deux piles ? "</span>, p1.equals(p1));
+
+        p2.empiler(1);
+        assertFalse(<span style='color:#2A00FF'>"égalité de deux piles ? "</span>, p1.equals(p2));
+
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+
+
+    <br />
+    <hr />
+    <h3>Question 2.4</h3>
+    
+	<p>Voici le code de la classe de test: PilesAuMemeComportement</p>
+
+<pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question2;
+
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> PilesAuMemeComportement <span style='font-weight:bold;color:#7B0052;'>extends</span> junit.framework.TestCase <span style='font-weight:bold;color:#D3171B'>{</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>private</span> question2.PileI p1;
+    <span style='font-weight:bold;color:#7B0052;'>private</span> question2.PileI p2;
+    <span style='font-weight:bold;color:#7B0052;'>private</span> question2.PileI p3;
+    <span style='font-weight:bold;color:#7B0052;'>private</span> question2.PileI p4;
+
+    
+    <span style='font-weight:bold;color:#7B0052;'>protected</span> <span style='font-weight:bold;color:#7B0052;'>void</span> setUp() <span style='color:#3F7F5F'>// throws java.lang.Exception
+</span>    <span style='font-weight:bold;color:#D3171B'>{</span>
+        p1 = <span style='font-weight:bold;color:#7B0052;'>new</span> question2.Pile(PileI.CAPACITE_PAR_DEFAUT);
+        p2 = <span style='font-weight:bold;color:#7B0052;'>new</span> question2.Pile2(PileI.CAPACITE_PAR_DEFAUT);
+        p3 = <span style='font-weight:bold;color:#7B0052;'>new</span> question2.Pile3(PileI.CAPACITE_PAR_DEFAUT);
+        p4 = <span style='font-weight:bold;color:#7B0052;'>new</span> question2.Pile4(PileI.CAPACITE_PAR_DEFAUT);
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+
+    <span style='font-weight:bold;color:#7B0052;'>protected</span> <span style='font-weight:bold;color:#7B0052;'>void</span> tearDown() <span style='color:#3F7F5F'>// throws java.lang.Exception
+</span>    <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='color:#3F7F5F'>//Liberez ici les ressources engagees par setUp()
+</span>    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> test_Sommaire()  <span style='font-weight:bold;color:#7B0052;'>throws</span> Exception <span style='font-weight:bold;color:#D3171B'>{</span>
+
+        p4.empiler(<span style='color:#2A00FF'>"b"</span>);p4.empiler(<span style='color:#2A00FF'>"a"</span>);
+        p3.empiler(<span style='color:#2A00FF'>"b"</span>);p3.empiler(<span style='color:#2A00FF'>"a"</span>);
+        p2.empiler(<span style='color:#2A00FF'>"b"</span>);p2.empiler(<span style='color:#2A00FF'>"a"</span>);
+        p1.empiler(<span style='color:#2A00FF'>"b"</span>);p1.empiler(<span style='color:#2A00FF'>"a"</span>);
+
+        assertEquals(p1.capacite(), p2.capacite());
+        assertEquals(p2.capacite(), p3.capacite());
+        assertEquals(p3.capacite(), p4.capacite());
+
+        assertEquals(<span style='color:#2A00FF'>"[a, b]"</span>, p1.toString());
+        assertEquals(p1.toString(), p2.toString());
+        assertEquals(p2.toString(), p3.toString());
+        assertEquals(p3.toString(), p4.toString());
+
+        assertEquals(p1.sommet(), p2.sommet());
+        assertEquals(p2.sommet(), p3.sommet());
+        assertEquals(p3.sommet(), p4.sommet());
+
+        String s = (String) p1.depiler();
+        assertEquals(s, (String) p2.depiler());
+        assertEquals(s, (String) p3.depiler());
+        assertEquals(s, (String) p4.depiler());
+
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> test_meme_comportement() <span style='font-weight:bold;color:#7B0052;'>throws</span> Exception <span style='font-weight:bold;color:#D3171B'>{</span> 
+        p4.empiler(<span style='color:#2A00FF'>"aze"</span>);
+        p3.empiler(<span style='color:#2A00FF'>"aze"</span>);
+        p2.empiler(<span style='color:#2A00FF'>"aze"</span>);
+        p1.empiler(<span style='color:#2A00FF'>"aze"</span>);
+
+        assertEquals(<span style='color:#2A00FF'>"p1.capacite() == p2.capacite() ??"</span>,p1.capacite(), p2.capacite());
+        assertEquals(<span style='color:#2A00FF'>"p2.capacite() == p3.capacite() ??"</span>,p2.capacite(), p3.capacite());
+        assertEquals(<span style='color:#2A00FF'>"p3.capacite() == p4.capacite() ??"</span>,p3.capacite(), p4.capacite());
+
+        assertEquals(<span style='color:#2A00FF'>"[aze]"</span>, p1.toString());
+        assertEquals(<span style='color:#2A00FF'>"p1.toString() != p2.toString() ?? "</span>, p1.toString(), p2.toString());
+        assertEquals(<span style='color:#2A00FF'>"p2.toString()!= p3.toString() ?? "</span>,p2.toString(), p3.toString());
+        assertEquals(<span style='color:#2A00FF'>"p3.toString()!= p4.toString() ?? "</span>, p3.toString(), p4.toString());
+
+        assertEquals(<span style='color:#2A00FF'>"p1.sommet() != p2.sommet() ??? "</span>, p1.sommet(), p2.sommet());
+        assertEquals(<span style='color:#2A00FF'>"p2.sommet() != p3.sommet() ??? "</span>, p2.sommet(), p3.sommet());
+        assertEquals(<span style='color:#2A00FF'>"p1.estVide() != p2.estVide() ??? "</span>,p1.estVide(), p2.estVide());
+        assertEquals(<span style='color:#2A00FF'>"p2.estVide()!= p3.estVide() ??? "</span>, p2.estVide(), p3.estVide());
+        assertEquals(<span style='color:#2A00FF'>"p1.estPleine() != p2.estPleine() ??? "</span>,p1.estPleine(), p2.estPleine());
+        assertEquals(<span style='color:#2A00FF'>"p2.estPleine()!=  p3.estPleine() ??? "</span>,p2.estPleine(), p3.estPleine());
+
+        String s = (String) p1.depiler();
+        assertEquals(<span style='color:#2A00FF'>" difference apres avoir depile ?? "</span>, s, (String) p2.depiler());
+        assertEquals(<span style='color:#2A00FF'>" difference apres avoir depile ?? "</span>,s, (String) p3.depiler());
+        assertEquals(<span style='color:#2A00FF'>" difference apres avoir depile ?? "</span>,s, (String) p4.depiler());
+
+        assertEquals(<span style='color:#2A00FF'>"p1.estVide() != p2.estVide() ??? "</span>,p1.estVide(), p2.estVide());
+        assertEquals(<span style='color:#2A00FF'>"p2.estVide()!= p3.estVide() ??? "</span>, p2.estVide(), p3.estVide());
+        assertEquals(<span style='color:#2A00FF'>"p1.estPleine() != p2.estPleine() ??? "</span>,p1.estPleine(), p2.estPleine());
+        assertEquals(<span style='color:#2A00FF'>"p2.estPleine()!=  p3.estPleine() ??? "</span>,p2.estPleine(), p3.estPleine());
+
+        assertEquals(<span style='color:#2A00FF'>" difference sur la taille() ?? "</span>,p1.taille(), p2.taille());
+        assertEquals(<span style='color:#2A00FF'>" difference sur la taille() ?? "</span>,p2.taille(), p3.taille());
+        assertEquals(<span style='color:#2A00FF'>" difference sur la taille() ?? "</span>,p3.taille(), p4.taille());
+
+        p4.empiler(<span style='color:#2A00FF'>"azerty"</span>);
+        p3.empiler(<span style='color:#2A00FF'>"azerty"</span>);
+        p2.empiler(<span style='color:#2A00FF'>"azerty"</span>);
+        p1.empiler(<span style='color:#2A00FF'>"azerty"</span>);
+
+        assertEquals(<span style='color:#2A00FF'>"p1.sommet() != p2.sommet() ??? "</span>, p1.sommet(), p2.sommet());
+        assertEquals(<span style='color:#2A00FF'>"p2.sommet() != p3.sommet() ??? "</span>, p2.sommet(), p3.sommet());
+        assertEquals(<span style='color:#2A00FF'>"p1.estVide() != p2.estVide() ??? "</span>,p1.estVide(), p2.estVide());
+        assertEquals(<span style='color:#2A00FF'>"p2.estVide()!= p3.estVide() ??? "</span>, p2.estVide(), p3.estVide());
+        assertEquals(<span style='color:#2A00FF'>"p1.estPleine() != p2.estPleine() ??? "</span>,p1.estPleine(), p2.estPleine());
+        assertEquals(<span style='color:#2A00FF'>"p2.estPleine()!=  p3.estPleine() ??? "</span>,p2.estPleine(), p3.estPleine());
+        assertEquals(<span style='color:#2A00FF'>" difference sur la taille() ?? "</span>,p1.taille(), p2.taille());
+        assertEquals(<span style='color:#2A00FF'>" difference sur la taille() ?? "</span>,p2.taille(), p3.taille());
+        assertEquals(<span style='color:#2A00FF'>" difference  sur la taille() ?? "</span>,p3.taille(), p4.taille());
+
+        p4.empiler(<span style='color:#2A00FF'>"azer"</span>);
+        p3.empiler(<span style='color:#2A00FF'>"azer"</span>);
+        p2.empiler(<span style='color:#2A00FF'>"azer"</span>);
+        p1.empiler(<span style='color:#2A00FF'>"azer"</span>);
+
+        assertEquals(<span style='color:#2A00FF'>"p1.toString() != p2.toString() ?? "</span>, p1.toString(), p2.toString());
+        assertEquals(<span style='color:#2A00FF'>"p2.toString() != p3.toString() ?? "</span>,p2.toString(), p3.toString());
+        assertEquals(<span style='color:#2A00FF'>"p3.toString() != p4.toString() ?? "</span>, p3.toString(), p4.toString());
+
+        assertEquals(<span style='color:#2A00FF'>"p1.sommet() != p2.sommet() ??? "</span>, p1.sommet(), p2.sommet());
+        assertEquals(<span style='color:#2A00FF'>"p2.sommet() != p3.sommet() ??? "</span>, p2.sommet(), p3.sommet());
+
+        assertEquals(<span style='color:#2A00FF'>"p1.estVide() != p2.estVide() ??? "</span>,p1.estVide(), p2.estVide());
+        assertEquals(<span style='color:#2A00FF'>"p2.estVide()!= p3.estVide() ??? "</span>, p2.estVide(), p3.estVide());
+        assertEquals(<span style='color:#2A00FF'>"p1.estPleine() != p2.estPleine() ??? "</span>,p1.estPleine(), p2.estPleine());
+        assertEquals(<span style='color:#2A00FF'>"p2.estPleine()!=  p3.estPleine() ??? "</span>,p2.estPleine(), p3.estPleine());
+
+        assertEquals(<span style='color:#2A00FF'>" difference sur la taille() ?? "</span>,p1.taille(), p2.taille());
+        assertEquals(<span style='color:#2A00FF'>" difference sur la taille() ?? "</span>,p2.taille(), p3.taille());
+        assertEquals(<span style='color:#2A00FF'>" difference  sur la taille() ?? "</span>,p3.taille(), p4.taille());
+
+        p4.empiler(<span style='color:#2A00FF'>"azer"</span>);
+        p3.empiler(<span style='color:#2A00FF'>"azer"</span>);
+        p2.empiler(<span style='color:#2A00FF'>"azer"</span>);
+        p1.empiler(<span style='color:#2A00FF'>"azer"</span>);
+
+        assertEquals(<span style='color:#2A00FF'>"p1.toString() != p2.toString() ?? "</span>, p1.toString(), p2.toString());
+        assertEquals(<span style='color:#2A00FF'>"p2.toString() != p3.toString() ?? "</span>,p2.toString(), p3.toString());
+        assertEquals(<span style='color:#2A00FF'>"p3.toString() != p4.toString() ?? "</span>, p3.toString(), p4.toString());
+
+        assertEquals(<span style='color:#2A00FF'>"p1.sommet() != p2.sommet() ??? "</span>, p1.sommet(), p2.sommet());
+        assertEquals(<span style='color:#2A00FF'>"p2.sommet() != p3.sommet() ??? "</span>, p2.sommet(), p3.sommet());
+
+        assertEquals(<span style='color:#2A00FF'>"p1.estVide() != p2.estVide() ??? "</span>,p1.estVide(), p2.estVide());
+        assertEquals(<span style='color:#2A00FF'>"p2.estVide()!= p3.estVide() ??? "</span>, p2.estVide(), p3.estVide());
+        assertEquals(<span style='color:#2A00FF'>"p1.estPleine() != p2.estPleine() ??? "</span>,p1.estPleine(), p2.estPleine());
+        assertEquals(<span style='color:#2A00FF'>"p2.estPleine()!=  p3.estPleine() ??? "</span>,p2.estPleine(), p3.estPleine());
+
+        assertEquals(<span style='color:#2A00FF'>" difference sur la taille() ?? "</span>,p1.taille(), p2.taille());
+        assertEquals(<span style='color:#2A00FF'>" difference sur la taille() ?? "</span>,p2.taille(), p3.taille());
+        assertEquals(<span style='color:#2A00FF'>" difference  sur la taille() ?? "</span>,p3.taille(), p4.taille());
+
+        p4.depiler();
+        p3.depiler();
+        p2.depiler();
+        p1.depiler();
+
+        assertEquals(<span style='color:#2A00FF'>"p1.toString() != p2.toString() ?? "</span>, p1.toString(), p2.toString());
+        assertEquals(<span style='color:#2A00FF'>"p2.toString() != p3.toString() ?? "</span>,p2.toString(), p3.toString());
+        assertEquals(<span style='color:#2A00FF'>"p3.toString() != p4.toString() ?? "</span>, p3.toString(), p4.toString());
+
+        assertEquals(<span style='color:#2A00FF'>"p1.sommet() != p2.sommet() ??? "</span>, p1.sommet(), p2.sommet());
+        assertEquals(<span style='color:#2A00FF'>"p2.sommet() != p3.sommet() ??? "</span>, p2.sommet(), p3.sommet());
+
+        assertEquals(<span style='color:#2A00FF'>"p1.estVide() != p2.estVide() ??? "</span>,p1.estVide(), p2.estVide());
+        assertEquals(<span style='color:#2A00FF'>"p2.estVide()!= p3.estVide() ??? "</span>, p2.estVide(), p3.estVide());
+        assertEquals(<span style='color:#2A00FF'>"p1.estPleine() != p2.estPleine() ??? "</span>,p1.estPleine(), p2.estPleine());
+        assertEquals(<span style='color:#2A00FF'>"p2.estPleine()!=  p3.estPleine() ??? "</span>,p2.estPleine(), p3.estPleine());
+
+        assertEquals(<span style='color:#2A00FF'>" difference sur la taille() ?? "</span>,p1.taille(), p2.taille());
+        assertEquals(<span style='color:#2A00FF'>" difference sur la taille() ?? "</span>,p2.taille(), p3.taille());
+        assertEquals(<span style='color:#2A00FF'>" difference  sur la taille() ?? "</span>,p3.taille(), p4.taille());
+
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+
+
+    <br />
+    <hr />
+    <h3>Question 2.5</h3>
+    
+<p>La première méthode manque d' une comparaison sur les types des contenus de la collection, elle ne teste pas entièrement l' égalité des deux objets, et peut confondre un String avec un Entier par exemple</p>
+<p>Je pense que la règle à retenir est de bien penser à tous les points qui identifient un objet avant de coder la méthode equals(), pour pouvoir être sûr d' une vraie égalité. </p>
+<p>Pour la deuxième méthode, elle ne teste que le retour de la méthode toString() des objets, ce qui n' est pas suffisant pour valider une égalité.</p>
+
+    <br />
+    <hr />
+    <h3>Question 3.1</h3>
+    
+<p>On constate que les classes implémentants l' interface PileI<T>, ne pourront manipuler plus que un seul type d' objet.</p>
+
+    <br />
+    <hr />
+    <h3>Question 3.2</h3>
+    
+<p>Le code de la classe UneUtilisation , avec le try/ catch commenté</p>
+
+<pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question3;
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> question1.PolygoneRegulier;
+
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> UneUtilisation <span style='font-weight:bold;color:#D3171B'>{</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>static</span> <span style='font-weight:bold;color:#7B0052;'>void</span> main(String[] args) <span style='font-weight:bold;color:#7B0052;'>throws</span> Exception <span style='font-weight:bold;color:#D3171B'>{</span>
+        PileI &lt;PolygoneRegulier&gt; p1 = <span style='font-weight:bold;color:#7B0052;'>new</span> Pile2 &lt;PolygoneRegulier&gt; (10); <span style='color:#3F7F5F'>// p1 ne contient que des polygones réguliers
+</span>        PileI &lt;PileI &lt;PolygoneRegulier&gt;&gt; p2 = <span style='font-weight:bold;color:#7B0052;'>new</span> Pile2 &lt;PileI &lt;PolygoneRegulier&gt;&gt; (10); <span style='color:#3F7F5F'>// p2 ne contient que des piles de polygones réguliers
+</span>
+        <span style='color:#3F7F5F'>// p1 est ici une pile de polygones réguliers PolygoneRegulier.java
+</span>        p1.empiler(<span style='font-weight:bold;color:#7B0052;'>new</span> PolygoneRegulier(4, 100));
+        p1.empiler(<span style='font-weight:bold;color:#7B0052;'>new</span> PolygoneRegulier(5, 100));
+
+        System.out.println(<span style='color:#2A00FF'>" la pile p1 = "</span> + p1);
+
+        p2.empiler(p1);
+        System.out.println(<span style='color:#2A00FF'>" la pile p2 = "</span> + p2);
+
+        <span style='color:#3F7F5F'>// try {
+</span>            <span style='color:#3F7F5F'>// p1.empiler(new PolygoneRegulier(5,100)); // désormais une erreur de
+</span>            <span style='color:#3F7F5F'>// // compilation
+</span>            <span style='color:#3F7F5F'>// // ....
+</span>            <span style='color:#3F7F5F'>// String s = (String)p1.depiler(); // désormais une erreur de
+</span>            <span style='color:#3F7F5F'>// // compilation
+</span>        <span style='color:#3F7F5F'>// } catch (Exception e) {
+</span>            <span style='color:#3F7F5F'>// e.printStackTrace();
+</span>        <span style='color:#3F7F5F'>// }
+</span>    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+
+
+    <br />
+    <hr />
+    <h3>Question 3.2 bis</h3>
+    
+<p>Une capture d' écran montrant que ça ne compile plus</p>
+<img src="Annotation 2019-10-22 173057.png" width="480" height="315">
+	
+    <br />
+    <hr />    
+        <h3>Conclusion, biliographie et remarques :</h3>
+<p>Ce TP m' a pris finalement pas mal de temps, mais pour rééllement apprendre, il n' y a pas de secret, c' est dans la pratique, rechercher trouver et constater les erreurs soit même.</p>
+<p>Pour ce premier TP, je n' ai pas eu le temps de soigner la présentation, j' ai pensé plus utile d' enlever: commentaires et javadoc(pas toutes), en finissant ce TP et en regardant la mise en page, je me dis que ça fait un peu lourd et chargé pour une correction en série, je ferai mieux sur le prochain TP.
+</p><p>Bonne correction!</p><br><br>
+
+        <!--i style="font-size:12px;">... Une seule page html, limitez le nombre de clics, (plus de 200 rapports à corriger chaque semaine)</i-->
+</body>
+</html>

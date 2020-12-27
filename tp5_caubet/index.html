@@ -1,0 +1,1040 @@
+<html>
+<head>
+    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+    <title>NFP121 - TP5</title>
+    <style type="text/css">
+        body {
+            background: #E5DED6;
+            background-color: #fff;
+            color: #333333;
+            font-size: 14px;
+            font-family: Verdana, Arial;
+        }
+
+        table {
+            font-size: 20px;
+            border-color: #808080;
+            border-style: solid;
+            border-width: 1px;
+        }
+
+        h2 {
+            color: #C1002A;
+            font-family: Verdana, Arial;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        h3 {
+            color: #C1002A;
+            font-family: Verdana, Arial;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        hr {
+            margin: 15px 0 15px 0;
+        }
+
+		applet {
+			margin: 10px 0px 25px 250px;
+			border-width: 1px;
+			border-style: solid;
+			border-color: #777777;
+		}
+    </style>
+
+</head>
+<body>
+    <h2 style="text-align: center">NFP 121 - TP5</h2>
+    <h2 style="text-align: center">Classes abstraites, interface, h�ritage</h2>
+    <br />
+    <hr>
+    <br />
+    <table>
+        <tr>
+            <td>Nom:
+            </td>
+            <td> CAUBET
+            </td>
+        </tr>
+        <tr>
+            <td>Prenom:
+            </td>
+            <td> Julien
+            </td>
+        </tr>
+        <tr>
+            <td>Matricule:
+            </td>
+            <td> FOD_motdepasse1
+            </td>
+        </tr>
+    </table>
+
+	<br />
+    <hr />
+    <h3>Question 1.1</h3>
+    <p>methode add</p>
+    <br />
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>boolean</span> add(T t) <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>if</span>(!(this.contains(t)))<span style='font-weight:bold;color:#D3171B'>{</span>
+          <span style='font-weight:bold;color:#7B0052;'>return</span> this.table.add(t);
+          <span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> <span style='font-weight:bold;color:#7B0052;'>false</span>;
+    <span style='font-weight:bold;color:#D3171B'>}</span></pre>
+	<br />
+    <hr />
+    <h3>Question 1.2</h3>
+    <p>la methode de test de la methode "Ensemble.add()"</p>
+    <br>
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> testAdd()<span style='font-weight:bold;color:#D3171B'>{</span>
+        question1.Ensemble&lt;Integer&gt; e1;<span style='color:#3F7F5F'>//, e2;
+</span>        e1 = <span style='font-weight:bold;color:#7B0052;'>new</span> question1.Ensemble&lt;Integer&gt;();
+        assertEquals(true, e1.add(2));
+        assertEquals(true, e1.add(3));
+        assertTrue(e1.size()==2);
+        assertFalse(e1.add(2));
+        assertTrue(e1.size()==2);
+
+
+       <span style='font-weight:bold;color:#D3171B'>}</span></pre>
+
+	<br />
+    <hr />
+    <h3>Question 1.3</h3>
+    <p>La classe Ensemble</p>
+    <br>
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question1;
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.util.*;
+
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> Ensemble&lt;T&gt; <span style='font-weight:bold;color:#7B0052;'>extends</span> AbstractSet&lt;T&gt; <span style='font-weight:bold;color:#D3171B'>{</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>protected</span> java.util.Vector&lt;T&gt; table = <span style='font-weight:bold;color:#7B0052;'>new</span> java.util.Vector&lt;T&gt;();
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>int</span> size() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> table.size();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> Iterator&lt;T&gt; iterator() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> table.iterator();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>boolean</span> add(T t) <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>if</span>(!(this.contains(t)))<span style='font-weight:bold;color:#D3171B'>{</span>
+          <span style='font-weight:bold;color:#7B0052;'>return</span> this.table.add(t);
+          <span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> <span style='font-weight:bold;color:#7B0052;'>false</span>;
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> Ensemble&lt;T&gt; union(Ensemble&lt;? <span style='font-weight:bold;color:#7B0052;'>extends</span> T&gt; e) <span style='font-weight:bold;color:#D3171B'>{</span>
+        Ensemble&lt;T&gt; t = <span style='font-weight:bold;color:#7B0052;'>new</span> Ensemble();
+        t.addAll(<span style='font-weight:bold;color:#7B0052;'>this</span>);
+        t.addAll(e);
+        <span style='font-weight:bold;color:#7B0052;'>return</span> t;
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> Ensemble&lt;T&gt; inter(Ensemble&lt;? <span style='font-weight:bold;color:#7B0052;'>extends</span> T&gt; e) <span style='font-weight:bold;color:#D3171B'>{</span>
+        Ensemble&lt;T&gt; t = <span style='font-weight:bold;color:#7B0052;'>new</span> Ensemble&lt;T&gt;();
+        t.addAll(<span style='font-weight:bold;color:#7B0052;'>this</span>);
+        t.retainAll(e);
+        <span style='font-weight:bold;color:#7B0052;'>return</span> t;
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> Ensemble&lt;T&gt; diff(Ensemble&lt;? <span style='font-weight:bold;color:#7B0052;'>extends</span> T&gt; e) <span style='font-weight:bold;color:#D3171B'>{</span>
+        Ensemble&lt;T&gt; t = <span style='font-weight:bold;color:#7B0052;'>new</span> Ensemble&lt;T&gt;();
+        t.addAll(<span style='font-weight:bold;color:#7B0052;'>this</span>);
+        t.removeAll(e);
+        <span style='font-weight:bold;color:#7B0052;'>return</span> t;
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    Ensemble&lt;T&gt; diffSym(Ensemble&lt;? <span style='font-weight:bold;color:#7B0052;'>extends</span> T&gt; e) <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> union(e).diff(inter(e));
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+
+	<br />
+    <hr />
+    <h3>Question 1.4</h3>
+    <p>La classe EnsembleTest</p>
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question1;
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.util.*;
+
+
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> EnsembleTest <span style='font-weight:bold;color:#7B0052;'>extends</span> junit.framework.TestCase <span style='font-weight:bold;color:#D3171B'>{</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> testSize()<span style='font-weight:bold;color:#D3171B'>{</span>
+        question1.Ensemble&lt;Integer&gt; e1;
+        e1 = <span style='font-weight:bold;color:#7B0052;'>new</span> question1.Ensemble&lt;Integer&gt;();
+        assertTrue(e1.size()==0);
+        e1.add(2);
+        e1.add(3);
+        assertTrue(e1.size()==2);
+        e1.remove(2);
+        assertTrue(e1.size()==1);
+        e1.remove(3);
+        assertTrue(e1.size()==0);
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> testIterator()<span style='font-weight:bold;color:#D3171B'>{</span>
+        question1.Ensemble&lt;Integer&gt; e1;
+        e1 = <span style='font-weight:bold;color:#7B0052;'>new</span> question1.Ensemble&lt;Integer&gt;();
+        Iterator it = e1.iterator();
+        e1.add(2);
+        e1.add(3);
+        assertTrue(it.hasNext());
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> testAdd()<span style='font-weight:bold;color:#D3171B'>{</span>
+        question1.Ensemble&lt;Integer&gt; e1;<span style='color:#3F7F5F'>//, e2;
+</span>        e1 = <span style='font-weight:bold;color:#7B0052;'>new</span> question1.Ensemble&lt;Integer&gt;();
+        assertEquals(true, e1.add(2));
+        assertEquals(true, e1.add(3));
+        assertTrue(e1.size()==2);
+        assertFalse(e1.add(2));
+        assertTrue(e1.size()==2);
+
+
+       <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> testUnion() <span style='font-weight:bold;color:#D3171B'>{</span>
+        question1.Ensemble&lt;Integer&gt; e3, e4;
+        e3 = <span style='font-weight:bold;color:#7B0052;'>new</span> question1.Ensemble&lt;Integer&gt;();
+        assertEquals(true, e3.add(2));
+        assertEquals(true, e3.add(3));
+
+        e4 = <span style='font-weight:bold;color:#7B0052;'>new</span> question1.Ensemble&lt;Integer&gt;();
+        assertEquals(true, e4.add(3));
+        assertEquals(true, e4.add(4));
+
+        question1.Ensemble&lt;Integer&gt; union = e3.union(e4);
+        assertEquals(3, union.size());
+        assertTrue(union.contains(2));
+        assertTrue(union.contains(3));
+        assertTrue(union.contains(4));
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> testInter() <span style='font-weight:bold;color:#D3171B'>{</span>
+        question1.Ensemble&lt;Integer&gt; e3, e4;
+        e3 = <span style='font-weight:bold;color:#7B0052;'>new</span> question1.Ensemble&lt;Integer&gt;();
+        assertEquals(true, e3.add(2));
+        assertEquals(true, e3.add(3));
+
+        e4 = <span style='font-weight:bold;color:#7B0052;'>new</span> question1.Ensemble&lt;Integer&gt;();
+        assertEquals(true, e4.add(3));
+        assertEquals(true, e4.add(4));
+
+        question1.Ensemble&lt;Integer&gt; inter = e3.inter(e4);
+        assertEquals(1, inter.size());
+        assertTrue(inter.contains(3));
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> testDiff() <span style='font-weight:bold;color:#D3171B'>{</span>
+        question1.Ensemble&lt;Integer&gt; e3, e4;
+        e3 = <span style='font-weight:bold;color:#7B0052;'>new</span> question1.Ensemble&lt;Integer&gt;();
+        assertEquals(true, e3.add(2));
+        assertEquals(true, e3.add(3));
+
+        e4 = <span style='font-weight:bold;color:#7B0052;'>new</span> question1.Ensemble&lt;Integer&gt;();
+        assertEquals(true, e4.add(3));
+        assertEquals(true, e4.add(4));
+
+        question1.Ensemble&lt;Integer&gt; diff = e3.diff(e4);
+        assertEquals(1, diff.size());
+        assertTrue(diff.contains(2));
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> testDiffSym() <span style='font-weight:bold;color:#D3171B'>{</span>
+        question1.Ensemble&lt;Integer&gt; e3, e4;
+        e3 = <span style='font-weight:bold;color:#7B0052;'>new</span> question1.Ensemble&lt;Integer&gt;();
+        assertEquals(true, e3.add(2));
+        assertEquals(true, e3.add(3));
+
+        e4 = <span style='font-weight:bold;color:#7B0052;'>new</span> question1.Ensemble&lt;Integer&gt;();
+        assertEquals(true, e4.add(3));
+        assertEquals(true, e4.add(4));
+
+        question1.Ensemble&lt;Integer&gt; diffsym = e3.diffSym(e4);
+        assertEquals(2, diffsym.size());
+        assertTrue(diffsym.contains(2));
+        assertTrue(diffsym.contains(4));
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+<br>
+<p>J' ai crée une classe "Controleur" pour faire son role</p>
+<pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question1;
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.event.ActionEvent;
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.event.ActionListener;
+
+
+<span style='color:#3F5FBF'>/**
+ * Décrivez votre classe Controleur ici.
+ *
+ * @author (votre nom)
+ * @version (un numéro de version ou une date)
+ */</span>
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> Controleur <span style='font-weight:bold;color:#7B0052;'>implements</span> ActionListener<span style='font-weight:bold;color:#D3171B'>{</span>
+    <span style='color:#3F7F5F'>//proprietes
+</span>    IHMTestEnsemble ihm;
+
+    <span style='color:#3F7F5F'>//constructeur
+</span>    <span style='font-weight:bold;color:#7B0052;'>public</span> Controleur(IHMTestEnsemble ihm)<span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>super</span>();
+        this.ihm = ihm;
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+
+    @Override
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> actionPerformed(ActionEvent ae)<span style='font-weight:bold;color:#D3171B'>{</span>
+    <span style='font-weight:bold;color:#7B0052;'>if</span> (ae.getActionCommand().equals(<span style='color:#2A00FF'>"union"</span>)) <span style='font-weight:bold;color:#D3171B'>{</span>
+        ihm.setUnion(ae);
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>if</span> (ae.getActionCommand().equals(<span style='color:#2A00FF'>"intersection"</span>)) <span style='font-weight:bold;color:#D3171B'>{</span>
+        ihm.setInter(ae);
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>if</span> (ae.getActionCommand().equals(<span style='color:#2A00FF'>"difference"</span>)) <span style='font-weight:bold;color:#D3171B'>{</span>
+        ihm.setDiff(ae);
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>if</span> (ae.getActionCommand().equals(<span style='color:#2A00FF'>"diffSymetrique"</span>)) <span style='font-weight:bold;color:#D3171B'>{</span>
+        ihm.setDiffSym(ae);
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+<br>
+<p>La classe IHMTestEnsemble</p>
+<pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question1;
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.*;
+<span style='font-weight:bold;color:#7B0052;'>import</span> javax.swing.*;
+
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> IHMTestEnsemble <span style='font-weight:bold;color:#7B0052;'>extends</span> JFrame <span style='font-weight:bold;color:#D3171B'>{</span>
+
+    <span style='color:#3F7F5F'>// Variables declaration - do not modify//GEN-BEGIN:variables
+</span>    <span style='font-weight:bold;color:#7B0052;'>private</span> JPanel panel1;
+    <span style='font-weight:bold;color:#7B0052;'>private</span> JLabel label1;
+    <span style='font-weight:bold;color:#7B0052;'>private</span> JTextField textField1;
+
+    <span style='font-weight:bold;color:#7B0052;'>private</span> JPanel panel2;
+    <span style='font-weight:bold;color:#7B0052;'>private</span> JLabel label2;
+    <span style='font-weight:bold;color:#7B0052;'>private</span> JTextField textField2;
+    <span style='font-weight:bold;color:#7B0052;'>private</span> JPanel panel3;
+
+    <span style='font-weight:bold;color:#7B0052;'>private</span> JLabel label4;
+    <span style='font-weight:bold;color:#7B0052;'>private</span> JPanel panel4;
+    <span style='font-weight:bold;color:#7B0052;'>private</span> JLabel label3;
+    <span style='font-weight:bold;color:#7B0052;'>private</span> JTextField textField3;
+
+    <span style='font-weight:bold;color:#7B0052;'>private</span> JButton button1;
+    <span style='font-weight:bold;color:#7B0052;'>private</span> JButton button2;
+    <span style='font-weight:bold;color:#7B0052;'>private</span> JButton button3;
+    <span style='font-weight:bold;color:#7B0052;'>private</span> JButton button4;
+
+    <span style='font-weight:bold;color:#7B0052;'>private</span> Controleur controleur;
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> IHMTestEnsemble() <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>super</span>(<span style='color:#2A00FF'>"IHM TestEnsemble"</span>);
+        initComponents();
+        setLocation(200,200);
+        pack();
+        setVisible(<span style='font-weight:bold;color:#7B0052;'>true</span>);
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>private</span> <span style='font-weight:bold;color:#7B0052;'>void</span> initComponents() <span style='font-weight:bold;color:#D3171B'>{</span><span style='color:#3F7F5F'>// GEN-BEGIN:initComponents
+</span>        setLayout(<span style='font-weight:bold;color:#7B0052;'>new</span> GridLayout(4, 1, 2, 2));
+
+        controleur = <span style='font-weight:bold;color:#7B0052;'>new</span> Controleur(<span style='font-weight:bold;color:#7B0052;'>this</span>);
+
+        panel1 = <span style='font-weight:bold;color:#7B0052;'>new</span> JPanel();
+        panel1.setLayout(<span style='font-weight:bold;color:#7B0052;'>new</span> java.awt.FlowLayout(0, 5, 5));
+        panel1.setBackground(java.awt.Color.lightGray);
+        label1 = <span style='font-weight:bold;color:#7B0052;'>new</span> JLabel();
+        label1.setBackground(java.awt.Color.orange);
+        label1.setText(<span style='color:#2A00FF'>"ensemble e1 :"</span>);
+        panel1.add(label1);
+        textField1 = <span style='font-weight:bold;color:#7B0052;'>new</span> JTextField();
+        textField1.setColumns(52);
+        textField1.setName(<span style='color:#2A00FF'>"saisieE1"</span>);
+        panel1.add(textField1);
+        add(panel1);
+
+        panel2 = <span style='font-weight:bold;color:#7B0052;'>new</span> JPanel();
+        panel2.setLayout(<span style='font-weight:bold;color:#7B0052;'>new</span> java.awt.FlowLayout(0, 5, 5));
+        panel2.setBackground(java.awt.Color.magenta);
+        label2 = <span style='font-weight:bold;color:#7B0052;'>new</span> JLabel();
+        label2.setText(<span style='color:#2A00FF'>"ensemble e2 :"</span>);
+        panel2.add(label2);
+        textField2 = <span style='font-weight:bold;color:#7B0052;'>new</span> JTextField();
+        textField2.setColumns(52);
+        panel2.add(textField2);
+        add(panel2);
+
+        panel3 = <span style='font-weight:bold;color:#7B0052;'>new</span> JPanel();
+        panel3.setLayout(<span style='font-weight:bold;color:#7B0052;'>new</span> java.awt.FlowLayout(0, 5, 5));
+        panel3.setBackground(java.awt.Color.green);
+        label4 = <span style='font-weight:bold;color:#7B0052;'>new</span> JLabel();
+        label4.setText(<span style='color:#2A00FF'>"Opérations e1 Op e2  :"</span>);
+        label4.setName(<span style='color:#2A00FF'>"label4"</span>);
+        panel3.add(label4);
+
+        button1 = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"union"</span>);
+        button1.setBackground(java.awt.Color.red);
+        button1.setName(<span style='color:#2A00FF'>"union"</span>);
+        button1.addActionListener(controleur  <span style='color:#3F7F5F'>// à compléter, par une instance de
+</span>                                        <span style='color:#3F7F5F'>// classe anonyme, usage de
+</span>                                        <span style='color:#3F7F5F'>// unionActionPerformed voir en bas de
+</span>                                        <span style='color:#3F7F5F'>// page
+</span>        );
+
+        panel3.add(button1);
+        button2 = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"intersection"</span>);
+        button2.setBackground(java.awt.Color.yellow);
+        button2.setName(<span style='color:#2A00FF'>"intersection"</span>);
+        button2.addActionListener(controleur  <span style='color:#3F7F5F'>// à compléter, par une instance de
+</span>                                        <span style='color:#3F7F5F'>// classe anonyme,
+</span>                                        <span style='color:#3F7F5F'>// intersectionActionPerformed voir en
+</span>                                        <span style='color:#3F7F5F'>// bas de page
+</span>        );
+
+        panel3.add(button2);
+        button3 = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"difference"</span>);
+        button3.setBackground(java.awt.Color.pink);
+        button3.setActionCommand(<span style='color:#2A00FF'>"difference"</span>);
+        button3.setName(<span style='color:#2A00FF'>"difference"</span>);
+        button3.addActionListener(controleur  <span style='color:#3F7F5F'>// à compléter, par une instance de
+</span>                                        <span style='color:#3F7F5F'>// classe anonyme, usage de
+</span>                                        <span style='color:#3F7F5F'>// differenceActionPerformed voir en bas
+</span>                                        <span style='color:#3F7F5F'>// de page
+</span>        );
+
+        panel3.add(button3);
+        button4 = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"diffSymetrique"</span>);
+        button4.setBackground(java.awt.Color.cyan);
+        button4.setName(<span style='color:#2A00FF'>"diffSymetrique"</span>);
+        button4.addActionListener(controleur  <span style='color:#3F7F5F'>// à compléter, par une instance de
+</span>                                        <span style='color:#3F7F5F'>// classe anonyme, usgae de
+</span>                                        <span style='color:#3F7F5F'>// diffSymetriqueActionPerformed voir en
+</span>                                        <span style='color:#3F7F5F'>// bas de page
+</span>        );
+
+        panel3.add(button4);
+        add(panel3);
+
+        panel4 = <span style='font-weight:bold;color:#7B0052;'>new</span> JPanel();
+        panel4.setLayout(<span style='font-weight:bold;color:#7B0052;'>new</span> java.awt.FlowLayout(0, 5, 5));
+        label3 = <span style='font-weight:bold;color:#7B0052;'>new</span> JLabel();
+        label3.setText(<span style='color:#2A00FF'>"Résultat"</span>);
+        label3.setName(<span style='color:#2A00FF'>"Résultat"</span>);
+
+        panel4.add(label3);
+
+        textField3 = <span style='font-weight:bold;color:#7B0052;'>new</span> JTextField();
+        textField3.setColumns(60);
+
+        panel4.add(textField3);
+        panel4.setBackground(java.awt.Color.orange);
+
+        add(panel4);
+    <span style='font-weight:bold;color:#D3171B'>}</span><span style='color:#3F7F5F'>// GEN-END:initComponents
+</span>
+    <span style='font-weight:bold;color:#7B0052;'>private</span> Ensemble&lt;String&gt; getSet(JTextField saisie) <span style='font-weight:bold;color:#D3171B'>{</span>
+        Ensemble&lt;String&gt; e = <span style='font-weight:bold;color:#7B0052;'>new</span> Ensemble&lt;String&gt;();
+        java.util.StringTokenizer st = <span style='font-weight:bold;color:#7B0052;'>new</span> java.util.StringTokenizer(
+                saisie.getText(), <span style='color:#2A00FF'>" ,.:/-;"</span>);
+        <span style='font-weight:bold;color:#7B0052;'>while</span> (st.hasMoreTokens()) <span style='font-weight:bold;color:#D3171B'>{</span>
+            e.add(st.nextToken());
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> e;
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='color:#3F7F5F'>// ne pas modifier ces lignes
+</span>    <span style='font-weight:bold;color:#7B0052;'>private</span> <span style='font-weight:bold;color:#7B0052;'>void</span> differenceActionPerformed(java.awt.event.ActionEvent evt) <span style='font-weight:bold;color:#D3171B'>{</span><span style='color:#3F7F5F'>// GEN-FIRST:event_differenceActionPerformed
+</span>        <span style='color:#3F7F5F'>// Add your handling code here:
+</span>        Ensemble&lt;String&gt; e1 = getSet(textField1);
+        Ensemble&lt;String&gt; e2 = getSet(textField2);
+        textField3.setText(e1.diff(e2).toString());
+    <span style='font-weight:bold;color:#D3171B'>}</span><span style='color:#3F7F5F'>// GEN-LAST:event_differenceActionPerformed
+</span>
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> setDiff(java.awt.event.ActionEvent evt)<span style='font-weight:bold;color:#D3171B'>{</span>
+        differenceActionPerformed(evt);
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>private</span> <span style='font-weight:bold;color:#7B0052;'>void</span> intersectionActionPerformed(java.awt.event.ActionEvent evt) <span style='font-weight:bold;color:#D3171B'>{</span><span style='color:#3F7F5F'>// GEN-FIRST:event_intersectionActionPerformed
+</span>        <span style='color:#3F7F5F'>// Add your handling code here:
+</span>        Ensemble&lt;String&gt; e1 = getSet(textField1);
+        Ensemble&lt;String&gt; e2 = getSet(textField2);
+        textField3.setText((e1.inter(e2)).toString());
+    <span style='font-weight:bold;color:#D3171B'>}</span><span style='color:#3F7F5F'>// GEN-LAST:event_intersectionActionPerformed
+</span>
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> setInter(java.awt.event.ActionEvent evt)<span style='font-weight:bold;color:#D3171B'>{</span>
+        intersectionActionPerformed(evt);
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>private</span> <span style='font-weight:bold;color:#7B0052;'>void</span> unionActionPerformed(java.awt.event.ActionEvent evt) <span style='font-weight:bold;color:#D3171B'>{</span><span style='color:#3F7F5F'>// GEN-FIRST:event_unionActionPerformed
+</span>        Ensemble&lt;String&gt; e1 = getSet(textField1);
+        Ensemble&lt;String&gt; e2 = getSet(textField2);
+        textField3.setText(e1.union(e2).toString());
+    <span style='font-weight:bold;color:#D3171B'>}</span><span style='color:#3F7F5F'>// GEN-LAST:event_unionActionPerformed
+</span>
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> setUnion(java.awt.event.ActionEvent evt)<span style='font-weight:bold;color:#D3171B'>{</span>
+        unionActionPerformed(evt);
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>private</span> <span style='font-weight:bold;color:#7B0052;'>void</span> diffSymetriqueActionPerformed(java.awt.event.ActionEvent evt) <span style='font-weight:bold;color:#D3171B'>{</span><span style='color:#3F7F5F'>// GEN-FIRST:event_button4ActionPerformed
+</span>        <span style='color:#3F7F5F'>// Add your handling code here:
+</span>        Ensemble&lt;String&gt; e1 = getSet(textField1);
+        Ensemble&lt;String&gt; e2 = getSet(textField2);
+        textField3.setText(e1.diffSym(e2).toString());
+    <span style='font-weight:bold;color:#D3171B'>}</span><span style='color:#3F7F5F'>// GEN-LAST:event_button4ActionPerformed
+</span>
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> setDiffSym(java.awt.event.ActionEvent evt)<span style='font-weight:bold;color:#D3171B'>{</span>
+        diffSymetriqueActionPerformed(evt);
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>static</span> <span style='font-weight:bold;color:#7B0052;'>void</span> main(String[] args)<span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>new</span> IHMTestEnsemble();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+	<br />
+    <hr />
+
+    <h3>Question 2.1</h3>
+    <p>la classe Chapitre2CoreJava2 - sans la methode "CHAPITRE2"</p>
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> Chapitre2CoreJava2 <span style='font-weight:bold;color:#D3171B'>{</span>
+
+        <span style='color:#3F5FBF'>/**
+         * Obtention d'une liste de mots a  partir de la constante CHAPITRE2.
+         *
+         **/</span>
+        <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>static</span> List&lt;String&gt; listeDesMots() <span style='font-weight:bold;color:#D3171B'>{</span>
+            List&lt;String&gt; liste = <span style='font-weight:bold;color:#7B0052;'>new</span> LinkedList&lt;String&gt;();
+
+            StringTokenizer st = <span style='font-weight:bold;color:#7B0052;'>new</span> StringTokenizer(Chapitre2CoreJava2.CHAPITRE2,
+                    <span style='color:#2A00FF'>"[](){};, :.\n\""</span>);
+            <span style='color:#3F7F5F'>// à  compléter
+    </span>        <span style='font-weight:bold;color:#7B0052;'>while</span>(st.hasMoreTokens())<span style='font-weight:bold;color:#D3171B'>{</span>
+            liste.add(st.nextToken());
+            <span style='font-weight:bold;color:#D3171B'>}</span>
+
+            <span style='font-weight:bold;color:#7B0052;'>return</span> liste;
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='color:#3F5FBF'>/**
+         * Obtention d'une liste de couples &lt;String,Integer&gt;.
+         * A chaque mot présent dans la liste, est associé son nombre d'occurrence.
+         *
+         * @param liste la liste des mots
+         */</span>
+        <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>static</span> Map&lt;String, Integer&gt; occurrencesDesMots(List&lt;String&gt; liste) <span style='font-weight:bold;color:#D3171B'>{</span>
+            Map&lt;String, Integer&gt; table = <span style='font-weight:bold;color:#7B0052;'>new</span> HashMap&lt;String, Integer&gt;();
+                <span style='font-weight:bold;color:#7B0052;'>for</span>(String t: liste) <span style='font-weight:bold;color:#D3171B'>{</span>
+                    Integer i = table.get(t);
+                    <span style='font-weight:bold;color:#7B0052;'>if</span> (i ==  <span style='font-weight:bold;color:#7B0052;'>null</span>) <span style='font-weight:bold;color:#D3171B'>{</span>
+                        i = 0;
+                    <span style='font-weight:bold;color:#D3171B'>}</span>
+                    table.put(t, i + 1);
+                <span style='font-weight:bold;color:#D3171B'>}</span>
+
+            <span style='font-weight:bold;color:#7B0052;'>return</span> table;
+        <span style='font-weight:bold;color:#D3171B'>}</span></pre>
+    <br />
+    <hr />
+    <h3>Question 2.2</h3>
+    <p>La classe JPanelListe</p>
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question2;
+
+
+    <span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.*;
+    <span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.event.*;
+    <span style='font-weight:bold;color:#7B0052;'>import</span> javax.swing.*;
+
+    <span style='font-weight:bold;color:#7B0052;'>import</span> java.util.Collections;
+    <span style='font-weight:bold;color:#7B0052;'>import</span> java.util.Comparator;
+    <span style='font-weight:bold;color:#7B0052;'>import</span> java.util.Iterator;
+    <span style='font-weight:bold;color:#7B0052;'>import</span> java.util.List;
+    <span style='font-weight:bold;color:#7B0052;'>import</span> java.util.LinkedList;
+    <span style='font-weight:bold;color:#7B0052;'>import</span> java.util.Map;
+    <span style='font-weight:bold;color:#7B0052;'>import</span> java.util.*;
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> JPanelListe <span style='font-weight:bold;color:#7B0052;'>extends</span> JPanel <span style='font-weight:bold;color:#7B0052;'>implements</span> ActionListener, ItemListener, KeyListener <span style='font-weight:bold;color:#D3171B'>{</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>private</span> JPanel cmd = <span style='font-weight:bold;color:#7B0052;'>new</span> JPanel();
+        <span style='font-weight:bold;color:#7B0052;'>private</span> JLabel afficheur = <span style='font-weight:bold;color:#7B0052;'>new</span> JLabel();
+        <span style='font-weight:bold;color:#7B0052;'>private</span> JTextField saisie = <span style='font-weight:bold;color:#7B0052;'>new</span> JTextField();
+
+        <span style='font-weight:bold;color:#7B0052;'>private</span> JPanel panelBoutons = <span style='font-weight:bold;color:#7B0052;'>new</span> JPanel();
+        <span style='font-weight:bold;color:#7B0052;'>private</span> JButton boutonRechercher = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"rechercher"</span>);
+        <span style='font-weight:bold;color:#7B0052;'>private</span> JButton boutonRetirer = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"retirer"</span>);
+
+        <span style='font-weight:bold;color:#7B0052;'>private</span> CheckboxGroup mode = <span style='font-weight:bold;color:#7B0052;'>new</span> CheckboxGroup();
+        <span style='font-weight:bold;color:#7B0052;'>private</span> Checkbox ordreCroissant = <span style='font-weight:bold;color:#7B0052;'>new</span> Checkbox(<span style='color:#2A00FF'>"croissant"</span>, mode, <span style='font-weight:bold;color:#7B0052;'>false</span>);
+        <span style='font-weight:bold;color:#7B0052;'>private</span> Checkbox ordreDecroissant = <span style='font-weight:bold;color:#7B0052;'>new</span> Checkbox(<span style='color:#2A00FF'>"décroissant"</span>, mode, <span style='font-weight:bold;color:#7B0052;'>false</span>);
+
+        <span style='font-weight:bold;color:#7B0052;'>private</span> JButton boutonOccurrences = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"occurrence"</span>);
+
+        <span style='font-weight:bold;color:#7B0052;'>private</span> TextArea texte = <span style='font-weight:bold;color:#7B0052;'>new</span> TextArea();
+
+        <span style='font-weight:bold;color:#7B0052;'>private</span> List&lt;String&gt; liste;
+        <span style='font-weight:bold;color:#7B0052;'>private</span> Map&lt;String, Integer&gt; occurrences;
+
+        <span style='font-weight:bold;color:#7B0052;'>public</span> JPanelListe(List&lt;String&gt; liste, Map&lt;String, Integer&gt; occurrences) <span style='font-weight:bold;color:#D3171B'>{</span>
+            this.liste = liste;
+            this.occurrences = occurrences;
+
+            cmd.setLayout(<span style='font-weight:bold;color:#7B0052;'>new</span> GridLayout(3, 1));
+
+            cmd.add(afficheur);
+            cmd.add(saisie);
+
+            panelBoutons.setLayout(<span style='font-weight:bold;color:#7B0052;'>new</span> FlowLayout(FlowLayout.LEFT));
+            panelBoutons.add(boutonRechercher);
+            panelBoutons.add(boutonRetirer);
+            panelBoutons.add(<span style='font-weight:bold;color:#7B0052;'>new</span> JLabel(<span style='color:#2A00FF'>"tri du texte :"</span>));
+            panelBoutons.add(ordreCroissant);
+            panelBoutons.add(ordreDecroissant);
+            panelBoutons.add(boutonOccurrences);
+            cmd.add(panelBoutons);
+
+            <span style='font-weight:bold;color:#7B0052;'>if</span>(liste!=<span style='font-weight:bold;color:#7B0052;'>null</span> && occurrences!=<span style='font-weight:bold;color:#7B0052;'>null</span>)<span style='font-weight:bold;color:#D3171B'>{</span>
+                afficheur.setText(liste.getClass().getName() + <span style='color:#2A00FF'>" et "</span>+ occurrences.getClass().getName());
+                texte.setText(liste.toString());
+            <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#7B0052;'>else</span><span style='font-weight:bold;color:#D3171B'>{</span>
+                texte.setText(<span style='color:#2A00FF'>"la classe Chapitre2CoreJava semble incomplète"</span>);
+            <span style='font-weight:bold;color:#D3171B'>}</span>
+
+            setLayout(<span style='font-weight:bold;color:#7B0052;'>new</span> BorderLayout());
+
+            add(cmd, <span style='color:#2A00FF'>"North"</span>);
+            add(texte, <span style='color:#2A00FF'>"Center"</span>);
+
+            boutonRechercher.addActionListener(<span style='font-weight:bold;color:#7B0052;'>this</span>);
+            boutonOccurrences.addActionListener(<span style='font-weight:bold;color:#7B0052;'>this</span>);
+            boutonRetirer.addActionListener(<span style='font-weight:bold;color:#7B0052;'>this</span>);
+            ordreCroissant.addItemListener(<span style='font-weight:bold;color:#7B0052;'>this</span>);
+            ordreDecroissant.addItemListener(<span style='font-weight:bold;color:#7B0052;'>this</span>);
+            saisie.addKeyListener(<span style='font-weight:bold;color:#7B0052;'>this</span>);
+            <span style='color:#3F7F5F'>// à compléter;
+    </span>
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='color:#3F5FBF'>/** ne pas modifier les affichages, les classes de tests en ont besoin ... */</span>
+        <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> actionPerformed(ActionEvent ae) <span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>try</span> <span style='font-weight:bold;color:#D3171B'>{</span>
+                <span style='font-weight:bold;color:#7B0052;'>boolean</span> res = <span style='font-weight:bold;color:#7B0052;'>false</span>;
+                <span style='font-weight:bold;color:#7B0052;'>if</span> (ae.getSource() == boutonRechercher || ae.getSource() == saisie) <span style='font-weight:bold;color:#D3171B'>{</span>
+                    res = liste.contains(saisie.getText());
+                    Integer occur = occurrences.get(saisie.getText());
+                    afficheur.setText(<span style='color:#2A00FF'>"résultat de la recherche de : "</span>+ saisie.getText() + <span style='color:#2A00FF'>" --&gt;  "</span> + res);
+                <span style='font-weight:bold;color:#D3171B'>}</span> <span style='font-weight:bold;color:#7B0052;'>else</span> <span style='font-weight:bold;color:#7B0052;'>if</span> (ae.getSource() == boutonRetirer) <span style='font-weight:bold;color:#D3171B'>{</span>
+                    res = retirerDeLaListeTousLesElementsCommencantPar(saisie.getText());
+
+                    afficheur.setText(<span style='color:#2A00FF'>"résultat du retrait de tous les éléments commençant par --&gt;  "</span>+ saisie.getText() + <span style='color:#2A00FF'>" : "</span> + res);
+                <span style='font-weight:bold;color:#D3171B'>}</span> <span style='font-weight:bold;color:#7B0052;'>else</span> <span style='font-weight:bold;color:#7B0052;'>if</span> (ae.getSource() == boutonOccurrences) <span style='font-weight:bold;color:#D3171B'>{</span>
+                    Integer occur = occurrences.get(saisie.getText());
+                    <span style='font-weight:bold;color:#7B0052;'>if</span> (occur != <span style='font-weight:bold;color:#7B0052;'>null</span>)
+                        afficheur.setText(<span style='color:#2A00FF'>" --&gt;  "</span> + occur + <span style='color:#2A00FF'>" occurrence(s)"</span>);
+                    <span style='font-weight:bold;color:#7B0052;'>else</span><span style='font-weight:bold;color:#D3171B'>{</span>
+                        <span style='font-weight:bold;color:#7B0052;'>if</span>(Chapitre2CoreJava2.CHAPITRE2.contains(saisie.getText()))<span style='font-weight:bold;color:#D3171B'>{</span>
+                        afficheur.setText(<span style='color:#2A00FF'>" --&gt;  0 "</span>);
+                    <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#7B0052;'>else</span><span style='font-weight:bold;color:#D3171B'>{</span>afficheur.setText(<span style='color:#2A00FF'>" --&gt;  ??? "</span>);<span style='font-weight:bold;color:#D3171B'>}</span>
+
+                    <span style='font-weight:bold;color:#D3171B'>}</span>
+                <span style='font-weight:bold;color:#D3171B'>}</span>
+                texte.setText(liste.toString());
+
+            <span style='font-weight:bold;color:#D3171B'>}</span> <span style='font-weight:bold;color:#7B0052;'>catch</span> (Exception e) <span style='font-weight:bold;color:#D3171B'>{</span>
+                afficheur.setText(e.toString());
+            <span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> itemStateChanged(ItemEvent ie) <span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>if</span> (ie.getSource() == ordreCroissant)<span style='font-weight:bold;color:#D3171B'>{</span>
+                liste.sort(String.CASE_INSENSITIVE_ORDER);
+            <span style='font-weight:bold;color:#D3171B'>}</span>
+            <span style='font-weight:bold;color:#7B0052;'>else</span> <span style='font-weight:bold;color:#7B0052;'>if</span> (ie.getSource() == ordreDecroissant)<span style='font-weight:bold;color:#D3171B'>{</span>
+                liste.sort(Comparator.reverseOrder());
+            <span style='font-weight:bold;color:#D3171B'>}</span>
+
+            texte.setText(liste.toString());
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>private</span> <span style='font-weight:bold;color:#7B0052;'>boolean</span> retirerDeLaListeTousLesElementsCommencantPar(String prefixe) <span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>boolean</span> resultat = <span style='font-weight:bold;color:#7B0052;'>false</span>;
+                <span style='font-weight:bold;color:#7B0052;'>for</span>( <span style='font-weight:bold;color:#7B0052;'>int</span> i = 0; i&lt; liste.size(); i++)<span style='font-weight:bold;color:#D3171B'>{</span>
+                    String str = liste.get(i);
+                    <span style='font-weight:bold;color:#7B0052;'>if</span>(str.startsWith(prefixe))<span style='font-weight:bold;color:#D3171B'>{</span>
+                    liste.remove(str);
+                    resultat = <span style='font-weight:bold;color:#7B0052;'>true</span>;
+                    occurrences = Chapitre2CoreJava2.occurrencesDesMots(liste);
+                    <span style='font-weight:bold;color:#D3171B'>}</span>
+                <span style='font-weight:bold;color:#D3171B'>}</span>
+            <span style='font-weight:bold;color:#7B0052;'>return</span> resultat;
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> keyPressed(KeyEvent e) <span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>boolean</span> res = <span style='font-weight:bold;color:#7B0052;'>false</span>;
+            <span style='font-weight:bold;color:#7B0052;'>if</span> (e.getKeyCode() == KeyEvent.VK_ENTER) <span style='font-weight:bold;color:#D3171B'>{</span>
+                    res = liste.contains(saisie.getText());
+                    Integer occur = occurrences.get(saisie.getText());
+                    afficheur.setText(<span style='color:#2A00FF'>"résultat de la recherche de : "</span>+ saisie.getText() + <span style='color:#2A00FF'>" --&gt;  "</span> + res);
+                <span style='font-weight:bold;color:#D3171B'>}</span>
+            <span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> keyTyped(KeyEvent e) <span style='font-weight:bold;color:#D3171B'>{</span><span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> keyReleased(KeyEvent e) <span style='font-weight:bold;color:#D3171B'>{</span><span style='font-weight:bold;color:#D3171B'>}</span>
+    <span style='font-weight:bold;color:#D3171B'>}</span></pre>
+    <br />
+    <hr />
+    <h3>Question 2.3</h3>
+    <p>La classe JPanelListe2</p>
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question2;
+
+    <span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.*;
+    <span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.event.*;
+    <span style='font-weight:bold;color:#7B0052;'>import</span> javax.swing.*;
+
+    <span style='font-weight:bold;color:#7B0052;'>import</span> java.util.Collections;
+    <span style='font-weight:bold;color:#7B0052;'>import</span> java.util.Comparator;
+    <span style='font-weight:bold;color:#7B0052;'>import</span> java.util.Iterator;
+    <span style='font-weight:bold;color:#7B0052;'>import</span> java.util.List;
+    <span style='font-weight:bold;color:#7B0052;'>import</span> java.util.LinkedList;
+    <span style='font-weight:bold;color:#7B0052;'>import</span> java.util.Map;
+    <span style='font-weight:bold;color:#7B0052;'>import</span> java.util.*;
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> JPanelListe2 <span style='font-weight:bold;color:#7B0052;'>extends</span> JPanel <span style='font-weight:bold;color:#7B0052;'>implements</span> ActionListener, ItemListener , KeyListener<span style='font-weight:bold;color:#D3171B'>{</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>private</span> JPanel cmd = <span style='font-weight:bold;color:#7B0052;'>new</span> JPanel();
+        <span style='font-weight:bold;color:#7B0052;'>private</span> JLabel afficheur = <span style='font-weight:bold;color:#7B0052;'>new</span> JLabel();
+        <span style='font-weight:bold;color:#7B0052;'>private</span> JTextField saisie = <span style='font-weight:bold;color:#7B0052;'>new</span> JTextField();
+
+        <span style='font-weight:bold;color:#7B0052;'>private</span> JPanel panelBoutons = <span style='font-weight:bold;color:#7B0052;'>new</span> JPanel();
+        <span style='font-weight:bold;color:#7B0052;'>private</span> JButton boutonRechercher = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"rechercher"</span>);
+        <span style='font-weight:bold;color:#7B0052;'>private</span> JButton boutonRetirer = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"retirer"</span>);
+
+        <span style='font-weight:bold;color:#7B0052;'>private</span> CheckboxGroup mode = <span style='font-weight:bold;color:#7B0052;'>new</span> CheckboxGroup();
+        <span style='font-weight:bold;color:#7B0052;'>private</span> Checkbox ordreCroissant = <span style='font-weight:bold;color:#7B0052;'>new</span> Checkbox(<span style='color:#2A00FF'>"croissant"</span>, mode, <span style='font-weight:bold;color:#7B0052;'>false</span>);
+        <span style='font-weight:bold;color:#7B0052;'>private</span> Checkbox ordreDecroissant = <span style='font-weight:bold;color:#7B0052;'>new</span> Checkbox(<span style='color:#2A00FF'>"décroissant"</span>, mode, <span style='font-weight:bold;color:#7B0052;'>false</span>);
+
+        <span style='font-weight:bold;color:#7B0052;'>private</span> JButton boutonOccurrences = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"occurrence"</span>);
+
+        <span style='font-weight:bold;color:#7B0052;'>private</span> JButton boutonAnnuler = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>"annuler"</span>);
+
+        <span style='font-weight:bold;color:#7B0052;'>private</span> TextArea texte = <span style='font-weight:bold;color:#7B0052;'>new</span> TextArea();
+
+        <span style='font-weight:bold;color:#7B0052;'>private</span> List&lt;String&gt; liste;
+        <span style='font-weight:bold;color:#7B0052;'>private</span> Map&lt;String, Integer&gt; occurrences;
+
+        <span style='font-weight:bold;color:#7B0052;'>private</span> Stack&lt;Memento&gt; mementos = <span style='font-weight:bold;color:#7B0052;'>new</span> Stack&lt;&gt;();
+
+        <span style='font-weight:bold;color:#7B0052;'>private</span> Originator originator = <span style='font-weight:bold;color:#7B0052;'>new</span> Originator();
+
+        <span style='font-weight:bold;color:#7B0052;'>public</span> JPanelListe2(List&lt;String&gt; liste, Map&lt;String, Integer&gt; occurrences) <span style='font-weight:bold;color:#D3171B'>{</span>
+            this.liste = liste;
+            this.occurrences = occurrences;
+
+            cmd.setLayout(<span style='font-weight:bold;color:#7B0052;'>new</span> GridLayout(3, 1));
+
+            cmd.add(afficheur);
+            cmd.add(saisie);
+
+            panelBoutons.setLayout(<span style='font-weight:bold;color:#7B0052;'>new</span> FlowLayout(FlowLayout.LEFT));
+            panelBoutons.add(boutonRechercher);
+            panelBoutons.add(boutonRetirer);
+            panelBoutons.add(<span style='font-weight:bold;color:#7B0052;'>new</span> JLabel(<span style='color:#2A00FF'>"tri du texte :"</span>));
+            panelBoutons.add(ordreCroissant);
+            panelBoutons.add(ordreDecroissant);
+            panelBoutons.add(boutonOccurrences);
+            panelBoutons.add(boutonAnnuler);
+            cmd.add(panelBoutons);
+
+
+            <span style='font-weight:bold;color:#7B0052;'>if</span>(liste!=<span style='font-weight:bold;color:#7B0052;'>null</span> && occurrences!=<span style='font-weight:bold;color:#7B0052;'>null</span>)<span style='font-weight:bold;color:#D3171B'>{</span>
+                afficheur.setText(liste.getClass().getName() + <span style='color:#2A00FF'>" et "</span>+ occurrences.getClass().getName());
+                texte.setText(liste.toString());
+            <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#7B0052;'>else</span><span style='font-weight:bold;color:#D3171B'>{</span>
+                texte.setText(<span style='color:#2A00FF'>"la classe Chapitre2CoreJava semble incomplète"</span>);
+            <span style='font-weight:bold;color:#D3171B'>}</span>
+
+            setLayout(<span style='font-weight:bold;color:#7B0052;'>new</span> BorderLayout());
+
+            add(cmd, <span style='color:#2A00FF'>"North"</span>);
+            add(texte, <span style='color:#2A00FF'>"Center"</span>);
+
+            boutonRechercher.addActionListener(<span style='font-weight:bold;color:#7B0052;'>this</span>);
+            boutonOccurrences.addActionListener(<span style='font-weight:bold;color:#7B0052;'>this</span>);
+            boutonRetirer.addActionListener(<span style='font-weight:bold;color:#7B0052;'>this</span>);
+            ordreCroissant.addItemListener(<span style='font-weight:bold;color:#7B0052;'>this</span>);
+            ordreDecroissant.addItemListener(<span style='font-weight:bold;color:#7B0052;'>this</span>);
+            saisie.addKeyListener(<span style='font-weight:bold;color:#7B0052;'>this</span>);
+            boutonAnnuler.addActionListener(<span style='font-weight:bold;color:#7B0052;'>this</span>);
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+            <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> actionPerformed(ActionEvent ae) <span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>try</span> <span style='font-weight:bold;color:#D3171B'>{</span>
+                <span style='font-weight:bold;color:#7B0052;'>boolean</span> res = <span style='font-weight:bold;color:#7B0052;'>false</span>;
+                <span style='font-weight:bold;color:#7B0052;'>if</span> (ae.getSource() == boutonRechercher || ae.getSource() == saisie) <span style='font-weight:bold;color:#D3171B'>{</span>
+                    res = liste.contains(saisie.getText());
+                    Integer occur = occurrences.get(saisie.getText());
+                    afficheur.setText(<span style='color:#2A00FF'>"résultat de la recherche de : "</span>+ saisie.getText() + <span style='color:#2A00FF'>" --&gt;  "</span> + res);
+                <span style='font-weight:bold;color:#D3171B'>}</span> <span style='font-weight:bold;color:#7B0052;'>else</span> <span style='font-weight:bold;color:#7B0052;'>if</span> (ae.getSource() == boutonRetirer) <span style='font-weight:bold;color:#D3171B'>{</span>
+                    List&lt;String&gt; liste2 = <span style='font-weight:bold;color:#7B0052;'>new</span> LinkedList&lt;String&gt;(liste);<span style='color:#3F7F5F'>//creation d' une liste intermediaire
+    </span>                res = retirerDeLaListeTousLesElementsCommencantPar(saisie.getText());
+                    <span style='font-weight:bold;color:#7B0052;'>if</span>(res)<span style='font-weight:bold;color:#D3171B'>{</span>this.saveListe(liste2);<span style='font-weight:bold;color:#D3171B'>}</span>
+                    afficheur.setText(<span style='color:#2A00FF'>"résultat du retrait de tous les éléments commençant par --&gt;  "</span>+ saisie.getText() + <span style='color:#2A00FF'>" : "</span> + res);
+                <span style='font-weight:bold;color:#D3171B'>}</span> <span style='font-weight:bold;color:#7B0052;'>else</span> <span style='font-weight:bold;color:#7B0052;'>if</span> (ae.getSource() == boutonAnnuler) <span style='font-weight:bold;color:#D3171B'>{</span>
+                    <span style='font-weight:bold;color:#7B0052;'>if</span>(mementos.size()&gt;=1)<span style='font-weight:bold;color:#D3171B'>{</span>this.annuler();<span style='font-weight:bold;color:#D3171B'>}</span>
+
+                <span style='font-weight:bold;color:#D3171B'>}</span> <span style='font-weight:bold;color:#7B0052;'>else</span> <span style='font-weight:bold;color:#7B0052;'>if</span> (ae.getSource() == boutonOccurrences) <span style='font-weight:bold;color:#D3171B'>{</span>
+                    Integer occur = occurrences.get(saisie.getText());
+                    <span style='font-weight:bold;color:#7B0052;'>if</span> (occur != <span style='font-weight:bold;color:#7B0052;'>null</span>)
+                        afficheur.setText(<span style='color:#2A00FF'>" --&gt;  "</span> + occur + <span style='color:#2A00FF'>" occurrence(s)"</span>);
+                    <span style='font-weight:bold;color:#7B0052;'>else</span><span style='font-weight:bold;color:#D3171B'>{</span>
+                        <span style='font-weight:bold;color:#7B0052;'>if</span>(Chapitre2CoreJava2.CHAPITRE2.contains(saisie.getText()))<span style='font-weight:bold;color:#D3171B'>{</span>
+                        afficheur.setText(<span style='color:#2A00FF'>" --&gt;  0 "</span>);
+                    <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#7B0052;'>else</span><span style='font-weight:bold;color:#D3171B'>{</span>afficheur.setText(<span style='color:#2A00FF'>" --&gt;  ??? "</span>);<span style='font-weight:bold;color:#D3171B'>}</span>
+
+                    <span style='font-weight:bold;color:#D3171B'>}</span>
+                <span style='font-weight:bold;color:#D3171B'>}</span>
+                texte.setText(liste.toString());
+
+            <span style='font-weight:bold;color:#D3171B'>}</span> <span style='font-weight:bold;color:#7B0052;'>catch</span> (Exception e) <span style='font-weight:bold;color:#D3171B'>{</span>
+                afficheur.setText(e.toString());
+            <span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> itemStateChanged(ItemEvent ie) <span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>if</span> (ie.getSource() == ordreCroissant)<span style='font-weight:bold;color:#D3171B'>{</span>
+                this.saveListe();
+                liste.sort(String.CASE_INSENSITIVE_ORDER);
+            <span style='font-weight:bold;color:#D3171B'>}</span>
+            <span style='font-weight:bold;color:#7B0052;'>else</span> <span style='font-weight:bold;color:#7B0052;'>if</span> (ie.getSource() == ordreDecroissant)<span style='font-weight:bold;color:#D3171B'>{</span>
+                this.saveListe();
+                liste.sort(Comparator.reverseOrder());
+            <span style='font-weight:bold;color:#D3171B'>}</span>
+
+            texte.setText(liste.toString());
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>private</span> <span style='font-weight:bold;color:#7B0052;'>boolean</span> retirerDeLaListeTousLesElementsCommencantPar(String prefixe) <span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>boolean</span> resultat = <span style='font-weight:bold;color:#7B0052;'>false</span>;
+                <span style='font-weight:bold;color:#7B0052;'>for</span>( <span style='font-weight:bold;color:#7B0052;'>int</span> i = 0; i&lt; liste.size(); i++)<span style='font-weight:bold;color:#D3171B'>{</span>
+                    String str = liste.get(i);
+                    <span style='font-weight:bold;color:#7B0052;'>if</span>(str.startsWith(prefixe))<span style='font-weight:bold;color:#D3171B'>{</span>
+                    liste.remove(str);
+                    resultat = <span style='font-weight:bold;color:#7B0052;'>true</span>;
+                    occurrences = Chapitre2CoreJava2.occurrencesDesMots(liste);
+                    <span style='font-weight:bold;color:#D3171B'>}</span>
+                <span style='font-weight:bold;color:#D3171B'>}</span>
+            <span style='font-weight:bold;color:#7B0052;'>return</span> resultat;
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> keyPressed(KeyEvent e) <span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>boolean</span> res = <span style='font-weight:bold;color:#7B0052;'>false</span>;
+            <span style='font-weight:bold;color:#7B0052;'>if</span> (e.getKeyCode() == KeyEvent.VK_ENTER) <span style='font-weight:bold;color:#D3171B'>{</span>
+                    res = liste.contains(saisie.getText());
+                    Integer occur = occurrences.get(saisie.getText());
+                    afficheur.setText(<span style='color:#2A00FF'>"résultat de la recherche de : "</span>+ saisie.getText() + <span style='color:#2A00FF'>" --&gt;  "</span> + res);
+                <span style='font-weight:bold;color:#D3171B'>}</span>
+            <span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> keyTyped(KeyEvent e) <span style='font-weight:bold;color:#D3171B'>{</span><span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> keyReleased(KeyEvent e) <span style='font-weight:bold;color:#D3171B'>{</span><span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> addMemento(Memento m) <span style='font-weight:bold;color:#D3171B'>{</span>
+            mementos.push(m);
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>public</span> Memento getMemento() <span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>return</span> mementos.pop();
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='color:#3F5FBF'>/**
+         * methode saveListe
+         */</span>
+        <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> saveListe()<span style='font-weight:bold;color:#D3171B'>{</span>
+            originator.setState(this.liste);
+            this.addMemento( originator.save() );
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='color:#3F5FBF'>/**
+         * methode saveListe
+         * @param List&lt;String&gt; liste2
+         */</span>
+        <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> saveListe(List&lt;String&gt; liste2)<span style='font-weight:bold;color:#D3171B'>{</span>
+            originator.setState(liste2);
+            this.addMemento( originator.save() );
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='color:#3F5FBF'>/**
+         * methode annuler
+         */</span>
+        <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> annuler()<span style='font-weight:bold;color:#D3171B'>{</span>
+            liste.clear();
+            liste.addAll(originator.restore( this.getMemento() ));
+            occurrences = Chapitre2CoreJava2.occurrencesDesMots(liste);
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+    <span style='color:#3F5FBF'>/**
+     * Classe Memento
+     */</span>
+    <span style='font-weight:bold;color:#7B0052;'>class</span> Memento <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>private</span> List&lt;String&gt; state = <span style='font-weight:bold;color:#7B0052;'>new</span> LinkedList&lt;String&gt;();
+
+        <span style='font-weight:bold;color:#7B0052;'>public</span> Memento(List&lt;String&gt; state) <span style='font-weight:bold;color:#D3171B'>{</span>
+            this.state.addAll(state);
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>public</span> List&lt;String&gt; getState() <span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>return</span> state;
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+    <span style='color:#3F5FBF'>/**
+     * Classe Originator
+     */</span>
+    <span style='font-weight:bold;color:#7B0052;'>class</span> Originator <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>private</span> List&lt;String&gt; state = <span style='font-weight:bold;color:#7B0052;'>new</span> LinkedList&lt;String&gt;();
+
+        <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> setState(List&lt;String&gt; state) <span style='font-weight:bold;color:#D3171B'>{</span>
+            this.state.clear();
+            this.state.addAll(state);
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>public</span> Memento save() <span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>return</span> <span style='font-weight:bold;color:#7B0052;'>new</span> Memento(state);
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#7B0052;'>public</span> List&lt;String&gt; restore(Memento m) <span style='font-weight:bold;color:#D3171B'>{</span>
+            state = m.getState();
+            <span style='font-weight:bold;color:#7B0052;'>return</span> state;
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+    <span style='font-weight:bold;color:#D3171B'>}</span></pre>
+    <br />
+    <hr />
+    <h3>Question 3.1</h3>
+    <p>La classe HashSetFactory</p>
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question3;
+
+    <span style='font-weight:bold;color:#7B0052;'>import</span> java.util.Set;
+    <span style='font-weight:bold;color:#7B0052;'>import</span> java.util.HashSet;
+    <span style='color:#3F5FBF'>/**
+     * classe hashsetfactory
+     * @param T a definir
+     */</span>
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> HashSetFactory&lt;T&gt; <span style='font-weight:bold;color:#7B0052;'>implements</span> Factory&lt;Set&lt;T&gt;&gt;<span style='font-weight:bold;color:#D3171B'>{</span>
+
+        <span style='color:#3F5FBF'>/**
+         * methode create
+         * @return hashset&lt;T&gt;
+         */</span>
+        <span style='font-weight:bold;color:#7B0052;'>public</span> Set&lt;T&gt; create() <span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>return</span> <span style='font-weight:bold;color:#7B0052;'>new</span> HashSet&lt;T&gt;();
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+    <span style='font-weight:bold;color:#D3171B'>}</span></pre>
+    <br>
+    <p>La classe TreeSetFactory</p>
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question3;
+
+    <span style='font-weight:bold;color:#7B0052;'>import</span> java.util.Set;
+    <span style='font-weight:bold;color:#7B0052;'>import</span> java.util.TreeSet;
+    <span style='color:#3F5FBF'>/**
+     * classe treesetfactory
+     * @param T a definir
+     */</span>
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> TreeSetFactory&lt;T <span style='font-weight:bold;color:#7B0052;'>extends</span> Comparable&lt;T&gt;&gt; <span style='font-weight:bold;color:#7B0052;'>implements</span> Factory&lt;Set&lt;T&gt;&gt;<span style='font-weight:bold;color:#D3171B'>{</span>
+
+        <span style='color:#3F5FBF'>/**
+         * methode create
+         * @return treeset&lt;T&gt;
+         */</span>
+        <span style='font-weight:bold;color:#7B0052;'>public</span> Set&lt;T&gt; create() <span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>return</span> <span style='font-weight:bold;color:#7B0052;'>new</span> TreeSet&lt;T&gt;();
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+    <span style='font-weight:bold;color:#D3171B'>}</span></pre>
+    <br />
+    <hr />
+    <h3>Question 3.2</h3>
+    <p>La classe de tests</p>
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question3;
+
+    <span style='font-weight:bold;color:#7B0052;'>import</span> java.util.Set;
+    <span style='color:#3F5FBF'>/**
+     * classe de test des classes treesetfactory et hashsetfactory
+     */</span>
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> Tests <span style='font-weight:bold;color:#7B0052;'>extends</span> junit.framework.TestCase <span style='font-weight:bold;color:#D3171B'>{</span>
+
+        <span style='color:#3F5FBF'>/**
+         * test1
+         * @param factory&lt;set&lt;Integer&gt;&gt;
+         */</span>
+        <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> test1(question3.Factory&lt;Set&lt;Integer&gt;&gt; f) <span style='font-weight:bold;color:#7B0052;'>throws</span> Exception <span style='font-weight:bold;color:#D3171B'>{</span>
+            Set&lt;Integer&gt; set = f.create();
+            <span style='font-weight:bold;color:#7B0052;'>for</span> (<span style='font-weight:bold;color:#7B0052;'>int</span> i = 20; i &gt; 0; i--)
+                set.add(i);
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='color:#3F5FBF'>/**
+         * test creation
+         */</span>
+        <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> testCreation() <span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>try</span> <span style='font-weight:bold;color:#D3171B'>{</span>
+                test1(<span style='font-weight:bold;color:#7B0052;'>new</span> TreeSetFactory&lt;Integer&gt;());
+                test1(<span style='font-weight:bold;color:#7B0052;'>new</span> HashSetFactory&lt;Integer&gt;());
+            <span style='font-weight:bold;color:#D3171B'>}</span> <span style='font-weight:bold;color:#7B0052;'>catch</span> (NoSuchMethodError e) <span style='font-weight:bold;color:#D3171B'>{</span>
+                fail(<span style='color:#2A00FF'>"NoSuchMethodError : "</span> + e.getMessage());
+            <span style='font-weight:bold;color:#D3171B'>}</span> <span style='font-weight:bold;color:#7B0052;'>catch</span> (Exception e) <span style='font-weight:bold;color:#D3171B'>{</span>
+                fail(<span style='color:#2A00FF'>" exception inattendue : "</span> + e.getMessage());
+            <span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='color:#3F5FBF'>/**
+         * test treesetfactory
+         */</span>
+           <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> test_TreeSetFactory()<span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>try</span><span style='font-weight:bold;color:#D3171B'>{</span>
+                question3.TreeSetFactory&lt;Integer&gt; treeSetF1 = <span style='font-weight:bold;color:#7B0052;'>new</span> question3.TreeSetFactory&lt;Integer&gt;();
+                java.util.Set&lt;Integer&gt; ts = treeSetF1.create();
+                assertNotNull(<span style='color:#2A00FF'>"appel de create retourne null ???"</span>, ts);
+                assertEquals(<span style='color:#2A00FF'>" un TreeSet est attendu ???"</span>, ts.getClass().getName(), <span style='color:#2A00FF'>"java.util.TreeSet"</span>);
+                assertEquals(true, ts.add(5));
+                assertEquals(true, ts.add(3));
+                assertEquals(false, ts.add(3));
+                assertEquals(<span style='color:#2A00FF'>"[3, 5]"</span>, ts.toString());
+            <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#7B0052;'>catch</span>(NoSuchMethodError e)<span style='font-weight:bold;color:#D3171B'>{</span>
+                fail(<span style='color:#2A00FF'>" exception : "</span> + e.getMessage());
+            <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#7B0052;'>catch</span>(NoClassDefFoundError e)<span style='font-weight:bold;color:#D3171B'>{</span>
+                fail(<span style='color:#2A00FF'>" exception : "</span> + e.getMessage());
+            <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#7B0052;'>catch</span>(Exception e)<span style='font-weight:bold;color:#D3171B'>{</span>
+                fail(<span style='color:#2A00FF'>" exception inattendue : "</span> + e.getMessage());
+            <span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='color:#3F5FBF'>/**
+         * test hashsetfactory
+         */</span>
+        <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> test_HashSetFactory()<span style='font-weight:bold;color:#D3171B'>{</span>
+            <span style='font-weight:bold;color:#7B0052;'>try</span><span style='font-weight:bold;color:#D3171B'>{</span>
+                question3.HashSetFactory&lt;Integer&gt; HashSetF1 = <span style='font-weight:bold;color:#7B0052;'>new</span> question3.HashSetFactory&lt;Integer&gt;();
+                java.util.Set&lt;Integer&gt; ts = HashSetF1.create();
+                assertNotNull(<span style='color:#2A00FF'>"appel de create retourne null ???"</span>, ts);
+                assertEquals(<span style='color:#2A00FF'>" un HashSet est attendu ???"</span>, ts.getClass().getName(), <span style='color:#2A00FF'>"java.util.HashSet"</span>);
+                assertEquals(true, ts.add(5));
+                assertEquals(true, ts.add(3));
+                assertEquals(false, ts.add(3));
+                assertEquals(<span style='color:#2A00FF'>"[3, 5]"</span>, ts.toString());
+            <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#7B0052;'>catch</span>(NoSuchMethodError e)<span style='font-weight:bold;color:#D3171B'>{</span>
+                fail(<span style='color:#2A00FF'>" exception : "</span> + e.getMessage());
+            <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#7B0052;'>catch</span>(NoClassDefFoundError e)<span style='font-weight:bold;color:#D3171B'>{</span>
+                fail(<span style='color:#2A00FF'>" exception : "</span> + e.getMessage());
+            <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#7B0052;'>catch</span>(Exception e)<span style='font-weight:bold;color:#D3171B'>{</span>
+                fail(<span style='color:#2A00FF'>" exception inattendue : "</span> + e.getMessage());
+            <span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+
+    <span style='font-weight:bold;color:#D3171B'>}</span></pre>
+    <br />
+    <hr />
+        <h3>Conclusion, biliographie et remarques :</h3>
+        <i style="font-size:12px;">En effet, plus les TP se suivent et plus ils montent en puissance. Beaucoup de notions vu dans ce TP (je ne suis pas sur de les imprimer suffisament pour des applications sur mes projets personnels pour le moment). Comme d' habitude maintenant, il m' a demandé beaucoup de temps. </i><br><br>
+</body>
+</html>

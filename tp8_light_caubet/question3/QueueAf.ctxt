@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.params=q
+comment0.target=QueueAf(QueueI)
+comment1.params=i
+comment1.target=void\ add(int)
+comment2.params=
+comment2.target=int\ remove()
+comment3.params=
+comment3.target=void\ clear()
+comment4.params=i
+comment4.target=boolean\ contains(int)
+comment5.params=
+comment5.target=int\ size()
+comment6.params=
+comment6.target=int\ capacity()
+numComments=7

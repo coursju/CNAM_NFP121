@@ -1,0 +1,9 @@
+There were 6 failures: 
+1) testPlusieursValeursVisiteurCompositeValide(question2): Ce composite n''est pas valide, revoyez CompositeValide !!! 
+2) testTroisContributeursUnGroupe(question2): Revoyez DébitMaximal !!! expected:<100> but was:<0> 
+
+
+3) test_SansDoublon_accepter_dans_visite_du_groupe(question2): accepter n''est pas appelée ? curieux... 
+4) test_CompositeValide_accepter_dans_visite_du_groupe(question2): accepter n''est pas appelée ? curieux... 
+5) test_CompositeValide_instanceof_dans_visite_du_groupe(question2): L''opérateur instanceof ne doit pas être utilisé ??? 
+6) test_DebitMaximal_accepter_dans_visite_du_groupe(question2): accepter n''est pas appelée ? curieux...

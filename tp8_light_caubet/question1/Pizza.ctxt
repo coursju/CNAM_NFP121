@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.target=String\ getDescription()
+comment0.text=Une\ description\ textuelle\ de\ la\ Pizza\ \n
+comment1.target=double\ cost()
+comment1.text=le\ prix\ de\ vente\ \n
+numComments=2

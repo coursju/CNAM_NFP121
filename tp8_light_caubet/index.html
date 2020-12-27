@@ -1,0 +1,475 @@
+<html>
+<head>
+    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+    <title>NFP121 - TP8</title>
+    <style type="text/css">
+        body {
+            background: #E5DED6;
+            background-color: #fff;
+            color: #333333;
+            font-size: 14px;
+            font-family: Verdana, Arial;
+        }
+
+        table {
+            font-size: 20px;
+            border-color: #808080;
+            border-style: solid;
+            border-width: 1px;
+        }
+
+        h2 {
+            color: #C1002A;
+            font-family: Verdana, Arial;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        h3 {
+            color: #C1002A;
+            font-family: Verdana, Arial;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        hr {
+            margin: 15px 0 15px 0;
+        }
+
+		applet {
+			margin: 10px 0px 25px 250px;
+			border-width: 1px;
+			border-style: solid;
+			border-color: #777777;
+		}
+    </style>
+
+</head>
+<body>
+    <h2 style="text-align: center">NFP 121 - TP8</h2>
+    <h2 style="text-align: center">Pattern Decorateur</h2>
+    <br />
+    <hr>
+    <br />
+    <table>
+        <tr>
+            <td>Nom
+            </td>
+            <td>...CAUBET
+            </td>
+        </tr>
+        <tr>
+            <td>Prenom
+            </td>
+            <td>...Julien
+            </td>
+        </tr>
+        <tr>
+            <td>Matricule
+            </td>
+            <td>...FOD_motdepasse1
+            </td>
+        </tr>
+    </table>
+
+	<br />
+    <hr />
+    <h3>Question 1</h3>
+    <p>L'IHM "PizzaStore"</p>
+
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question1;
+
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.*;
+<span style='font-weight:bold;color:#7B0052;'>import</span> javax.swing.*;
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.awt.event.*;
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.text.DecimalFormat;
+
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> PizzaStore <span style='font-weight:bold;color:#7B0052;'>extends</span> JFrame<span style='font-weight:bold;color:#D3171B'>{</span>
+
+     <span style='font-weight:bold;color:#7B0052;'>public</span> PizzaStore()<span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>super</span>(<span style='color:#2A00FF'>"IHMPizza"</span>);
+        add(<span style='font-weight:bold;color:#7B0052;'>new</span> IHMPizza());
+        pack();show();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>static</span> <span style='font-weight:bold;color:#7B0052;'>void</span> main(String[] args)<span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>new</span> PizzaStore();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+
+    <span style='font-weight:bold;color:#7B0052;'>private</span> <span style='font-weight:bold;color:#7B0052;'>class</span> IHMPizza <span style='font-weight:bold;color:#7B0052;'>extends</span> JPanel<span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>private</span> JLabel         afficheur = <span style='font-weight:bold;color:#7B0052;'>new</span> JLabel(<span style='color:#2A00FF'>" please, first choose your pizza, then the constituents but once clams..."</span>);
+
+        <span style='font-weight:bold;color:#7B0052;'>private</span> JButton        boutonSolo = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>""</span>);
+        <span style='font-weight:bold;color:#7B0052;'>private</span> JButton        boutonClassic = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>""</span>);
+        <span style='font-weight:bold;color:#7B0052;'>private</span> JButton        boutonCrust = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>""</span>);
+
+        <span style='font-weight:bold;color:#7B0052;'>private</span> Checkbox       parmesan = <span style='font-weight:bold;color:#7B0052;'>new</span> Checkbox(<span style='color:#2A00FF'>"parmesan"</span>, null, <span style='font-weight:bold;color:#7B0052;'>true</span>);
+        <span style='font-weight:bold;color:#7B0052;'>private</span> Checkbox       mozarella = <span style='font-weight:bold;color:#7B0052;'>new</span> Checkbox(<span style='color:#2A00FF'>"mozarella"</span>, null, <span style='font-weight:bold;color:#7B0052;'>false</span>);
+        <span style='font-weight:bold;color:#7B0052;'>private</span> Checkbox       ham = <span style='font-weight:bold;color:#7B0052;'>new</span> Checkbox(<span style='color:#2A00FF'>"ham"</span>, null, <span style='font-weight:bold;color:#7B0052;'>false</span>);
+        <span style='font-weight:bold;color:#7B0052;'>private</span> Checkbox       tomato = <span style='font-weight:bold;color:#7B0052;'>new</span> Checkbox(<span style='color:#2A00FF'>"tomato"</span>, null, <span style='font-weight:bold;color:#7B0052;'>false</span>);
+        <span style='font-weight:bold;color:#7B0052;'>private</span> Checkbox       mushrooms = <span style='font-weight:bold;color:#7B0052;'>new</span> Checkbox(<span style='color:#2A00FF'>"mushrooms"</span>, null, <span style='font-weight:bold;color:#7B0052;'>false</span>);
+        <span style='font-weight:bold;color:#7B0052;'>private</span> Checkbox       clams = <span style='font-weight:bold;color:#7B0052;'>new</span> Checkbox(<span style='color:#2A00FF'>"clams"</span>, null, <span style='font-weight:bold;color:#7B0052;'>false</span>);
+
+        <span style='font-weight:bold;color:#7B0052;'>private</span> DecimalFormat  df = <span style='font-weight:bold;color:#7B0052;'>new</span> DecimalFormat(<span style='color:#2A00FF'>"##.##"</span>);
+        <span style='font-weight:bold;color:#7B0052;'>private</span> JButton        boutonMake = <span style='font-weight:bold;color:#7B0052;'>new</span> JButton(<span style='color:#2A00FF'>""</span>);
+
+        <span style='font-weight:bold;color:#7B0052;'>private</span> Pizza          pizza;
+
+        <span style='font-weight:bold;color:#7B0052;'>public</span> IHMPizza()<span style='font-weight:bold;color:#D3171B'>{</span>
+            JPanel panelGlobal = <span style='font-weight:bold;color:#7B0052;'>new</span> JPanel();
+            JPanel panelBoutons = <span style='font-weight:bold;color:#7B0052;'>new</span> JPanel();
+            JPanel panelDecorations = <span style='font-weight:bold;color:#7B0052;'>new</span> JPanel();
+            JPanel panelMake = <span style='font-weight:bold;color:#7B0052;'>new</span> JPanel();
+
+            panelGlobal.setLayout(<span style='font-weight:bold;color:#7B0052;'>new</span> GridLayout(3,1));
+            afficheur.setEnabled(<span style='font-weight:bold;color:#7B0052;'>false</span>);
+            panelGlobal.add(afficheur);
+
+            panelBoutons.setLayout(<span style='font-weight:bold;color:#7B0052;'>new</span> FlowLayout(FlowLayout.CENTER));
+            panelBoutons.add(boutonSolo);panelBoutons.add(boutonClassic);panelBoutons.add(boutonCrust);
+
+            panelDecorations.setLayout(<span style='font-weight:bold;color:#7B0052;'>new</span> GridLayout(1,6));
+            panelDecorations.add(parmesan);panelDecorations.add(mozarella);
+            panelDecorations.add(ham);panelDecorations.add(tomato);
+            panelDecorations.add(mushrooms);panelDecorations.add(clams);
+
+            panelGlobal.add(panelBoutons);
+            panelGlobal.add(panelDecorations);
+
+            setLayout(<span style='font-weight:bold;color:#7B0052;'>new</span> BorderLayout());
+            add(panelGlobal,<span style='color:#2A00FF'>"North"</span>);
+
+            panelMake.setLayout(<span style='font-weight:bold;color:#7B0052;'>new</span> FlowLayout(FlowLayout.CENTER));
+            panelMake.add(boutonMake);
+            add(panelMake,<span style='color:#2A00FF'>"Center"</span>);
+
+
+            boutonSolo.addActionListener(
+                <span style='font-weight:bold;color:#7B0052;'>new</span> ActionListener()<span style='font-weight:bold;color:#D3171B'>{</span>
+                    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> actionPerformed(ActionEvent ae)<span style='font-weight:bold;color:#D3171B'>{</span>
+                        pizza = <span style='font-weight:bold;color:#7B0052;'>new</span> PizzaSolo();
+                        validerLesDécorations();
+                    <span style='font-weight:bold;color:#D3171B'>}</span>
+                <span style='font-weight:bold;color:#D3171B'>}</span>);
+
+            boutonClassic.addActionListener(
+                <span style='font-weight:bold;color:#7B0052;'>new</span> ActionListener()<span style='font-weight:bold;color:#D3171B'>{</span>
+                    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> actionPerformed(ActionEvent ae)<span style='font-weight:bold;color:#D3171B'>{</span>
+                        pizza = <span style='font-weight:bold;color:#7B0052;'>new</span> Classic();
+                        validerLesDécorations();
+                    <span style='font-weight:bold;color:#D3171B'>}</span>
+                <span style='font-weight:bold;color:#D3171B'>}</span>);
+
+            boutonCrust.addActionListener(
+                <span style='font-weight:bold;color:#7B0052;'>new</span> ActionListener()<span style='font-weight:bold;color:#D3171B'>{</span>
+                    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> actionPerformed(ActionEvent ae)<span style='font-weight:bold;color:#D3171B'>{</span>
+                        pizza = <span style='font-weight:bold;color:#7B0052;'>new</span> GenerousCrust();
+                        validerLesDécorations();
+                    <span style='font-weight:bold;color:#D3171B'>}</span>
+                <span style='font-weight:bold;color:#D3171B'>}</span>);
+
+            parmesan.addItemListener(<span style='font-weight:bold;color:#7B0052;'>new</span> ItemListener()<span style='font-weight:bold;color:#D3171B'>{</span>
+                    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> itemStateChanged(ItemEvent ie)<span style='font-weight:bold;color:#D3171B'>{</span>
+                        <span style='font-weight:bold;color:#7B0052;'>if</span>(ie.getStateChange()==ItemEvent.SELECTED)<span style='font-weight:bold;color:#D3171B'>{</span>
+                            pizza = <span style='font-weight:bold;color:#7B0052;'>new</span> Parmesan(pizza);
+                        <span style='font-weight:bold;color:#D3171B'>}</span>
+                        afficherLaPizzaEtSonCoût();
+                    <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#D3171B'>}</span>);
+            mozarella.addItemListener(<span style='font-weight:bold;color:#7B0052;'>new</span> ItemListener()<span style='font-weight:bold;color:#D3171B'>{</span>
+                    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> itemStateChanged(ItemEvent ie)<span style='font-weight:bold;color:#D3171B'>{</span>
+                        <span style='font-weight:bold;color:#7B0052;'>if</span>(ie.getStateChange()==ItemEvent.SELECTED)<span style='font-weight:bold;color:#D3171B'>{</span>
+                            pizza = <span style='font-weight:bold;color:#7B0052;'>new</span> FreshMozarella(pizza);
+                        <span style='font-weight:bold;color:#D3171B'>}</span>
+                        afficherLaPizzaEtSonCoût();
+                    <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#D3171B'>}</span>);
+            ham.addItemListener(<span style='font-weight:bold;color:#7B0052;'>new</span> ItemListener()<span style='font-weight:bold;color:#D3171B'>{</span>
+                    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> itemStateChanged(ItemEvent ie)<span style='font-weight:bold;color:#D3171B'>{</span>
+                        <span style='font-weight:bold;color:#7B0052;'>if</span>(ie.getStateChange()==ItemEvent.SELECTED)<span style='font-weight:bold;color:#D3171B'>{</span>
+                            pizza = <span style='font-weight:bold;color:#7B0052;'>new</span> Ham(pizza);
+                        <span style='font-weight:bold;color:#D3171B'>}</span>
+                        afficherLaPizzaEtSonCoût();
+                    <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#D3171B'>}</span>);
+            tomato.addItemListener(<span style='font-weight:bold;color:#7B0052;'>new</span> ItemListener()<span style='font-weight:bold;color:#D3171B'>{</span>
+                    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> itemStateChanged(ItemEvent ie)<span style='font-weight:bold;color:#D3171B'>{</span>
+                        pizza = <span style='font-weight:bold;color:#7B0052;'>new</span> Tomato(pizza);
+                        afficherLaPizzaEtSonCoût();
+                    <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#D3171B'>}</span>);
+            mushrooms.addItemListener(<span style='font-weight:bold;color:#7B0052;'>new</span> ItemListener()<span style='font-weight:bold;color:#D3171B'>{</span>
+                    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> itemStateChanged(ItemEvent ie)<span style='font-weight:bold;color:#D3171B'>{</span>
+                        <span style='font-weight:bold;color:#7B0052;'>if</span>(ie.getStateChange()==ItemEvent.SELECTED)<span style='font-weight:bold;color:#D3171B'>{</span>
+                            pizza = <span style='font-weight:bold;color:#7B0052;'>new</span> Mushrooms(pizza);
+                        <span style='font-weight:bold;color:#D3171B'>}</span>
+                        afficherLaPizzaEtSonCoût();
+                    <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#D3171B'>}</span>);
+            clams.addItemListener(<span style='font-weight:bold;color:#7B0052;'>new</span> ItemListener()<span style='font-weight:bold;color:#D3171B'>{</span>
+                    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> itemStateChanged(ItemEvent ie)<span style='font-weight:bold;color:#D3171B'>{</span>
+                        <span style='font-weight:bold;color:#7B0052;'>if</span>(ie.getStateChange()==ItemEvent.SELECTED)<span style='font-weight:bold;color:#D3171B'>{</span>
+                            pizza = <span style='font-weight:bold;color:#7B0052;'>new</span> Clams(pizza);
+                        <span style='font-weight:bold;color:#D3171B'>}</span>
+                        <span style='font-weight:bold;color:#7B0052;'>else</span> clams.setState(<span style='font-weight:bold;color:#7B0052;'>true</span>);
+                        afficherLaPizzaEtSonCoût();
+                    <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#D3171B'>}</span>);
+
+            boutonMake.addActionListener(
+                <span style='font-weight:bold;color:#7B0052;'>new</span> ActionListener()<span style='font-weight:bold;color:#D3171B'>{</span>
+                    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> actionPerformed(ActionEvent ae)<span style='font-weight:bold;color:#D3171B'>{</span>
+                        invaliderLesDécorations();
+                        afficheur.setText(<span style='color:#2A00FF'>"&lt;html&gt;&lt;FONT Color=red size=5&gt;MAKING of the "</span> + afficheur.getText() + <span style='color:#2A00FF'>"&lt;/html&gt;"</span>);
+                    <span style='font-weight:bold;color:#D3171B'>}</span>
+                <span style='font-weight:bold;color:#D3171B'>}</span>);
+
+            invaliderLesDécorations();
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>private</span> <span style='font-weight:bold;color:#7B0052;'>void</span> afficherLaPizzaEtSonCoût()<span style='font-weight:bold;color:#D3171B'>{</span>
+            afficheur.setText(<span style='color:#2A00FF'>"&lt;html&gt;&lt;FONT Color=blue size=4&gt;"</span>+ pizza.getDescription()+ <span style='color:#2A00FF'>"&lt;/FONT&gt;&lt;FONT Color=red size=4&gt; cost: "</span> + df.format(pizza.cost()) + <span style='color:#2A00FF'>" &#8364;&lt;/Font&gt;&lt;/html&gt;"</span>);
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>private</span> <span style='font-weight:bold;color:#7B0052;'>void</span> invaliderLesDécorations()<span style='font-weight:bold;color:#D3171B'>{</span>
+            boutonMake.setEnabled(<span style='font-weight:bold;color:#7B0052;'>false</span>);boutonMake.setText(<span style='color:#2A00FF'>"&lt;html&gt;&lt;font size=3 color=green&gt;compose your pizza ...&lt;/font&gt;&lt;/html&gt;"</span>);
+            boutonSolo.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);boutonSolo.setText(<span style='color:#2A00FF'>"&lt;html&gt;&lt;font size=3 color=red&gt;solo&lt;/font&gt;&lt;/html&gt;"</span>);
+            boutonClassic.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);boutonClassic.setText(<span style='color:#2A00FF'>"&lt;html&gt;&lt;font size=3 color=red&gt;classic&lt;/font&gt;&lt;/html&gt;"</span>);
+            boutonCrust.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);boutonCrust.setText(<span style='color:#2A00FF'>"&lt;html&gt;&lt;font size=3 color=red&gt;crust&lt;/font&gt;&lt;/html&gt;"</span>);
+            parmesan.setState(<span style='font-weight:bold;color:#7B0052;'>false</span>);mozarella.setState(<span style='font-weight:bold;color:#7B0052;'>false</span>);ham.setState(<span style='font-weight:bold;color:#7B0052;'>false</span>);tomato.setState(<span style='font-weight:bold;color:#7B0052;'>false</span>);mushrooms.setState(<span style='font-weight:bold;color:#7B0052;'>false</span>);clams.setState(<span style='font-weight:bold;color:#7B0052;'>false</span>);
+            parmesan.setEnabled(<span style='font-weight:bold;color:#7B0052;'>false</span>);mozarella.setEnabled(<span style='font-weight:bold;color:#7B0052;'>false</span>); ham.setEnabled(<span style='font-weight:bold;color:#7B0052;'>false</span>);tomato.setEnabled(<span style='font-weight:bold;color:#7B0052;'>false</span>);mushrooms.setEnabled(<span style='font-weight:bold;color:#7B0052;'>false</span>);clams.setEnabled(<span style='font-weight:bold;color:#7B0052;'>false</span>);
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        <span style='font-weight:bold;color:#7B0052;'>private</span> <span style='font-weight:bold;color:#7B0052;'>void</span> validerLesDécorations()<span style='font-weight:bold;color:#D3171B'>{</span>
+            boutonMake.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);boutonMake.setText(<span style='color:#2A00FF'>"&lt;html&gt;&lt;font size=3 color=red&gt;make the pizza !&lt;/font&gt;&lt;/html&gt;"</span>);
+            boutonSolo.setEnabled(<span style='font-weight:bold;color:#7B0052;'>false</span>);boutonSolo.setText(<span style='color:#2A00FF'>"&lt;html&gt;&lt;font size=3 color=green&gt;solo&lt;/font&gt;&lt;/html&gt;"</span>);
+            boutonClassic.setEnabled(<span style='font-weight:bold;color:#7B0052;'>false</span>);boutonClassic.setText(<span style='color:#2A00FF'>"&lt;html&gt;&lt;font size=3 color=green&gt;classic&lt;/font&gt;&lt;/html&gt;"</span>);
+            boutonCrust.setEnabled(<span style='font-weight:bold;color:#7B0052;'>false</span>);boutonCrust.setText(<span style='color:#2A00FF'>"&lt;html&gt;&lt;font size=3 color=green&gt;crust&lt;/font&gt;&lt;/html&gt;"</span>);
+            parmesan.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);mozarella.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);ham.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);tomato.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);mushrooms.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);clams.setEnabled(<span style='font-weight:bold;color:#7B0052;'>true</span>);
+            afficherLaPizzaEtSonCoût();
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+
+    <br />
+    <hr />
+    <h3>Question 2.1</h3>
+    <p>classe Chocolate</p>
+
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question2;
+
+<span style='color:#3F5FBF'>/**
+ * extrait de http://www.oreilly.com/catalog/hfdesignpat/
+ */</span>
+<span style='color:#3F7F5F'>//public abstract class Chocolate { // à rendre concréte
+</span><span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> Chocolate <span style='font-weight:bold;color:#7B0052;'>extends</span> Beverage <span style='font-weight:bold;color:#D3171B'>{</span>
+
+	<span style='font-weight:bold;color:#7B0052;'>public</span> Chocolate() <span style='font-weight:bold;color:#D3171B'>{</span>
+		description = <span style='color:#2A00FF'>"Chocolate"</span>;
+	<span style='font-weight:bold;color:#D3171B'>}</span>
+
+	<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>double</span> cost() <span style='font-weight:bold;color:#D3171B'>{</span>
+		<span style='font-weight:bold;color:#7B0052;'>return</span> 2.10;
+	<span style='font-weight:bold;color:#D3171B'>}</span>
+
+
+
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+
+    <br>
+    <p>méthodes de la classe de test ChocolateTest</p>
+
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question2;
+
+
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> ChocolateTest <span style='font-weight:bold;color:#7B0052;'>extends</span> junit.framework.TestCase<span style='font-weight:bold;color:#D3171B'>{</span>
+	<span style='font-weight:bold;color:#7B0052;'>private</span> question2.Chocolate choco;
+
+<span style='color:#3F7F5F'>// à décommenter
+</span>
+
+	<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> setUp()<span style='font-weight:bold;color:#D3171B'>{</span>
+		choco = <span style='font-weight:bold;color:#7B0052;'>new</span> question2.Chocolate();
+	<span style='font-weight:bold;color:#D3171B'>}</span>
+
+
+
+	<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> testChocolate()<span style='font-weight:bold;color:#D3171B'>{</span>
+		assertEquals(2.1, choco.cost(), 0.1);
+	<span style='font-weight:bold;color:#D3171B'>}</span>
+
+	<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> testChocolateWhip()<span style='font-weight:bold;color:#D3171B'>{</span>
+		question2.Beverage chocoSimpleWhip = <span style='font-weight:bold;color:#7B0052;'>new</span> question2.Whip(choco);
+
+		assertEquals(2.2, chocoSimpleWhip.cost(), 0.01);
+	<span style='font-weight:bold;color:#D3171B'>}</span>
+
+	<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> testChocolateWhipWhip()<span style='font-weight:bold;color:#D3171B'>{</span>
+		question2.Beverage chocoDoubleWhip = <span style='font-weight:bold;color:#7B0052;'>new</span> question2.Whip(<span style='font-weight:bold;color:#7B0052;'>new</span> question2.Whip(choco));
+
+		assertEquals(2.3, chocoDoubleWhip.cost(), 0.01);
+	<span style='font-weight:bold;color:#D3171B'>}</span>
+
+	<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> testChocolateWhipSoyMocha()<span style='font-weight:bold;color:#D3171B'>{</span>
+		question2.Beverage chocoWhipSoyMocha = <span style='font-weight:bold;color:#7B0052;'>new</span> question2.Mocha(<span style='font-weight:bold;color:#7B0052;'>new</span> question2.Soy(<span style='font-weight:bold;color:#7B0052;'>new</span> question2.Whip(choco)));
+
+		assertEquals(2.55, chocoWhipSoyMocha.cost(), 0.01);
+	<span style='font-weight:bold;color:#D3171B'>}</span>
+
+
+
+
+
+
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+
+    <br />
+    <hr />
+    <h3>Question 2.2</h3>
+    <p>classe BeetSugar</p>
+
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question2;
+
+<span style='color:#3F5FBF'>/**
+ * extrait de http://www.oreilly.com/catalog/hfdesignpat/
+ */</span>
+<span style='color:#3F7F5F'>//public abstract class BeetSugar  { // à rendre concrete
+</span><span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> BeetSugar <span style='font-weight:bold;color:#7B0052;'>extends</span> CondimentDecorator <span style='font-weight:bold;color:#D3171B'>{</span>
+
+	<span style='font-weight:bold;color:#7B0052;'>public</span> BeetSugar(Beverage beverage) <span style='font-weight:bold;color:#D3171B'>{</span>
+		<span style='font-weight:bold;color:#7B0052;'>super</span>(beverage);
+	<span style='font-weight:bold;color:#D3171B'>}</span>
+
+	<span style='font-weight:bold;color:#7B0052;'>public</span> String getDescription() <span style='font-weight:bold;color:#D3171B'>{</span>
+		<span style='font-weight:bold;color:#7B0052;'>return</span> super.getDescription() + <span style='color:#2A00FF'>", Beet Sugar"</span>;
+	<span style='font-weight:bold;color:#D3171B'>}</span>
+
+	<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>double</span> cost() <span style='font-weight:bold;color:#D3171B'>{</span>
+		<span style='font-weight:bold;color:#7B0052;'>return</span> .10 + super.cost();
+	<span style='font-weight:bold;color:#D3171B'>}</span>
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+
+    <br />
+    <hr />
+    <h3>Question 2.3</h3>
+    <p>La méthode toString()</p>
+
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question2;
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.text.DecimalFormat;
+
+<span style='color:#3F5FBF'>/**
+ * extrait de http://www.oreilly.com/catalog/hfdesignpat/
+ */</span>
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>abstract</span> <span style='font-weight:bold;color:#7B0052;'>class</span> Beverage <span style='font-weight:bold;color:#D3171B'>{</span>
+	String description = <span style='color:#2A00FF'>"Unknown Beverage"</span>;
+        <span style='font-weight:bold;color:#7B0052;'>private</span> DecimalFormat  df = <span style='font-weight:bold;color:#7B0052;'>new</span> DecimalFormat(<span style='color:#2A00FF'>"##.##"</span>);
+
+	<span style='font-weight:bold;color:#7B0052;'>public</span> String getDescription() <span style='font-weight:bold;color:#D3171B'>{</span>
+		<span style='font-weight:bold;color:#7B0052;'>return</span> description;
+	<span style='font-weight:bold;color:#D3171B'>}</span>
+
+	<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>abstract</span> <span style='font-weight:bold;color:#7B0052;'>double</span> cost();
+
+		<span style='font-weight:bold;color:#7B0052;'>public</span> String toString()<span style='font-weight:bold;color:#D3171B'>{</span>
+		  <span style='font-weight:bold;color:#7B0052;'>return</span> getDescription()+<span style='color:#2A00FF'>" $"</span>+(<span style='font-weight:bold;color:#7B0052;'>double</span>) Math.round(cost() * 100) / 100;<span style='color:#3F7F5F'>//df.format(cost());
+</span>		<span style='font-weight:bold;color:#D3171B'>}</span>
+
+
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+
+    <br />
+    <hr />
+    <h3>Question 3</h3>
+    <p>Vu que la question est optionnelle, et que je n' ai pas le temps de la faire(je suis trop en retard sur d' autres travaux et EU), je ne la fais pas, j' essayerai de la faire plus tard.</p>
+
+    <br />
+    <hr />
+    <h3>Question 4.1</h3>
+    <p>la classe UpperCaseInputStream</p>
+
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question4;
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.io.InputStream;
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.io.IOException;
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.io.*;
+
+<span style='color:#3F5FBF'>/**
+ * Cette classe "décore" un fichier (InputSream) par la conversion de tous
+ * les caractères Minuscule en Majuscule
+ * @author (votre nom)
+ * @version (un numéro de version ou une date)
+ */</span>
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> UpperCaseInputStream <span style='font-weight:bold;color:#7B0052;'>extends</span> FilterInputStream <span style='font-weight:bold;color:#D3171B'>{</span> <span style='color:#3F7F5F'>// à compléter
+</span>
+    <span style='font-weight:bold;color:#7B0052;'>public</span> UpperCaseInputStream (InputStream in)<span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>super</span>(in);
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>int</span> read() <span style='font-weight:bold;color:#7B0052;'>throws</span> IOException <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>int</span> c = super.read();
+        <span style='font-weight:bold;color:#7B0052;'>return</span> c == -1 ? c : Character.toUpperCase((<span style='font-weight:bold;color:#7B0052;'>char</span>) (c));
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>int</span> read(byte[] b, <span style='font-weight:bold;color:#7B0052;'>int</span> offset, <span style='font-weight:bold;color:#7B0052;'>int</span> len) <span style='font-weight:bold;color:#7B0052;'>throws</span> IOException <span style='font-weight:bold;color:#D3171B'>{</span>
+        <span style='font-weight:bold;color:#7B0052;'>int</span> result = super.read(b, offset, len);
+        <span style='font-weight:bold;color:#7B0052;'>for</span> (<span style='font-weight:bold;color:#7B0052;'>int</span> i = 0; i &lt; result; i++) <span style='font-weight:bold;color:#D3171B'>{</span>
+            b[i] = (<span style='font-weight:bold;color:#7B0052;'>byte</span>) Character.toUpperCase((<span style='font-weight:bold;color:#7B0052;'>char</span>) (b[i]));
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#7B0052;'>return</span> result;
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+
+    <br />
+    <hr />
+    <h3>Question 4.2</h3>
+    <p>La classe de tests pour PushbackInputStream</p>
+
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question4;
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.io.*;
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.net.*;
+
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> UpperCaseInputStreamTest <span style='font-weight:bold;color:#7B0052;'>extends</span> junit.framework.TestCase<span style='font-weight:bold;color:#D3171B'>{</span>
+
+  <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> testAccès_README_TXT()<span style='font-weight:bold;color:#D3171B'>{</span>
+    <span style='font-weight:bold;color:#7B0052;'>try</span><span style='font-weight:bold;color:#D3171B'>{</span>
+      InputStream is = <span style='font-weight:bold;color:#7B0052;'>new</span> BufferedInputStream( <span style='font-weight:bold;color:#7B0052;'>new</span> FileInputStream(<span style='font-weight:bold;color:#7B0052;'>new</span> File(<span style='color:#2A00FF'>"README.TXT"</span>)));
+	    <span style='font-weight:bold;color:#7B0052;'>int</span> c = is.read();
+	    assertTrue(<span style='color:#2A00FF'>" erreur de lecture ???"</span>, c!= -1);
+	    is.close();
+	  <span style='font-weight:bold;color:#D3171B'>}</span><span style='font-weight:bold;color:#7B0052;'>catch</span>(Exception e)<span style='font-weight:bold;color:#D3171B'>{</span>
+	    fail(<span style='color:#2A00FF'>" Erreur sur ce fichier : README.TXT ??? "</span> + e.getMessage());
+	   <span style='font-weight:bold;color:#D3171B'>}</span>
+	<span style='font-weight:bold;color:#D3171B'>}</span>
+
+	<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> testUpperCase_README_TXT() <span style='font-weight:bold;color:#7B0052;'>throws</span> Exception<span style='font-weight:bold;color:#D3171B'>{</span>
+        InputStream is = <span style='font-weight:bold;color:#7B0052;'>new</span> UpperCaseInputStream(<span style='font-weight:bold;color:#7B0052;'>new</span> BufferedInputStream( <span style='font-weight:bold;color:#7B0052;'>new</span> FileInputStream(<span style='font-weight:bold;color:#7B0052;'>new</span> File(<span style='color:#2A00FF'>"README.TXT"</span>))));   <span style='color:#3F7F5F'>// déclaration à décorer ....
+</span>
+	  <span style='font-weight:bold;color:#7B0052;'>int</span> c = is.read();
+	  <span style='font-weight:bold;color:#7B0052;'>while</span>( c != -1)<span style='font-weight:bold;color:#D3171B'>{</span>
+	      <span style='color:#3F7F5F'>//System.out.println((char)c);
+</span>	    assertTrue(<span style='color:#2A00FF'>"erreur !, '"</span> + Character.valueOf((<span style='font-weight:bold;color:#7B0052;'>char</span>)c) + <span style='color:#2A00FF'>"' ne semble pas être une majuscule ..."</span>, Character.isUpperCase((<span style='font-weight:bold;color:#7B0052;'>char</span>)c) || (<span style='font-weight:bold;color:#7B0052;'>char</span>)c==<span style='color:#2A00FF'>' '</span>);
+	    c = is.read();
+	  <span style='font-weight:bold;color:#D3171B'>}</span>
+
+	  is.close();
+	<span style='font-weight:bold;color:#D3171B'>}</span>
+
+	<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> testPushPackUpperCase_README_TXT() <span style='font-weight:bold;color:#7B0052;'>throws</span> Exception<span style='font-weight:bold;color:#D3171B'>{</span>
+	PushbackInputStream is = <span style='font-weight:bold;color:#7B0052;'>new</span> PushbackInputStream(<span style='font-weight:bold;color:#7B0052;'>new</span> UpperCaseInputStream(<span style='font-weight:bold;color:#7B0052;'>new</span> BufferedInputStream( <span style='font-weight:bold;color:#7B0052;'>new</span> FileInputStream(<span style='font-weight:bold;color:#7B0052;'>new</span> File(<span style='color:#2A00FF'>"README.TXT"</span>)))));
+        <span style='font-weight:bold;color:#7B0052;'>int</span> c = is.read();
+        assertTrue((<span style='font-weight:bold;color:#7B0052;'>char</span>)c == <span style='color:#2A00FF'>'T'</span>);
+        c = is.read();
+        assertTrue((<span style='font-weight:bold;color:#7B0052;'>char</span>)c == <span style='color:#2A00FF'>'E'</span>);
+        is.unread(<span style='color:#2A00FF'>'r'</span>);
+        c = is.read();
+        <span style='color:#3F7F5F'>//System.out.println("****"+(char)c);
+</span>        assertTrue((<span style='font-weight:bold;color:#7B0052;'>char</span>)c == <span style='color:#2A00FF'>'r'</span>);
+	<span style='font-weight:bold;color:#D3171B'>}</span>
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+
+    <br />
+    <hr />
+        <h3>Conclusion, biliographie et remarques :</h3>
+        <i style="font-size:12px;">... Une seule page html, limitez le nombre de clics, (plus de 200 rapports � corriger chaque semaine)</i>
+</body>
+</html>

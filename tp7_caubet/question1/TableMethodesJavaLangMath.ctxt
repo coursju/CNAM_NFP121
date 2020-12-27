@@ -1,0 +1,26 @@
+#BlueJ class context
+comment0.target=TableMethodesJavaLangMath
+comment0.text=\ Gestion\ par\ introspection\ des\ m\u00E9thodes\ de\ la\ classe\ java.lang.Math,<br>\r\n\ \ Seules\ sont\ conserv\u00E9es\ \:les\ m\u00E9thodes\ retournant\ un\ double\ et\ d'arit\u00E9\ 1\ ou\ 2<p>\r\n\ \ \ Note\ \:\ Emploi\ du\ Pattern\ Singleton\ pour\ cette\ table,\ accessible\ uniquement\ en\ lecture\ par\ des\ accesseurs<p>\r\n\ La\ convention\ de\ nommage\ est\ la\ suivante\ \:\r\n\ \ \ \ \ \ \ \ le\ "Nom"\ de\ la\ fonction\ suivi\ de\ "(double)"\ \ exemple\ \:\ "sqrt(double)"\r\n\ \ ou\ le\ "Nom"\ de\ la\ fonction\ suivi\ de\ "(double,\ double)"\ \ exemple\ \:\ "IEEEremainder(double,\ double)"\r\n
+comment1.params=
+comment1.target=TableMethodesJavaLangMath\ getInstance()
+comment2.params=
+comment2.target=TableMethodesJavaLangMath()
+comment3.params=nomDeLaM\u00E9thode
+comment3.target=boolean\ cetteMethodeEstPresente(java.lang.String)
+comment3.text=\ \r\n\ @param\ \ nomDeLaM\u00E9thode\ Nom\ de\ la\ fonction\ +\ "(double)"\ ou\ "(double,\ double)"\r\n\ @return\ true\ si\ la\ fonction\ est\ pr\u00E9sente\r\n
+comment4.params=nomDeLaMethode
+comment4.target=boolean\ cetteMethodeAttendDeuxParametres(java.lang.String)
+comment4.text=\ \r\n\ @param\ \ nomDeLaM\u00E9thode\ Nom\ de\ la\ fonction\ +\ "(double)"\ ou\ "(double,\ double)"\r\n\ @return\ true\ si\ la\ fonction\ est\ binaire,\ d'arit\u00E9\ 2\r\n\ @throws\ NoSuchElementException\ si\ la\ m\u00E9thode\ demand\u00E9e\ n'existe\ pas\r\n
+comment5.params=nomDeLaMethode
+comment5.target=boolean\ cetteMethodeAttendUnSeulParametre(java.lang.String)
+comment5.text=\ \r\n\ @param\ \ nomDeLaM\u00E9thode\ Nom\ de\ la\ fonction\ +\ "(double)"\ ou\ "(double,\ double)"\r\n\ @return\ true\ si\ la\ fonction\ est\ unaire,\ d'arit\u00E9\ 1\r\n\ @throws\ NoSuchElementException\ si\ la\ m\u00E9thode\ demand\u00E9e\ n'existe\ pas\ \r\n
+comment6.params=
+comment6.target=java.lang.String[]\ listeDesMethodes()
+comment6.text=\ \r\n\ Obtention\ de\ la\ liste\ ordonn\u00E9e\ des\ m\u00E9thodes\r\n\ @return\ la\ liste\ tri\u00E9e\ des\ fonctions\ issues\ de\ java.lang.Math\r\n
+comment7.params=nomDeLaMethode\ arg1
+comment7.target=double\ invoquer(java.lang.String,\ double)
+comment7.text=\ Invocation\ d'une\ m\u00E9thode\ de\ la\ table\r\n\ @param\ \ nomDeLaM\u00E9thode\ Nom\ de\ la\ fonction\ +\ "(double)"\r\n\ @param\ arg1\ l'op\u00E9rande\r\n\ @return\ un\ r\u00E9sultat\r\n\ @throws\ NoSuchElementException\ si\ la\ m\u00E9thode\ demand\u00E9e\ n'existe\ pas\ ou\ une\ exception\ lev\u00E9e\ par\ la\ fonction\ appel\u00E9e\r\n
+comment8.params=nomDeLaMethode\ arg1\ arg2
+comment8.target=double\ invoquer(java.lang.String,\ double,\ double)
+comment8.text=\ Invocation\ d'une\ m\u00E9thode\ de\ la\ table\r\n\ @param\ \ nomDeLaM\u00E9thode\ Nom\ de\ la\ fonction\ +\ "(double,\ double)"\r\n\ @param\ arg1\ l'op\u00E9rande\r\n\ @return\ un\ r\u00E9sultat\r\n\ @throws\ NoSuchElementException\ si\ la\ m\u00E9thode\ demand\u00E9e\ n'existe\ pas\ ou\ une\ exception\ lev\u00E9e\ par\ la\ fonction\ appel\u00E9e\r\n
+numComments=9

@@ -1,0 +1,262 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+
+
+
+<link rel="stylesheet" type="text/css" href="css/style.css"><title></title></head><body>
+    
+    <div id="container">
+        <div id="header">
+            <div id="header_toprow">
+                Conservatoire national des arts et métiers
+            </div>
+            <div id="header_title">
+                NFP121 : Programmation avancée<br>
+                TP <span style="font-weight: 400;"><i>injection</i></span> <br>
+                Injection de dépendances, Inversion de contrôle
+            </div>
+        </div>
+        &nbsp;<div id="content">
+
+            <div class="question">
+                <img src="images/question1.png" height="80" width="101">
+                <span>Le </span>framework femtoContainer</div>
+
+            <div class="paragraphe">
+				&nbsp;<p>
+				<b><font size="5">Préambule:</font></b><font size="5"> lire, étudier l'article de 
+                Martin Fowler</font></p>
+                <p><font size="3">&nbsp;&nbsp;&nbsp;
+<a href="http://www.martinfowler.com/articles/injection.html">
+http://www.martinfowler.com/articles/injection.html</a></font></p>
+
+
+                <p><font size="3">Ce TP est accompagné d'une séance d'exercices dirigés sur le 
+                même thème</font></p><blockquote><p><font size="3">&nbsp; cf. ed 
+                injection_dependances_IoC</font></p>
+
+
+                </blockquote>
+                <p>&nbsp;</p>
+
+
+            </div>
+            <hr>
+			
+            <p align="left"><font size="4">&nbsp;&nbsp;&nbsp; Dans le paragraphe <b>
+<font color="#990044">Setter Injection with
+<a href="https://fr.wikipedia.org/wiki/Spring_%28framework%29">Spring</a></font></b> 
+l'auteur, Martin Fowler, présente un exemple de configuration de classes à l'aide du framework 
+Spring. L'exemple de l'article effectue une recherche d'un titre de film à 
+l'aide du nom du réalisateur, la liste des films peut se présenter selon plusieurs 
+formats: du fichier texte au format CSV ou avec d'autres séparateurs ou encore 
+en base de données ou bien sur 
+le web. </font></p>
+			
+            <p align="center">
+                <font size="4">
+<img src="images/wp6s9svj.gif" border="0" height="270" width="512"></font>
+            </p>
+			
+
+<p><font size="4">L'usage d'un framework de configuration, 
+comme Spring, 
+permet de s'affranchir du format de la liste des films, ce choix étant déterminé 
+au moment de l'exécution depuis un fichier de configuration. Une séparation claire 
+est ainsi effectuée entre la configuration des classes et leur utilisation.</font></p>
+
+
+<p><font size="4">Le fichier de configuration Spring est en XML (spring.xml) :</font></p>
+
+
+<blockquote>
+  <pre>&lt;beans&gt;<br>    &lt;bean id="<b><font color="#006699" size="3">MovieLister</font></b>" class="spring.MovieLister"&gt;<br>        &lt;property name="<span style="color: rgb(153, 0, 0);">finder</span>"&gt;<br>            &lt;ref local="MovieFinder"/&gt;    <i><b><font color="#0000ff">            &lt;-- ce sera un "bean" défini dans le même contexte</font></b></i>
+        &lt;/property&gt;
+    &lt;/bean&gt;
+    &lt;bean id="<b><font color="#006699" size="3">MovieFinder</font></b>" class="spring.ColonMovieFinder"&gt;  <i><b><font color="#0000ff">&lt;-- le format du fichier est indiqué ici</font></b></i><br>        &lt;property name="<span style="color: rgb(153, 0, 0);">filename</span>"&gt;<br>            &lt;value&gt;movies1.txt&lt;/value&gt;<br>        &lt;/property&gt;<br>    &lt;/bean&gt;<br>&lt;/beans&gt;</pre>
+</blockquote>
+
+
+<p><font size="4">La lecture de ce fichier indique, que nous avons deux beans :
+</font></p>
+
+
+<blockquote>
+  <ul>
+    <li><font size="4"><b><font color="#006699">MovieLister</font></b> et <b>
+    <font color="#006699">MovieFinder</font></b></font></li>
+    <li><font size="4">dont les propriétés sont respectivement <span style="color: rgb(153, 0, 0);">finder</span> et 
+    <span style="color: rgb(153, 0, 0);">filename,</span></font></li>
+    <li><font size="4">les mutateurs(setter) associés sont exécutés par Spring : 
+    <font color="#990000">setFinder</font> et <font color="#990000">setFilename</font>, avec les paramètres indiqués.</font></li>
+  </ul>
+</blockquote>
+
+
+<p><font size="4">En java, ci-dessous l'usage de Spring, extrait de l'article :</font></p>
+
+
+<blockquote>
+  <pre>public void testWithSpring() throws Exception {<br>    ApplicationContext ctx = new FileSystemXmlApplicationContext("spring.xml");<br>    MovieLister lister = (MovieLister) ctx.getBean("<b><font color="#006699">MovieLister</font></b>");<br>    Movie[] movies = lister.moviesDirectedBy("Sergio Leone");<br>    assertEquals("Once Upon a Time in the West", movies[0].getTitle());<br>}</pre>
+</blockquote>
+
+
+<p><font size="4">&nbsp;&nbsp;&nbsp; Nous souhaitons utiliser un <span style="font-style: italic;">framework</span> analogue, mais simplifié, développé pour cette unité, basé, comme Spring, sur l'injection de dépendances par les 
+mutateurs(setter), les mêmes noms de classe ou d'interface <i>ApplicationContext</i> 
+et noms de méthode <i>getBean</i>, <i>getType</i> ont été repris depuis Spring.</font></p>
+
+
+
+
+
+<p><font size="4">Dans la suite de cet énoncé, nous  nommerons ce framework : <font color="#990000">femtoContainer <a href="http://jfod.cnam.fr/progAvancee/femto_container_distrib_bluej.jar">http://jfod.cnam.fr/progAvancee/femto_container_distrib_bluej.jar</a>&nbsp;&nbsp; <span style="color: rgb(5, 0, 0);">cette
+archive est un projet bluej autonome, celui-ci contient plusieurs exemples dont
+quelques patrons de conception ainsi qu'une interface graphique d'aide à l'édition des
+fichiers de configuration,&nbsp;</span></font></font></p><p><font size="4">Note: <font color="#990000">femtoContainer </font>&nbsp;est 
+            normalement 
+            inclus dans votre projet<span style="font-style: italic;"></span> tp_injection, 
+            nul ajout n'est nécessaire.</font></p>
+<p><font size="4">L'exécution de la méthode main de la classe nommée 
+<font color="#990000">ConfigurationIHM</font> déclenche une interface graphique qui pourrait
+vous être utile pour la réalisation des fichiers de configuration ( interface perfectible...)<br>
+</font></p>
+
+            <font size="4">
+
+            <div class="paragraphe">
+                <p>&nbsp;</p>
+
+
+            </div>
+            <hr>
+			
+            <p>
+			<br>
+			
+            </p>
+			
+            <div class="question">
+                <img src="images/question1.png" height="80" width="101"> Un 
+                exemple <br>
+</div>
+
+                </font>
+<p><font size="4"><span style="font-weight: bold;">&nbsp;&nbsp;&nbsp; </span>Proposez 
+un exemple, de votre choix, de l'utilisation de l'injection de dépendances.</font></p>
+            <font size="4"><p>&nbsp;&nbsp;&nbsp; Cet exemple doit être accompagné d'une 
+classe de tests unitaires, celui-ci sera intégré à la prochaine 
+version de <font color="#990000"><b>femtoContainer</b></font>.</p>
+            <p style="font-style: italic;">Utilisez JNEWS afin de déposer cet exemple, menu Outils, 
+item submit..., Scheme tp_injection_question1_deposer</p>
+
+            <blockquote>
+              <blockquote>
+
+<p><img src="images/tp_deposer.jpg" border="0" height="194" width="534"></p>
+
+              </blockquote>
+            </blockquote>
+<hr>
+			
+            <div class="question">
+                <img src="images/question2.png" height="80" width="101"> Un 
+                patron et son utilisation<br>
+</div>
+
+<p>Proposez un patron de conception, un exemple d'utilisation, une classe de 
+tests unitaires. un patron de votre choix parmi les 16 (23-7) de votre 
+<a href="http://jfod.cnam.fr/NFP121/supports/extras_designpatternscard.pdf">aide 
+mémoire</a>, <b>-7: en excluant</b> les  exemples présents dans&nbsp;
+<a href="http://jfod.cnam.fr/progAvancee/femto_container_distrib_bluej.jar">femtoContainer</a>, 
+soient :</p>
+
+            <blockquote>
+
+<p>
+<img border="0" src="images/tp_inj111.gif" width="703" height="86"></p>
+
+            </blockquote>
+
+<p>
+Les exemples de ces 7 patrons avec
+<a href="http://jfod.cnam.fr/progAvancee/femto_container_distrib_bluej.jar">
+femtoContainer</a> peuvent vous être utiles, et sont bien entendu 
+perfectibles...</p>
+
+<p>
+&nbsp;</p>
+
+<p style="font-style: italic;">Utiliser JNEWS afin de déposer vos contributions, menu Outils, 
+item submit..., Scheme tp_injection_question2_contribuer</p>
+
+<p><img src="images/tp_item_contribuer.jpg" border="0" height="194" width="534"></p>
+</font></p>
+
+                
+<p>&nbsp;</p>
+
+<hr>
+<p>&nbsp;</p>
+			
+            <div class="question">
+                <img src="images/question3.png" height="80" width="101"> Usage 
+                du patron ServiceLocator<br>
+</div>
+
+<p><font size="4">L'</font><big>exemple de la questions1 et le patron de la 
+question 2 sont maintenant accessibles via une 
+                instance du patron ServiceLocator, </big></p>
+
+                
+<p><big>&nbsp; Vérifiez la configuration (./question3/README.TXT) 
+                et enrichissez la classe de tests unitaires en conséquence (./question3/ServiceLocatorTests.java)...</big></p>
+
+
+
+<font size="4">
+
+<p style="font-style: italic;">N'oubliez pas d'utiliser JNEWS afin de déposer vos contribution, menu Outils, 
+item submit..., Scheme tp_injection_question3_contribuer</p>
+
+                </font>
+
+                
+<p>&nbsp;</p>
+
+<hr>
+			<span lang="FR"><font size="3">
+			<br>
+			
+            <div class="question">&nbsp;
+                Optionnelle contribution</div>
+
+            </font><font size="4">
+            </font><p><font size="4">&nbsp;&nbsp;&nbsp; F</font><font size="3"><font size="4">emtoContainer 
+            est bien entendu perfectible, tout ajout, toutes modifications sont 
+            les bienvenus et seront intégrés, à l'outil pour l'an prochain.
+</font></font></p>
+            <p><font size="4">&nbsp;&nbsp;&nbsp; Les traces en mode verbeux, 
+            l'exécution possible par introspection de n'importe quelle méthode, 
+            la gestion des erreurs issue d'un fichier de configuration mal formé 
+            pourrait être améliorée. </font></p>
+            <p><font size="4">&nbsp;&nbsp;&nbsp; Un autre format du fichier de configuration XML, JSON 
+... peut aussi être proposé. L'interface graphique engendrant le fichier de 
+configuration XML ou JSON pourrait, elle aussi être enrichie ou réécrite.</font></p>
+            <p>&nbsp;</p>
+            <p><font size="4">JSON : à l'aide de cette librairie par exemple, 
+            voir <a href="https://www.jmdoudoux.fr/java/dej/chap-gson.htm">
+            https://www.jmdoudoux.fr/java/dej/chap-gson.htm</a><br>
+            </font></p>
+<font size="3">            </font></span>
+			
+                <p>
+			
+			<br>
+			
+        </p></div>
+        <div id="footer">
+            <a class="lien" href="http://jfod.cnam.fr/" target="_blank">JFOD</a> |
+            <a class="lien" target="_blank" href="http://deptmedia.cnam.fr/phpBB3/viewforum.php?f=40">FORUM</a> | <a class="lien" href="http://www.cnam.fr/" target="_blank">CNAM</a>
+        </div>
+    </div>
+</body></html>

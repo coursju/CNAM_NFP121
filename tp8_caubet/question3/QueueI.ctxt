@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.params=i
+comment0.target=void\ add(int)
+comment0.text=Ajout\ d'un\ entier\ \u00E0\ la\ file.\n@param\ i\ l'\u00E9l\u00E9ment\ \u00E0\ enfiler\n@throws\ RuntimeException\ si\ la\ file\ est\ pleine\n\n
+comment1.target=int\ remove()
+comment1.text=retrait\ d'un\ entier\ \u00E0\ la\ file.\n@return\ l'\u00E9l\u00E9ment\ \u00E0\ d\u00E9filer\n@throws\ RuntimeException\ si\ la\ file\ est\ vide\n\n
+comment2.target=int\ element()
+comment2.text=Lecture\ du\ prochain\ \u00E9l\u00E9ment\ \u00E0\ d\u00E9filer.\n@return\ l'\u00E9l\u00E9ment\ \u00E0\ d\u00E9filer\n@throws\ RuntimeException\ si\ la\ file\ est\ vide\n\n
+comment3.target=void\ clear()
+comment3.text=Retrait\ de\ tous\ les\ \u00E9l\u00E9ments\ de\ la\ file.\n\n
+comment4.params=i
+comment4.target=boolean\ contains(int)
+comment4.text=Test\ de\ la\ pr\u00E9sence\ d'un\ \u00E9l\u00E9ment.\n@param\ i\ l'\u00E9l\u00E9ment\ \u00E0\ tester\n@retrun\ true\ i\ est\ pr\u00E9sent,\ false\ autrement\n\n
+comment5.target=int\ size()
+comment5.text=Obtention\ du\ nombre\ d'\u00E9l\u00E9ment\ de\ la\ file.\n@return\ le\ nombre\ d'\u00E9l\u00E9ment\ pr\u00E9sent\n\n
+comment6.target=int\ capacity()
+comment6.text=Obtention\ du\ nombre\ maximal\ d'\u00E9l\u00E9ment\ de\ la\ file.\n@return\ la\ capacit\u00E9\ de\ cette\ file\n\n
+comment7.target=boolean\ repOk()
+comment7.text=Invariant\ de\ classe.\ cf.\ B.\ Liskov.\n@return\ true\ si\ l'invariant\ est\ vrai,\ faux\ autrement.\n\n
+comment8.target=Object\ af()
+comment8.text=Fonction\ d'abstraction.\ cf.\ B.\ Liskov.\n@return\ la\ repr\u00E9sentation\ dite\ abstraite\ de\ cette\ file\n\n
+numComments=9

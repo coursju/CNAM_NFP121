@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=Observe
+comment1.params=
+comment1.target=Observe()
+comment2.params=obs
+comment2.target=void\ setObserver(java.util.Observer)
+comment3.params=str
+comment3.target=void\ setAdd(java.lang.String)
+comment4.params=
+comment4.target=java.lang.String\ toString()
+numComments=5

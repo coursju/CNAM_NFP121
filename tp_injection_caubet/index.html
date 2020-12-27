@@ -1,0 +1,294 @@
+<html>
+<head>
+    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+    <title>NFP121 - TP7</title>
+    <style type="text/css">
+        body {
+            background: #E5DED6;
+            background-color: #fff;
+            color: #333333;
+            font-size: 14px;
+            font-family: Verdana, Arial;
+        }
+
+        table {
+            font-size: 20px;
+            border-color: #808080;
+            border-style: solid;
+            border-width: 1px;
+        }
+
+        h2 {
+            color: #C1002A;
+            font-family: Verdana, Arial;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        h3 {
+            color: #C1002A;
+            font-family: Verdana, Arial;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        hr {
+            margin: 15px 0 15px 0;
+        }
+    </style>
+
+</head>
+<body>
+    <h2 style="text-align: center">NFP 121 - TP_injection</h2>
+    <h2 style="text-align: center">Injection de d�pendances, Inversion de
+    contr�le</h2>
+    <br />
+    <hr>
+    <br />
+    <table>
+        <tr>
+            <td>Nom
+            </td>
+            <td>...CAUBET
+            </td>
+        </tr>
+        <tr>
+            <td>Pr�nom
+            </td>
+            <td>...Julien
+            </td>
+        </tr>
+        <tr>
+            <td>Matricule
+            </td>
+            <td>...FOD_motdepasse1
+            </td>
+        </tr>
+    </table>
+    <br />
+    <hr />
+    <h3>Question 1.1 :</h3>
+    <p>Une classe "Assembleur" et une classe de test</p>
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question1;
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> container.*;
+
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> Assembleur
+<span style='font-weight:bold;color:#D3171B'>{</span>
+   <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>static</span> <span style='font-weight:bold;color:#7B0052;'>void</span> assemble()<span style='font-weight:bold;color:#D3171B'>{</span>
+       ApplicationContext ctx=Factory.createApplicationContext(<span style='color:#2A00FF'>"./Question1/README.TXT"</span>);
+       Table tbl = ctx.getBean(<span style='color:#2A00FF'>"table"</span>);
+       <span style='color:#3F7F5F'>//tbl.setInt(98);
+</span>       System.out.println(<span style='color:#2A00FF'>"table: "</span> + tbl);
+   <span style='font-weight:bold;color:#D3171B'>}</span>
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+    <br>
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question1;
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> <span style='font-weight:bold;color:#7B0052;'>static</span> org.junit.Assert.*;
+<span style='font-weight:bold;color:#7B0052;'>import</span> org.junit.After;
+<span style='font-weight:bold;color:#7B0052;'>import</span> org.junit.Before;
+<span style='font-weight:bold;color:#7B0052;'>import</span> org.junit.Test;
+<span style='font-weight:bold;color:#7B0052;'>import</span> container.*;
+
+
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> TableTest <span style='font-weight:bold;color:#7B0052;'>extends</span> junit.framework.TestCase<span style='font-weight:bold;color:#D3171B'>{</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> test1() <span style='font-weight:bold;color:#7B0052;'>throws</span> Exception<span style='font-weight:bold;color:#D3171B'>{</span>
+    ApplicationContext ctx = Factory.createApplicationContext(<span style='color:#2A00FF'>"./Question1/README.TXT"</span>);
+    Table t = ctx.getBean(<span style='color:#2A00FF'>"table"</span>);
+    assertEquals(Table.class,ctx.getType(<span style='color:#2A00FF'>"table"</span>));
+    t.setInt(4);t.setInt(2);t.setInt(2);t.setInt(1);
+    assertEquals(<span style='color:#2A00FF'>"[3, 4, 4, 2, 2, 1]"</span>,t.toString());
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+    <hr />
+
+    <h3>Question 2.1 :</h3>
+    <p>Le patron Observer, une classe " Assembleur" et une classe de test</p>
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question2;
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.util.*;
+
+
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> Observe <span style='font-weight:bold;color:#7B0052;'>extends</span> Observable<span style='font-weight:bold;color:#D3171B'>{</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>private</span> List&lt;String&gt; liste;
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> Observe()
+    <span style='font-weight:bold;color:#D3171B'>{</span>
+      liste = <span style='font-weight:bold;color:#7B0052;'>new</span> ArrayList&lt;String&gt;();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> setObserver(Observer obs)<span style='font-weight:bold;color:#D3171B'>{</span>
+        	addObserver(obs);
+        	System.out.println(<span style='color:#2A00FF'>"nombre d observateurs: "</span>+countObservers());
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> setAdd(String str)<span style='font-weight:bold;color:#D3171B'>{</span>
+       liste.add(str);
+       <span style='color:#3F7F5F'>//System.out.println("methode add ");
+</span>       setChanged();
+       notifyObservers();
+       <span style='color:#3F7F5F'>//clearChanged();
+</span>    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> String toString()<span style='font-weight:bold;color:#D3171B'>{</span>
+       <span style='font-weight:bold;color:#7B0052;'>return</span> liste.toString();
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+    <br>
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question2;
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.util.*;
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> Observateur <span style='font-weight:bold;color:#7B0052;'>implements</span> Observer<span style='font-weight:bold;color:#D3171B'>{</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> Observateur()
+    <span style='font-weight:bold;color:#D3171B'>{</span>
+       System.out.println(<span style='color:#2A00FF'>"***1 observateur cree***"</span>);
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    @Override
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> update(Observable o, Object arg)<span style='font-weight:bold;color:#D3171B'>{</span>
+       System.out.println(<span style='color:#2A00FF'>"methode update: "</span>+o.toString());
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+    <br>
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question2;
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> container.*;
+
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> Assembleur
+<span style='font-weight:bold;color:#D3171B'>{</span>
+   <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>static</span> <span style='font-weight:bold;color:#7B0052;'>void</span> assemble()<span style='font-weight:bold;color:#D3171B'>{</span>
+       ApplicationContext ctx=Factory.createApplicationContext(<span style='color:#2A00FF'>"./Question2/README.TXT"</span>);
+       Observe obs = ctx.getBean(<span style='color:#2A00FF'>"observe"</span>);
+       System.out.println(<span style='color:#2A00FF'>"observe: "</span> + obs);
+   <span style='font-weight:bold;color:#D3171B'>}</span>
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+    <br>
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question2;
+
+
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> <span style='font-weight:bold;color:#7B0052;'>static</span> org.junit.Assert.*;
+<span style='font-weight:bold;color:#7B0052;'>import</span> org.junit.After;
+<span style='font-weight:bold;color:#7B0052;'>import</span> org.junit.Before;
+<span style='font-weight:bold;color:#7B0052;'>import</span> org.junit.Test;
+<span style='font-weight:bold;color:#7B0052;'>import</span> container.*;
+
+
+
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> ObserveTest <span style='font-weight:bold;color:#7B0052;'>extends</span> junit.framework.TestCase<span style='font-weight:bold;color:#D3171B'>{</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> test1()<span style='font-weight:bold;color:#D3171B'>{</span>
+       ApplicationContext ctx=Factory.createApplicationContext(<span style='color:#2A00FF'>"./Question2/README.TXT"</span>);
+       Observe obs = ctx.getBean(<span style='color:#2A00FF'>"observe"</span>);
+       Observateur o = <span style='font-weight:bold;color:#7B0052;'>new</span> Observateur();
+
+       assertEquals(Observe.class,ctx.getType(<span style='color:#2A00FF'>"observe"</span>));
+       assertEquals(2, obs.countObservers());
+       assertEquals(<span style='color:#2A00FF'>"[liste, encore, et encore]"</span>,obs.toString());
+
+       obs.setObserver(o);
+       obs.setAdd(<span style='color:#2A00FF'>"truc"</span>);
+
+       assertEquals(3, obs.countObservers());
+       assertEquals(<span style='color:#2A00FF'>"[liste, encore, et encore, truc]"</span>,obs.toString());
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+    <hr />
+
+    <h3>Question 3 :</h3>
+    <p>La classe de test</p>
+    <pre style='text-align: left; border: 1px dashed #008DEF; line-height: 18px; padding: 15px; font-size: 13px; font-family:'Courier New', Courier, monospace; overflow: auto;'><span style='font-weight:bold;color:#7B0052;'>package</span> question3;
+
+<span style='font-weight:bold;color:#7B0052;'>import</span> container.*;
+<span style='font-weight:bold;color:#7B0052;'>import</span> service_locator.*;
+<span style='font-weight:bold;color:#7B0052;'>import</span> java.util.*;
+<span style='font-weight:bold;color:#7B0052;'>import</span> question1.*;
+<span style='font-weight:bold;color:#7B0052;'>import</span> question2.*;
+
+<span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>class</span> ServiceLocatorTests <span style='font-weight:bold;color:#7B0052;'>extends</span> junit.framework.TestCase<span style='font-weight:bold;color:#D3171B'>{</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> testServiceLocator() <span style='font-weight:bold;color:#7B0052;'>throws</span> Exception<span style='font-weight:bold;color:#D3171B'>{</span>
+        ApplicationContext ctx = Factory.createApplicationContext(<span style='color:#2A00FF'>"./question3/README.TXT"</span>);
+
+        ServiceLocatorI serviceLocator = ctx.getBean(<span style='color:#2A00FF'>"serviceLocator"</span>);
+        List&lt;String&gt; beans = <span style='font-weight:bold;color:#7B0052;'>new</span> ArrayList&lt;&gt;();
+        System.out.println(<span style='color:#2A00FF'>"Liste des beans issue du service locator"</span>);
+        <span style='font-weight:bold;color:#7B0052;'>for</span>(String service : ctx)<span style='font-weight:bold;color:#D3171B'>{</span>
+            System.out.println(<span style='color:#2A00FF'>"\t"</span> + service);
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        System.out.println(<span style='color:#2A00FF'>"\nListe des beans accessibles depuis le service locator"</span>);
+        <span style='font-weight:bold;color:#7B0052;'>for</span>(String service : serviceLocator)<span style='font-weight:bold;color:#D3171B'>{</span>
+            System.out.println(<span style='color:#2A00FF'>"\t"</span> + service);
+            beans.add(service);
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+        List&lt;String&gt; beans2 = <span style='font-weight:bold;color:#7B0052;'>new</span> ArrayList&lt;&gt;();
+        Iterator&lt;ApplicationContext&gt; itContainers = serviceLocator.iteratorContainers();
+        <span style='font-weight:bold;color:#7B0052;'>while</span>(itContainers.hasNext())<span style='font-weight:bold;color:#D3171B'>{</span>
+            ApplicationContext container = itContainers.next();
+            Iterator&lt;String&gt; itServices = serviceLocator.iteratorServices(container);
+            <span style='font-weight:bold;color:#7B0052;'>while</span>(itServices.hasNext())<span style='font-weight:bold;color:#D3171B'>{</span>
+                String service = itServices.next();
+                System.out.println(<span style='color:#2A00FF'>"\t"</span> + service);
+                beans2.add(service);
+            <span style='font-weight:bold;color:#D3171B'>}</span>
+        <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> testServiceLocator2() <span style='font-weight:bold;color:#7B0052;'>throws</span> Exception<span style='font-weight:bold;color:#D3171B'>{</span>
+        ApplicationContext ctx = Factory.createApplicationContext(<span style='color:#2A00FF'>"./question3/README.TXT"</span>);
+        ServiceLocatorI serviceLocator = ctx.getBean(<span style='color:#2A00FF'>"serviceLocator"</span>);
+        <span style='color:#3F7F5F'>// sur ce test deux beans avec le même nom, mais de deux conteneurs distincts
+</span>        List&lt;Integer&gt; liste1 = serviceLocator.lookup(<span style='color:#2A00FF'>"QUESTION1"</span>,<span style='color:#2A00FF'>"liste"</span>);
+        assertNotNull(liste1);
+        assertEquals(2,liste1.size());
+
+        <span style='color:#3F7F5F'>// List&lt;Integer&gt; liste2 = serviceLocator.lookup("QUESTION2","liste");
+</span>        <span style='color:#3F7F5F'>// assertNotNull(liste2);
+</span>        <span style='color:#3F7F5F'>// assertEquals(2,liste2.size());
+</span>    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> testQuestion1() <span style='font-weight:bold;color:#7B0052;'>throws</span> Exception<span style='font-weight:bold;color:#D3171B'>{</span>
+        ApplicationContext ctx = Factory.createApplicationContext(<span style='color:#2A00FF'>"./question3/README.TXT"</span>);
+        ServiceLocatorI serviceLocator = ctx.getBean(<span style='color:#2A00FF'>"serviceLocator"</span>);
+        question1.Table t = serviceLocator.lookup(<span style='color:#2A00FF'>"table"</span>);
+        <span style='color:#3F7F5F'>//assertEquals(Table.class,ctx.getType("table"));
+</span>        t.setInt(4);t.setInt(2);t.setInt(2);t.setInt(1);
+        assertEquals(<span style='color:#2A00FF'>"[3, 4, 4, 2, 2, 1]"</span>,t.toString());
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+
+    <span style='font-weight:bold;color:#7B0052;'>public</span> <span style='font-weight:bold;color:#7B0052;'>void</span> testQuestion2() <span style='font-weight:bold;color:#7B0052;'>throws</span> Exception<span style='font-weight:bold;color:#D3171B'>{</span>
+       ApplicationContext ctx = Factory.createApplicationContext(<span style='color:#2A00FF'>"./question3/README.TXT"</span>);
+       ServiceLocatorI serviceLocator = ctx.getBean(<span style='color:#2A00FF'>"serviceLocator"</span>);
+       question2.Observe obs = serviceLocator.lookup(<span style='color:#2A00FF'>"observe"</span>);
+       Observateur o = <span style='font-weight:bold;color:#7B0052;'>new</span> Observateur();
+
+       <span style='color:#3F7F5F'>//assertEquals(Observe.class,ctx.getType("observe"));
+</span>       assertEquals(2, obs.countObservers());
+       assertEquals(<span style='color:#2A00FF'>"[liste, encore, et encore]"</span>,obs.toString());
+
+       obs.setObserver(o);
+       obs.setAdd(<span style='color:#2A00FF'>"truc"</span>);
+
+       assertEquals(3, obs.countObservers());
+       assertEquals(<span style='color:#2A00FF'>"[liste, encore, et encore, truc]"</span>,obs.toString());
+    <span style='font-weight:bold;color:#D3171B'>}</span>
+<span style='font-weight:bold;color:#D3171B'>}</span></pre>
+    <br />
+    <hr />
+  
+
+        <h3>Conclusion, biliographie et remarques :</h3>
+        <i style="font-size:12px;">... Une seule page html, limitez le nombre de clics, (plus de 200 rapports � corriger chaque semaine)</i>
+
+</body>
+</html>

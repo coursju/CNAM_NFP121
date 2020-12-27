@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=Factory
+comment0.text=\r\n\ interface\ du\ design\ pattern\ "\ factory"\r\n\ @param\ <T>\ T\ a\ definir\r\n
+comment1.params=
+comment1.target=java.lang.Object\ create()
+comment1.text=\r\n\ methode\ abstraite\ "create"\r\n\ @return\ un\ obet\ de\ type\ T\r\n
+numComments=2

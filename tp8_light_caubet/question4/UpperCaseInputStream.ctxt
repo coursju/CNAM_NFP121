@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=UpperCaseInputStream
+comment0.text=\r\n\ Cette\ classe\ "d\u00E9core"\ un\ fichier\ (InputSream)\ par\ la\ conversion\ de\ tous\r\n\ les\ caract\u00E8res\ Minuscule\ en\ Majuscule\r\n\ @author\ (votre\ nom)\ \r\n\ @version\ (un\ num\u00E9ro\ de\ version\ ou\ une\ date)\r\n
+comment1.params=in
+comment1.target=UpperCaseInputStream(java.io.InputStream)
+comment2.params=
+comment2.target=int\ read()
+comment3.params=b\ offset\ len
+comment3.target=int\ read(byte[],\ int,\ int)
+numComments=4

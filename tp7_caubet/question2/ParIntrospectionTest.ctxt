@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=ParIntrospectionTest
+comment1.params=
+comment1.target=void\ test_lierObservableEtObserver()
+comment2.params=o\ arg
+comment2.target=void\ update(java.util.Observable,\ java.lang.Object)
+comment3.params=
+comment3.target=void\ test_lierJButtonEtActionListener()
+comment4.params=ae
+comment4.target=void\ actionPerformed(java.awt.event.ActionEvent)
+numComments=5

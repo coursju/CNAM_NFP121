@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.target=ServiceLocatorI
+comment0.text=\ Recherche\ d'un\ bean,\ apparent\u00E9\ "service"\ dans\ \r\n\ \ un\ conteneur\ de\ conteneurs\ de\ beans\r\n
+comment1.params=serviceName
+comment1.target=java.lang.Object\ lookup(java.lang.String)
+comment1.text=\ Recherche\ d'un\ bean,\ \u00E0\ l'aide\ de\ son\ nom.\r\n\ @param\ serviceName\ le\ nom\ du\ bean\ (du\ service)\r\n\ @return\ le\ bean\ cr\u00E9\u00E9\ par\ l'un\ des\ conteneurs\r\n
+comment2.params=container
+comment2.target=void\ setContainer(container.ApplicationContext)
+comment2.text=\ Ajout\ de\ conteneur,\ 'setContainer'\:\ il\ faut\ lire\ 'addContainer'\r\n\ <b>Attention</b>\ pas\ de\ tests\ sur\ la\ pr\u00E9sence\ \u00E9ventuelle\ de\ doublons\r\n\ @exception\ si\ l'ajout\ des\ services\ \u00E9choue\ (fichier\ inexistant...)\r\n
+comment3.params=
+comment3.target=java.util.Iterator\ iterator()
+comment3.text=\ Retourne\ un\ it\u00E9rateur\ sur\ tous\ les\ services\ accessibles.\r\n\ \ i.e.\ tous\ les\ beans\ de\ tous\ les\ conteneurs\ ajout\u00E9s\r\n
+comment4.params=containerName\ serviceName
+comment4.target=java.lang.Object\ lookup(java.lang.String,\ java.lang.String)
+comment4.text=\ Recherche\ d'un\ bean,\ \u00E0\ l'aide\ de\ son\ nom.\r\n\ @param\ containerName\ le\ nom\ du\ conteneur\ de\ services\r\n\ @param\ serviceName\ le\ nom\ du\ bean\ (du\ service)\r\n\ @return\ le\ bean\ cr\u00E9\u00E9\ par\ le\ conteneur\r\n
+comment5.params=
+comment5.target=java.util.Iterator\ iteratorContainers()
+comment5.text=\ Retourne\ un\ it\u00E9rateur\ sur\ les\ conteneurs\ ajout\u00E9s.\r\n
+comment6.params=container
+comment6.target=java.util.Iterator\ iteratorServices(container.ApplicationContext)
+comment6.text=\ Retourne\ un\ it\u00E9rateur\ sur\ les\ services\ d'un\ conteneur.\r\n
+numComments=7

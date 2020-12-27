@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.params=q
+comment0.target=QueueRepOk(QueueI)
+comment1.params=i
+comment1.target=void\ add(int)
+comment2.target=int\ remove()
+comment3.target=void\ clear()
+comment4.params=i
+comment4.target=boolean\ contains(int)
+comment5.target=int\ size()
+comment6.target=int\ capacity()
+comment7.params=o
+comment7.target=boolean\ equals(Object)
+comment8.target=int\ hashCode()
+comment9.target=Object\ af()
+numComments=10

@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.params=q
+comment0.target=QueueDecorator(QueueI)
+comment1.params=i
+comment1.target=void\ add(int)
+comment10.target=Iterator<Integer>\ iterator()
+comment11.params=o
+comment11.target=boolean\ equals(Object)
+comment12.target=int\ hashCode()
+comment13.target=String\ toString()
+comment2.target=int\ remove()
+comment3.target=int\ element()
+comment4.target=void\ clear()
+comment5.params=i
+comment5.target=boolean\ contains(int)
+comment6.target=int\ size()
+comment7.target=int\ capacity()
+comment8.target=boolean\ repOk()
+comment8.text=Invariant\ de\ classe.\ cf.\ B.\ Liskov.\n
+comment9.target=Object\ af()
+comment9.text=Fonction\ d'abstraction.\ \n
+numComments=14

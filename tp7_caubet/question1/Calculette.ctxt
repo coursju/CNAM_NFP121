@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=Calculette
+comment0.text=\r\n\ Calculette\:\ Evaluation\ d'op\u00E9rations\ math\u00E9matiques,\r\n\ en\ utilisant\ les\ m\u00E9thodes\ de\ la\ classe\ <code>java.lang.Math</code>.\r\n\ Seules\ sont\ prises\ en\ compte\ les\ m\u00E9thodes\ prenant\ en\ param\u00E8tre\r\n\ UN\ ou\ DEUX\ double,\ et\ renvoie\ un\ double.\r\n\ Les\ m\u00E9thodes\ sont\ list\u00E9es\ en\ utilisant\ l'introspection.\r\n\ @author\ Yannick\ Meudal,\ modifi\u00E9\ pour\ NFP121\r\n
+comment1.params=ae
+comment1.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment1.text=\r\n\ M\u00E9thode\ ex\u00E9cut\u00E9e\ \u00E0\ chaque\ fois\ qu'une\ invocation\ doit\ \u00EAtre\ effectu\u00E9e.\r\n\ Appel\ lors\ de\ l'appui\ bouton\ Calculer,\ touche\ Entr\u00E9e\ dans\ X\ ou\ Y.\r\n
+comment2.params=
+comment2.target=Calculette()
+comment3.params=ae
+comment3.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment4.params=we
+comment4.target=void\ windowClosing(java.awt.event.WindowEvent)
+comment5.params=we
+comment5.target=void\ windowClosed(java.awt.event.WindowEvent)
+comment6.params=args
+comment6.target=void\ main(java.lang.String[])
+numComments=7

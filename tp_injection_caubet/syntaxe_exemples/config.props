@@ -1,0 +1,108 @@
+
+# exemples de possibilites syntaxiques du fichier de config 
+#verbose=true
+
+#
+#  bean: "exemple", prefix: 
+#  syntaxe_exemples.ExemplesSyntaxeConfiguration = container.getBean("exemple");
+# 
+bean.id.1=exemple
+#  class: syntaxe_exemples.ExemplesSyntaxeConfiguration
+exemple.class=syntaxe_exemples.ExemplesSyntaxeConfiguration
+# setter : setBool_(Boolean)
+exemple.property.1=bool_
+exemple.property.1.param.1=true
+# setter : setConcat(String)
+exemple.property.2=concat
+exemple.property.2.param.1=elt1
+# setter : setExemples_array(ExemplesSyntaxeConfiguration[])
+exemple.property.3=exemples_array
+exemple.property.3.param.1=exemple exemple exemple
+# setter : setB_(Byte)
+exemple.property.4=b_
+exemple.property.4.param.1=127
+# setter : setI_(Integer)
+exemple.property.5=i_
+exemple.property.5.param.1=10
+# setter : setB_array(byte[])
+exemple.property.6=b_array
+exemple.property.6.param.1=10 20 30 40 50
+# setter : setL_(Long)
+exemple.property.7=l_
+exemple.property.7.param.1=10
+# setter : setD(double)
+exemple.property.8=d
+exemple.property.8.param.1=10.1E4
+# setter : setS_(Short)
+exemple.property.9=s_
+exemple.property.9.param.1=257
+# setter : setExemples_list(List)
+exemple.property.10=exemples_list
+exemple.property.10.param.1=null
+# setter : setBool(boolean)
+exemple.property.11=bool
+exemple.property.11.param.1=false
+# setter : setInteger_array(Integer[])
+exemple.property.12=integer_array
+exemple.property.12.param.1=1 2 3 4 5
+# setter : setF_(Float)
+exemple.property.13=f_
+exemple.property.13.param.1=10F
+# setter : setByte_array(Byte[])
+exemple.property.14=byte_array
+exemple.property.14.param.1=1 2 3 4 5
+# setter : setString_array(String[])
+exemple.property.15=string_array
+exemple.property.15.param.1=a b c d e f
+# setter : setElement(int)
+exemple.property.16=element
+exemple.property.16.param.1=10
+# setter : setC(char)
+exemple.property.17=c
+exemple.property.17.param.1='a'
+# setter : setStr(String)
+exemple.property.18=str
+exemple.property.18.param.1=test
+# setter : setC_(Character)
+exemple.property.19=c_
+exemple.property.19.param.1='a'
+# setter : setD_(Double)
+exemple.property.20=d_
+exemple.property.20.param.1=20.3
+# setter : setB(byte)
+exemple.property.21=b
+exemple.property.21.param.1=10
+# setter : setS(short)
+exemple.property.22=s
+exemple.property.22.param.1=10
+# setter : setL(long)
+exemple.property.23=l
+exemple.property.23.param.1=1000
+# setter : setI(int)
+exemple.property.24=i
+exemple.property.24.param.1=20
+# setter : setF(float)
+exemple.property.25=f
+exemple.property.25.param.1=0.0
+## setter : setElement(int)
+exemple.property.26=element
+exemple.property.26.param.1=10
+# setter : setElement(int)
+exemple.property.27=element
+exemple.property.27.param.1=20
+# setter : setElement(int)
+exemple.property.28=element
+exemple.property.28.param.1=30
+
+exemple.property.29=collections
+exemple.property.29.param.1=liste1 liste2 set
+
+bean.id.2=liste1
+liste1.class=java.util.ArrayList
+
+bean.id.3=liste2
+liste2.class=java.util.LinkedList
+
+bean.id.4=set
+set.class=java.util.HashSet
+

@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=IHMQuestion2_1
+comment1.params=
+comment1.target=IHMQuestion2_1()
+comment2.params=args
+comment2.target=void\ main(java.lang.String[])
+comment3.params=jbo
+comment3.target=void\ addObserver2A(JButtonObserver)
+comment3.text=\r\n\ ajoute\ un\ observateur\ a\ boutonA\r\n
+comment4.params=jbo
+comment4.target=void\ addObserver2B(JButtonObserver)
+comment4.text=\r\n\ ajoute\ un\ observateur\ a\ boutonB\r\n
+comment5.params=jbo
+comment5.target=void\ addObserver2C(JButtonObserver)
+comment5.text=\r\n\ ajoute\ un\ observateur\ a\ boutonC\r\n
+comment6.params=
+comment6.target=java.awt.TextArea\ getContenu()
+comment6.text=\r\n\ renvoi\ contenu\r\n
+numComments=7

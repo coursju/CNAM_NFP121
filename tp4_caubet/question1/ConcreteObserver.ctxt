@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=ConcreteObserver
+comment0.text=\r\n\ D\u00E9crivez\ votre\ classe\ ConcreteObserver\ ici.\r\n\ \r\n\ @author\ (votre\ nom)\r\n\ @version\ (un\ num\u00E9ro\ de\ version\ ou\ une\ date)\r\n
+comment1.params=
+comment1.target=ConcreteObserver()
+comment2.params=observable\ arg
+comment2.target=void\ update(java.util.Observable,\ java.lang.Object)
+comment2.text=\r\n\ impl\u00E9mentation\ de\ la\ seule\ m\u00E9thode\ de\ l'interface\ java.util.Observer\ \u00E0\r\n\ chaque\ ex\u00E9cution\ de\ cette\ m\u00E9thode,\ celle-ci\ se\ contente\ d'empiler\ les\r\n\ param\u00E8tres\ transmis\ observable\ et\ arg\ respectivement\ dans\ 2\ piles\ senders\r\n\ et\ arguments\r\n
+comment3.params=
+comment3.target=java.util.Stack\ senders()
+comment4.params=
+comment4.target=java.util.Stack\ arguments()
+comment5.params=
+comment5.target=void\ resetAll()
+numComments=6

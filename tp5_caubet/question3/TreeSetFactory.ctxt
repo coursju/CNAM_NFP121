@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=TreeSetFactory
+comment0.text=\r\n\ classe\ treesetfactory\r\n\ @param\ T\ a\ definir\r\n
+comment1.params=
+comment1.target=java.util.Set\ create()
+comment1.text=\r\n\ methode\ create\r\n\ @return\ treeset<T>\r\n
+numComments=2
